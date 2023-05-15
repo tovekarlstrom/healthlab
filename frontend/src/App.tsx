@@ -19,8 +19,9 @@ function App() {
         >
           Learn React
         </a>
-        <RecipeCard />
       </header>
+      <p className="h1"> Headline </p>
+      <RecipeCard />
     </div>
   )
 }

@@ -1,8 +1,20 @@
 .RecipeCard {
   max-width: 443px;
+  margin-bottom: 9px;
 }
 
 .RecipeCard-image {
-  object-fit: contain;
-  max-width: 100%;
+  box-shadow: 0px 8px 16px 0px #00000026;
+  border-radius: 16px;
+}
+
+.RecipeCard-title {
+  padding-bottom: 9px;
+}
+
+.RecipeCard-rating {
+  color: #faca15;
+  display: flex;
+  gap: 1.3px;
+  margin: 9px 0;
 }
