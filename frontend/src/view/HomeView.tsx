@@ -1,5 +1,12 @@
+import RecipeCard from "../components/RecipeCard";
+
 function Home() {
-  return <h1>Home</h1>
+  return (
+    <div>
+      <h1>Home</h1>
+      <RecipeCard />
+    </div>
+  );
 }
 
-export default Home
+export default Home;

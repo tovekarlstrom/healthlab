@@ -1,29 +1,18 @@
 import React from "react"
-import logo from "./logo.svg"
+import { createHashRouter, RouterProvider } from "react-router-dom"
+import Root from "./Root"
 import "./App.css"
-import RecipeCard from "./components/RecipeCard"
+
+import HomeView from "./view/HomeView"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <p className="h1"> Headline </p>
-      <RecipeCard />
-    </div>
-  )
+  const router = createHashRouter([
+    {
+      children: [{ element: <HomeView />, path: "/" }],
+      element: <Root />,
+    },
+  ])
+  return <RouterProvider router={router} />
 }
 
 export default App
