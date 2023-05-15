@@ -1,0 +1,8 @@
+.RecipeCard {
+  max-width: 443px;
+}
+
+.RecipeCard-image {
+  object-fit: contain;
+  max-width: 100%;
+}

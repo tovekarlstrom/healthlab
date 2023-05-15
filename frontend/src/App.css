@@ -1,5 +1,11 @@
+img {
+  object-fit: contain;
+  max-width: 100%;
+}
+
 .App {
   text-align: center;
+  font-family: "Montserrat", sans-serif;
 }
 
 .App-logo {
