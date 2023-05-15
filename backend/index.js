@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const pg_1 = require("pg");
-// import cors from "cors";
+const cors_1 = __importDefault(require("cors"));
 dotenv_1.default.config();
 const client = new pg_1.Client({
     database: process.env.PGDATABASE || "",
@@ -26,18 +26,17 @@ const client = new pg_1.Client({
 });
 client.connect();
 const app = (0, express_1.default)();
-// app.use(cors());
-function fetchRecipes() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const { rows } = yield client.query("SELECT * FROM recipes");
-        console.log(rows);
-    });
-}
-fetchRecipes();
+app.use((0, cors_1.default)());
+// async function fetchRecipes() {
+//   const { rows } = await client.query("SELECT * FROM recipes");
+//   console.log(rows);
+// }
+// fetchRecipes();
 app.get("/recipes", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { rows } = yield client.query("SELECT * FROM recipes");
+    console.log("rows", rows);
     response.status(200).send(rows);
 }));
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(8085, () => {
+    console.log("Server is running on port 8085");
 });
