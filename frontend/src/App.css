@@ -1,5 +1,83 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+img {
+  object-fit: contain;
+  max-width: 100%;
+}
+
+/* TEXT */
+
+.h1,
+.h2,
+.h3,
+.h4 {
+  letter-spacing: 0.03em;
+  font-weight: 700;
+}
+
+.h5,
+.pBig {
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+
+.h1 {
+  font-size: 48px;
+}
+
+.h2 {
+  font-size: 40px;
+}
+
+.h3 {
+  font-size: 28px;
+}
+
+.h4,
+.h5 {
+  font-size: 24px;
+}
+
+.pBig,
+.pMed {
+  font-size: 20px;
+  letter-spacing: 0.03em;
+}
+
+.pSmall {
+  font-style: italic;
+  letter-spacing: 0.03em;
+  font-size: 18px;
+}
+
+@media (max-width: 500px) {
+  .h1 {
+    font-size: 24px;
+  }
+
+  .h2 {
+    font-size: 20px;
+  }
+
+  .h3 {
+    font-weight: 600;
+    font-size: 28px;
+  }
+
+  .pBig {
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .pMed {
+    font-size: 18px;
+  }
+  .pSmall {
+    font-size: 16px;
+  }
 }
 
 .App-logo {
