@@ -35,7 +35,7 @@ app.get("/login", async (request, response) => {
     );
     if (loggedInUser) {
       console.log("inloggad");
-      response.status(200).json(loggedInUser);
+      response.status(200).send("success");
     } else {
       console.log("fel lösen eller användarnamn");
       response.status(401).send("Unauthorized");

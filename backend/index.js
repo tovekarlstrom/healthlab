@@ -43,7 +43,7 @@ app.get("/login", (request, response) => __awaiter(void 0, void 0, void 0, funct
         const loggedInUser = rows.find((item) => item.email === email && item.password === password);
         if (loggedInUser) {
             console.log("inloggad");
-            response.status(200).json(loggedInUser);
+            response.status(200).send("success");
         }
         else {
             console.log("fel lösen eller användarnamn");
