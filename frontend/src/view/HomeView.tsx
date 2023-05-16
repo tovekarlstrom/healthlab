@@ -2,11 +2,12 @@ import { useState, useEffect } from "react"
 import RecipeCard from "../components/RecipeCard"
 import Info from "../components/Info"
 import Hero from "../components/Hero"
-
+import MicroNutrient from "../components/MicroNutrients"
 import { Link } from "react-router-dom"
 import "../styles/HomeView.css"
 export interface Recipe {
   id: number
+  image: string
   name: string
   rating: number
   time: number
@@ -40,8 +41,11 @@ function Home() {
   return (
     <div>
       <Hero />
-      <Link to={`/loggin`}>
-        <button className="logginButton">logga in</button>
+      <Link to={`/login`}>
+        <button className="loginButton">logga in</button>
+      </Link>
+      <Link to={`/homepage`}>
+        <button className="logginButton">register</button>
       </Link>
       {recipes !== null && (
         <div>
@@ -51,6 +55,7 @@ function Home() {
         </div>
       )}
       <Info />
+      <MicroNutrient></MicroNutrient>
     </div>
   )
 }

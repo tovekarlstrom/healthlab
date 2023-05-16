@@ -1,21 +1,20 @@
 * {
   box-sizing: border-box;
-  background-color: #f9fbf9;
 }
 
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   height: 852px;
+  padding-top: 263px;
   align-items: center;
 }
+
 .Form {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: column;
   align-items: center;
-  height: 300px;
 }
 .Input {
   display: flex;
@@ -32,6 +31,10 @@
   order: 0;
   flex-grow: 1; */
 }
+
+.lastInput {
+  margin-top: 30px;
+}
 .logginSubmitButton {
   box-sizing: border-box;
   /* display: flex;
@@ -40,7 +43,7 @@
   align-items: center; */
   padding: 6px 12px;
   gap: 8px;
-
+  margin-top: 65px;
   /* position: absolute; */
   width: 261px;
   height: 33px;
@@ -52,28 +55,20 @@
   border: 1px solid #6c757d;
   border-radius: 30px;
 }
-
+.accountQuestion {
+  margin-top: 26px;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  width: 261px;
+}
 .registerButton {
-  box-sizing: border-box;
-  /*
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
+  margin-top: 5px;
   padding: 6px 12px;
-  gap: 8px;
-
-  /* position: absolute; */
   width: 261px;
   height: 33px;
-  /* left: 66px;
-  top: 507px; */
-
-  /* Pirmär Linear */
-
   background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
-  /* Theme/Primary */
-
   border: 1px solid #0d6efd;
   border-radius: 30px;
 }
