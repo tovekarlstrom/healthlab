@@ -2,39 +2,20 @@ import { Card } from "react-bootstrap"
 import testImage from "../images/test.jpg"
 import "../styles/RecipeCard.css"
 import { StarFill } from "react-bootstrap-icons"
+import { Recipe } from "../view/HomeView"
 
-// interface RecipeCardProps {
-//   title: string
-//   image: string
-//   rating: number
-//   calories: number
-// }
+export interface RecipeCardProps {
+  item: Recipe
+}
 
-// function RecipeCard(props: RecipeCardProps) {
-//   return (
-//     <Card>
-//       <Card.Img variant="top" src={props.image} className="RecipeCard-image" />
-//       <div className="RecipeCard-body">
-//         <Card.Title className="RecipeCard-title h2"> {props.title}</Card.Title>
-//         <div className="RecipeCard-rating">
-//           <StarFill />
-//           <StarFill />
-//           <StarFill />
-//           <StarFill />
-//           <StarFill />
-//         </div>
-//         <Card.Text className="RecipeCard-cal pMed"> {props.calories} </Card.Text>
-//       </div>
-//     </Card>
-//   )
-// }
+function RecipeCard(props: RecipeCardProps) {
+  const { item } = props
 
-function RecipeCard() {
   return (
     <Card className="RecipeCard">
       <Card.Img variant="top" src={testImage} className="RecipeCard-image" />
       <div className="RecipeCard-body">
-        <h4 className="RecipeCard-title h4"> titel</h4>
+        <h4 className="RecipeCard-title h4"> {item.name}</h4>
         <div className="RecipeCard-rating">
           <StarFill />
           <StarFill />
@@ -42,7 +23,7 @@ function RecipeCard() {
           <StarFill />
           <StarFill />
         </div>
-        <Card.Text className="RecipeCard-cal pMed"> 123 kcal </Card.Text>
+        <Card.Text className="RecipeCard-cal pMed">{item.kcal} kcal</Card.Text>
       </div>
     </Card>
   )
