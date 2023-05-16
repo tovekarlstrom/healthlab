@@ -1,19 +1,7 @@
-<<<<<<< HEAD
-
-function HomeView() {
-  return (
- <>
- </>
-  );
-}
-
-export default HomeView;
-=======
 import { useState, useEffect } from "react";
->>>>>>> 2a711fcc78730458e2b5b699ef309408ad8318a7
 import RecipeCard from "../components/RecipeCard";
 import Info from "../components/Info";
-
+import MicroNutrient from "../components/MicroNutrients";
 import { Link } from "react-router-dom";
 import "../styles/HomeView.css";
 export interface Recipe {
@@ -54,6 +42,9 @@ function Home() {
       <Link to={`/loggin`}>
         <button className="logginButton">logga in</button>
       </Link>
+      <Link to={`/homepage`}>
+        <button className="logginButton">register</button>
+      </Link>
       {recipes !== null && (
         <div>
           {recipes.map((item) => (
@@ -62,6 +53,7 @@ function Home() {
         </div>
       )}
       <Info />
+      <MicroNutrient></MicroNutrient>
     </div>
   );
 }

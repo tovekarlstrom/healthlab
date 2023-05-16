@@ -1,36 +1,18 @@
-<<<<<<< HEAD
-import React from 'react';
-import Footer from './components/Footer';
-import MicroNutrient from './components/MicroNutrients';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <MicroNutrient></MicroNutrient>
-     <Footer></Footer>
-    </div>
-  );
-import React from "react"
-import { createHashRouter, RouterProvider } from "react-router-dom"
-import Root from "./Root"
-import "./App.css"
-=======
 import React from "react";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
 import "./App.css";
->>>>>>> 2a711fcc78730458e2b5b699ef309408ad8318a7
-
 import Loggin from "./components/Loggin";
 import HomeView from "./view/HomeView";
+import HomePage from "./view/HomePage";
 
 function App() {
   const router = createHashRouter([
     {
       children: [
         { element: <HomeView />, path: "/" },
-        { element: <Loggin />, path: "/loggin" },
+        { element: <Loggin />, path: "/login" },
+        { element: <HomePage />, path: "/homepage"}
       ],
       element: <Root />,
     },
