@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import "../styles/Loggin.css";
-
+import loginImg from "../images/login.png";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,9 @@ function Login() {
 
   return (
     <div className="container">
+      <img className="login-img" src={loginImg} alt="" />
       <div className="Form">
+        <h1 className="loginH1">Välkommen</h1>
         <div className="InputFields">
           <input
             className="Input"
@@ -44,9 +46,10 @@ function Login() {
         >
           Logga in
         </button>
+
+        <p className="accountQuestion">Har du inget konto än?</p>
+        <button className="registerButton">Registrera dig</button>
       </div>
-      <p className="accountQuestion">Har du inget konto än?</p>
-      <button className="registerButton">Registrera dig</button>
     </div>
   );
 }

@@ -6,15 +6,37 @@
   display: flex;
   flex-direction: column;
   height: 852px;
-  padding-top: 263px;
   align-items: center;
+  position: relative;
+}
+
+.login-img {
+  width: 100%;
+  height: 276px;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+}
+
+.loginH1 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  margin-top: 45px;
 }
 
 .Form {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   align-items: center;
+
+  z-index: 10;
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  width: 100%;
+  height: 503px;
+  margin-top: 250px;
 }
 .Input {
   display: flex;
@@ -26,7 +48,7 @@
   background: #ffffff;
   border: 1px solid #ced4da;
   border-radius: 4px;
-
+  margin-top: 45px;
   /* flex: none;
   order: 0;
   flex-grow: 1; */
