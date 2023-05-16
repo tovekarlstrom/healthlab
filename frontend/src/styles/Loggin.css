@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+  background-color: #f9fbf9;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 852px;
+  align-items: center;
+}
+.Form {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+}
+.Input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 6px 12px;
+  width: 261px;
+  height: 33px;
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+
+  /* flex: none;
+  order: 0;
+  flex-grow: 1; */
+}
+.logginSubmitButton {
+  box-sizing: border-box;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; */
+  padding: 6px 12px;
+  gap: 8px;
+
+  /* position: absolute; */
+  width: 261px;
+  height: 33px;
+  /* left: 66px;
+  top: 424px; */
+
+  background: #6c757d;
+
+  border: 1px solid #6c757d;
+  border-radius: 30px;
+}
+
+.registerButton {
+  box-sizing: border-box;
+  /*
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; */
+  padding: 6px 12px;
+  gap: 8px;
+
+  /* position: absolute; */
+  width: 261px;
+  height: 33px;
+  /* left: 66px;
+  top: 507px; */
+
+  /* Pirmär Linear */
+
+  background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
+  /* Theme/Primary */
+
+  border: 1px solid #0d6efd;
+  border-radius: 30px;
+}

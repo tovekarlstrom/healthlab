@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import RecipeCard from "../components/RecipeCard";
+import { Link } from "react-router-dom";
+import "../styles/HomeView.css";
 export interface Recipe {
   id: number;
   name: string;
@@ -35,6 +37,9 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
+      <Link to={`/loggin`}>
+        <button className="logginButton">logga in</button>
+      </Link>
       {recipes !== null && (
         <div>
           {recipes.map((item) => (
