@@ -1,5 +1,4 @@
 import { Card } from "react-bootstrap";
-
 import "../styles/RecipeCard.css";
 import { StarFill } from "react-bootstrap-icons";
 import { Recipe } from "../view/HomeView";

@@ -1,4 +1,16 @@
+<<<<<<< HEAD
+
+function HomeView() {
+  return (
+ <>
+ </>
+  );
+}
+
+export default HomeView;
+=======
 import { useState, useEffect } from "react";
+>>>>>>> 2a711fcc78730458e2b5b699ef309408ad8318a7
 import RecipeCard from "../components/RecipeCard";
 import Info from "../components/Info";
 
