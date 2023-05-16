@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import "../styles/HomeView.css";
 export interface Recipe {
   id: number;
+  image: string;
   name: string;
   rating: number;
   time: number;
@@ -39,8 +40,8 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
-      <Link to={`/loggin`}>
-        <button className="logginButton">logga in</button>
+      <Link to={`/login`}>
+        <button className="loginButton">logga in</button>
       </Link>
       {recipes !== null && (
         <div>

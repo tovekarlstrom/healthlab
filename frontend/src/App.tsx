@@ -3,7 +3,7 @@ import { createHashRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
 import "./App.css";
 
-import Loggin from "./components/Loggin";
+import Login from "./components/Login";
 import HomeView from "./view/HomeView";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     {
       children: [
         { element: <HomeView />, path: "/" },
-        { element: <Loggin />, path: "/loggin" },
+        { element: <Login />, path: "/login" },
       ],
       element: <Root />,
     },
