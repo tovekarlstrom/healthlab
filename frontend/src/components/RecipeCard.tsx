@@ -15,7 +15,7 @@ import { StarFill } from "react-bootstrap-icons"
 //     <Card>
 //       <Card.Img variant="top" src={props.image} className="RecipeCard-image" />
 //       <div className="RecipeCard-body">
-//         <Card.Title className="RecipeCard-title"> {props.title}</Card.Title>
+//         <Card.Title className="RecipeCard-title h2"> {props.title}</Card.Title>
 //         <div className="RecipeCard-rating">
 //           <StarFill />
 //           <StarFill />
@@ -23,7 +23,7 @@ import { StarFill } from "react-bootstrap-icons"
 //           <StarFill />
 //           <StarFill />
 //         </div>
-//         <Card.Text className="RecipeCard-cal"> {props.calories} </Card.Text>
+//         <Card.Text className="RecipeCard-cal pMed"> {props.calories} </Card.Text>
 //       </div>
 //     </Card>
 //   )
@@ -34,7 +34,7 @@ function RecipeCard() {
     <Card className="RecipeCard">
       <Card.Img variant="top" src={testImage} className="RecipeCard-image" />
       <div className="RecipeCard-body">
-        <Card.Title className="RecipeCard-title h2"> titel</Card.Title>
+        <h4 className="RecipeCard-title h4"> titel</h4>
         <div className="RecipeCard-rating">
           <StarFill />
           <StarFill />
