@@ -20,7 +20,7 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
     strokeDashoffset: dashOffset,
     transform: 'rotate(-90deg)',
     transformOrigin: 'center',
-    transition: 'stroke-dashoffset 0.3s ease-in-out'
+    transition: 'stroke-dashoffset 0.3s ease-in-out',
   };
 
   console.log('Rendering MicronutrientCircle:', nutrientName, nutrientAmount)
@@ -30,7 +30,7 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
   return (
     <div style={{ textAlign: 'center', width: '100px' }}>
       <h1 style={{ fontSize: '16px', marginBottom: '24px' }}>{nutrientName}</h1>
-      <p style={{ fontSize: '14px', marginBottom: '24px' }}>{nutrientAmount} grams</p>
+      <p style={{ fontSize: '14px', marginBottom: '24px', fontWeight: '500' }}>{nutrientAmount} g</p>
       <svg width="65" height="65">
         <circle
           cx="32.5"
@@ -66,13 +66,13 @@ const MicroNutrient: React.FC = () => {
         margin: '0 auto',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-evenly'}}>
         <MicronutrientCircle nutrientName="Protein" nutrientAmount={75} />
         <MicronutrientCircle nutrientName="Kolhydrater" nutrientAmount={12} />
         <MicronutrientCircle nutrientName="Fett" nutrientAmount={12} />
       </div>
-      <p style={{ fontSize: '16px', fontWeight: 'bold', marginTop: '24px' }}>
-        Totalt: {"{nummer}"}kcal
+      <p style={{ fontSize: '16px', marginTop: '24px', fontWeight: '500' }}>
+        <span style={{ fontWeight: '600' }}>Totalt:</span> {"{nummer}"}kcal
       </p>
     </div>
   )
