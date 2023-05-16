@@ -1,0 +1,49 @@
+.Info {
+  padding: 2.5px;
+  margin-top: 34px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  margin-bottom: 50px;
+}
+
+.Info-icon {
+  width: 60px;
+  align-self: center;
+}
+
+.Info-text {
+  display: inline;
+}
+.Info-more {
+  text-decoration: underline;
+  display: inline;
+  margin-left: 4px;
+}
+
+@media (min-width: 600px) {
+  .Info {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .Info-container {
+    gap: 25px;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 126px;
+  }
+
+  .Info-text-container {
+    width: 339px;
+  }
+
+  .Info-icon {
+    width: 100px;
+  }
+}

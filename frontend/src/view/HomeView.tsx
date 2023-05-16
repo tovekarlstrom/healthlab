@@ -1,44 +1,45 @@
-import { useState, useEffect } from "react";
-import RecipeCard from "../components/RecipeCard";
-import Info from "../components/Info";
+import { useState, useEffect } from "react"
+import RecipeCard from "../components/RecipeCard"
+import Info from "../components/Info"
+import Hero from "../components/Hero"
 
-import { Link } from "react-router-dom";
-import "../styles/HomeView.css";
+import { Link } from "react-router-dom"
+import "../styles/HomeView.css"
 export interface Recipe {
-  id: number;
-  name: string;
-  rating: number;
-  time: number;
-  likes: number;
-  comments: number;
-  protein: number;
-  carbs: number;
-  fat: number;
-  kcal: number;
-  ingredients: [string];
-  instructions: [string];
+  id: number
+  name: string
+  rating: number
+  time: number
+  likes: number
+  comments: number
+  protein: number
+  carbs: number
+  fat: number
+  kcal: number
+  ingredients: [string]
+  instructions: [string]
 }
 function Home() {
-  const [recipes, setRecipes] = useState<Recipe[] | null>(null);
+  const [recipes, setRecipes] = useState<Recipe[] | null>(null)
   useEffect(() => {
     fetch("http://localhost:8085/recipes")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was not ok")
         }
-        return response.json();
+        return response.json()
       })
       .then((result) => {
-        console.log(result);
-        setRecipes(result);
+        console.log(result)
+        setRecipes(result)
       })
       .catch((error) => {
-        console.log("Error:", error.message);
-      });
-  }, []);
+        console.log("Error:", error.message)
+      })
+  }, [])
   return (
     <div>
-      <h1>Home</h1>
+      <Hero />
       <Link to={`/loggin`}>
         <button className="logginButton">logga in</button>
       </Link>
@@ -51,7 +52,7 @@ function Home() {
       )}
       <Info />
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
