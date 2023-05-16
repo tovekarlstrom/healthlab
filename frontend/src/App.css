@@ -65,7 +65,11 @@ img {
 
   .h3 {
     font-weight: 600;
-    font-size: 28px;
+    font-size: 20px;
+  }
+
+  .h4 {
+    font-size: 20px;
   }
 
   .pBig {
@@ -73,7 +77,7 @@ img {
     font-size: 16px;
   }
   .pMed {
-    font-size: 18px;
+    font-size: 16px;
   }
   .pSmall {
     font-size: 16px;
