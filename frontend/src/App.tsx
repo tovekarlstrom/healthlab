@@ -2,7 +2,8 @@ import React from "react";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
 import "./App.css";
-import Loggin from "./components/Loggin";
+
+import Login from "./components/Login";
 import HomeView from "./view/HomeView";
 import HomePage from "./view/HomePage";
 
@@ -11,7 +12,7 @@ function App() {
     {
       children: [
         { element: <HomeView />, path: "/" },
-        { element: <Loggin />, path: "/login" },
+        { element: <Login />, path: "/login" },
         { element: <HomePage />, path: "/homepage"}
       ],
       element: <Root />,
