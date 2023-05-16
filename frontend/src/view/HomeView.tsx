@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import RecipeCard from "../components/RecipeCard";
+import Info from "../components/Info";
+
 import { Link } from "react-router-dom";
 import "../styles/HomeView.css";
 export interface Recipe {
@@ -47,6 +49,7 @@ function Home() {
           ))}
         </div>
       )}
+      <Info />
     </div>
   );
 }
