@@ -41,12 +41,7 @@ function Home() {
   return (
     <div>
       <Hero />
-      <Link to={`/login`}>
-        <button className="loginButton">logga in</button>
-      </Link>
-      <Link to={`/homepage`}>
-        <button className="logginButton">register</button>
-      </Link>
+
       {recipes !== null && (
         <div>
           {recipes.map((item) => (
