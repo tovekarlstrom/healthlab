@@ -7,11 +7,13 @@ export default function Hero() {
     <div className="Hero">
       <img className="Hero-image" src={heroImage} alt="pancake background" />
       <div className="Hero-content">
-        <h1 className="h1">Vi hjälper dig till ett hälsosammare liv.</h1>
-        <p className="pMed">
-          Genom att använda våra guider och recept kan vi garantera dig en
-          hälsosammare livsstil för 49kr/mån.
-        </p>
+        <div className="Hero-text">
+          <h1 className="h1">Vi hjälper dig till ett hälsosammare liv.</h1>
+          <p className="pMed">
+            Genom att använda våra guider och recept kan vi garantera dig en
+            hälsosammare livsstil för 49kr/mån.
+          </p>
+        </div>
 
         <div className="Hero-buttons">
           <Link to={`/login`}>

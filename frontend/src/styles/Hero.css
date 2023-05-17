@@ -30,27 +30,96 @@
   font-size: 16px;
   font-weight: 600;
   color: #174e2e;
-  border-radius: 34px;
+  border-radius: 50px;
   height: 50px;
+  border: none;
+}
+
+.Hero button:hover {
+  cursor: pointer;
 }
 
 .Hero-registerButton {
-  border: none;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
   background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
+  margin-left: 16px;
 }
 
-.Hero-loginButton {
-  background: transparent;
-  /* border-image-source: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%); */
+.Hero-registerButton:hover {
+  background: linear-gradient(96.22deg, #32c160 0%, #f4da1f 100%);
+}
 
-  border: solid 3px transparent;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 0)
-    ),
-    linear-gradient(101deg, #78e4ff, #ff48fa);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  box-shadow: 2px 1000px 1px rgba(255, 255, 255, 0) inset;
+/* Source: https://codepen.io/abhisavadiya/pen/RwxYwLX */
+
+.Hero-loginButton {
+  position: relative;
+  background: transparent;
+}
+
+.Hero-loginButton::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 90px;
+  border: 3px solid transparent;
+  background: linear-gradient(96.22deg, #7acb94, #eedf76 100%) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.Hero-loginButton:hover::after {
+  background: linear-gradient(96.22deg, #32c160, #f4da1f 100%) border-box;
+  border: 5px solid transparent;
+  box-shadow: 0px 8px 16px 0px #00000026;
+}
+
+@media (min-width: 500px) {
+  .Hero {
+    margin-top: 130px;
+    padding: 0 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: static;
+    width: 100%;
+    height: 675px;
+    background-color: #f9fbf9;
+  }
+
+  .Hero-content {
+    order: -1;
+    position: static;
+    background-color: transparent;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0;
+  }
+
+  .Hero-image {
+    border-radius: 30px;
+    max-height: 675px;
+    width: 100%;
+  }
+
+  .Hero-text {
+    max-width: 504px;
+  }
+
+  .Hero-text h1 {
+    margin-bottom: 32px;
+  }
+
+  .Hero button {
+    height: 100px;
+    padding: 6px 64px;
+    font-size: 28px;
+    font-weight: 700;
+  }
 }
