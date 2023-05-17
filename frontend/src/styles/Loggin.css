@@ -61,27 +61,24 @@
   margin-top: 30px;
 }
 .logginSubmitButton {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
   padding: 6px 12px;
+  gap: 8px;
   width: 174px;
   height: 42px;
-  border-style: none;
   background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
   border-radius: 30px;
+  border-style: none;
   margin-top: 50px;
   cursor: pointer;
-}
-.accountQuestion {
-  margin-top: 59.64px;
-  font-style: italic;
-  font-weight: 500;
+  /* text */
+  font-style: normal;
+  font-weight: 600;
   font-size: 16px;
   line-height: 120%;
-  width: 261px;
+  letter-spacing: 0.03em;
+  color: #174e2e;
 }
+
 .login-alternatives {
   margin-top: 50px;
   font-style: normal;
@@ -119,4 +116,21 @@
   background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
   border: 1px solid #0d6efd;
   border-radius: 30px;
+}
+
+.alredy-account {
+  display: flex;
+  width: 288px;
+  height: 18px;
+}
+.accountQuestion {
+  margin-top: 59.64px;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+}
+
+.login {
+  font-weight: 600;
 }
