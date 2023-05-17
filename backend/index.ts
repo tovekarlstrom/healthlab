@@ -10,6 +10,7 @@ const client = new Client({
   password: process.env.PGPASSWORD,
   port: Number(process.env.PGPORT),
   user: process.env.PGUSER,
+  ssl: true,
 });
 client.connect();
 
@@ -45,7 +46,7 @@ app.get("/login", async (request, response) => {
     response.status(400).send("email or password has not been added");
   }
 });
-
+const port = process.env.PORT || 8080;
 app.listen(8085, () => {
-  console.log("Server is running on port 8085");
+  console.log(`Server is running on port ${port}`);
 });
