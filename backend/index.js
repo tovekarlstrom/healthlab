@@ -56,7 +56,7 @@ app.get("/login", (request, response) => __awaiter(void 0, void 0, void 0, funct
         response.status(400).send("email or password has not been added");
     }
 }));
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8085;
 app.listen(8085, () => {
     console.log(`Server is running on port ${port}`);
 });
