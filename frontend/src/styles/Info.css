@@ -1,15 +1,17 @@
 .Info {
-  padding: 2.5px;
-  margin-top: 34px;
-  display: flex;
-  flex-direction: column;
+  padding: 0 18.5px;
+  background-color: #f9fbf9;
+}
+
+.Info h2 {
+  margin-bottom: 34px;
 }
 
 .Info-container {
   display: flex;
   flex-direction: column;
   gap: 34px;
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 .Info-icon {
@@ -17,9 +19,14 @@
   align-self: center;
 }
 
+.Info-text-container {
+  font-weight: 500;
+}
+
 .Info-text {
   display: inline;
 }
+
 .Info-more {
   text-decoration: underline;
   display: inline;
@@ -28,6 +35,7 @@
 
 @media (min-width: 600px) {
   .Info {
+    display: flex;
     flex-direction: row;
     gap: 20px;
   }

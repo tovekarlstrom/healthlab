@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 import RecipeCard from "../components/RecipeCard"
 import Info from "../components/Info"
 import Hero from "../components/Hero"
-import MicroNutrient from "../components/MicroNutrients"
 import { Link } from "react-router-dom"
 import "../styles/HomeView.css"
 export interface Recipe {
@@ -41,16 +40,18 @@ function Home() {
   return (
     <div>
       <Hero />
-
       {recipes !== null && (
-        <div>
+        <div className="Home-recipe-container">
+          <h2 className="h2">Testa några av våra populära recept</h2>
           {recipes.map((item) => (
-            <RecipeCard key={item.id} item={item} />
+            <Link to={item.name}>
+              <RecipeCard key={item.id} item={item} />
+            </Link>
           ))}
         </div>
       )}
+
       <Info />
-      <MicroNutrient></MicroNutrient>
     </div>
   )
 }

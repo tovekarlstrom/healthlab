@@ -16,3 +16,17 @@
   gap: 1.3px;
   margin: 9px 0;
 }
+
+.RecipeCard-rating svg {
+  font-size: 20px;
+}
+
+@media (min-width: 500px) {
+  .RecipeCard-rating svg {
+    font-size: 25px;
+  }
+
+  .RecipeCard-rating {
+    gap: 1.6px;
+  }
+}
