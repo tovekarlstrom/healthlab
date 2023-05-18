@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Loggin.css";
 import loginImg from "../images/login.png";
@@ -6,9 +6,12 @@ import googleLogo from "../images/Googlelogo.svg";
 import facebookLogo from "../images/Fcebooklogo.svg";
 import twitterLogo from "../images/Twitterlogo.svg";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
+import ArrowButton from "./ArrowButton";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [correctEmail, setCorrectEmail] = useState(true);
+  const [correctPassword, setCorrectPassword] = useState(true);
   const [logedInUser, setLogedInUser] = useState("");
 
   const loginUser = () => {
@@ -33,6 +36,7 @@ function Login() {
 
   return (
     <div className="container">
+      <ArrowButton />
       <img className="login-img" src={loginImg} alt="" />
       <div className="Form">
         <h1 className="loginH1">Välkommen</h1>
@@ -46,6 +50,22 @@ function Login() {
             onChange={(event) => setEmail?.(event.target.value)}
             required
           />
+          {!correctEmail && (
+            <div className="unauthorizedMessage">
+              <ExclamationCircleFill
+                style={{
+                  color: "rgba(220, 53, 69, 1)",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0 7px",
+                }}
+              >
+                Använd en giltig e-post
+              </p>
+            </div>
+          )}
           <input
             className="Input lastInput"
             type="password"
@@ -55,6 +75,20 @@ function Login() {
             onChange={(event) => setPassword?.(event.target.value)}
             required
           />
+          {!correctPassword && (
+            <div className="unauthorizedMessage">
+              <ExclamationCircleFill
+                style={{ color: "rgba(220, 53, 69, 1)" }}
+              />
+              <p
+                style={{
+                  margin: "0 7px",
+                }}
+              >
+                Felaktigt lösenord
+              </p>
+            </div>
+          )}
           {logedInUser === "Unauthorized" && (
             <div className="unauthorizedMessage">
               <ExclamationCircleFill
@@ -73,7 +107,16 @@ function Login() {
         <button
           className="logginSubmitButton"
           onClick={() => {
-            loginUser();
+            if (password !== "" && email !== "") {
+              loginUser();
+            } else {
+              if (password === "") {
+                setCorrectPassword(false);
+              }
+              if (email === "") {
+                setCorrectEmail(false);
+              }
+            }
           }}
         >
           Logga in

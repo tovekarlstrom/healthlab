@@ -6,6 +6,7 @@ import googleLogo from "../images/Googlelogo.svg";
 import facebookLogo from "../images/Fcebooklogo.svg";
 import twitterLogo from "../images/Twitterlogo.svg";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
+import ArrowButton from "./ArrowButton";
 
 export interface AccountInterface {
   full_name: string;
@@ -51,6 +52,7 @@ function RegisterAccount() {
 
   return (
     <div className="container">
+      <ArrowButton />
       <img className="login-img" src={registerImg} alt="" />
       <div className="Form">
         <h1 className="loginH1">Välkommen</h1>
@@ -100,6 +102,22 @@ function RegisterAccount() {
                 }}
               >
                 Använd en giltig e-post
+              </p>
+            </div>
+          )}
+          {logedInUser === "Conflict account already exists" && (
+            <div className="unauthorizedMessage">
+              <ExclamationCircleFill
+                style={{
+                  color: "rgba(220, 53, 69, 1)",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0 7px",
+                }}
+              >
+                E-post finns redan
               </p>
             </div>
           )}
