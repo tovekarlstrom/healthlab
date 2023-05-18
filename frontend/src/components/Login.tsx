@@ -1,17 +1,29 @@
 import { useState, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 import "../styles/Loggin.css";
 import loginImg from "../images/login.png";
 import googleLogo from "../images/Googlelogo.svg";
 import facebookLogo from "../images/Fcebooklogo.svg";
 import twitterLogo from "../images/Twitterlogo.svg";
-import errorIcon from "../images/Vector.png";
+import { ExclamationCircleFill } from "react-bootstrap-icons";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [logedInUser, setLogedInUser] = useState("");
 
   const loginUser = () => {
-    fetch(`http://localhost:8085/login/?email=${email}&password=${password}`)
+    const data = {
+      email: email,
+      password: password,
+    };
+
+    fetch("http://localhost:8085/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
       .then((response) => response.text())
       .then((result) => {
         console.log(result);
@@ -45,7 +57,9 @@ function Login() {
           />
           {logedInUser === "Unauthorized" && (
             <div className="unauthorizedMessage">
-              <img src={errorIcon} alt="" />
+              <ExclamationCircleFill
+                style={{ color: "rgba(220, 53, 69, 1)" }}
+              />
               <p
                 style={{
                   margin: "0 7px",
@@ -70,8 +84,15 @@ function Login() {
           <img className="logo" src={facebookLogo} alt="googles logo" />
           <img className="logo" src={twitterLogo} alt="twitters logo" />
         </div>
-        <p className="accountQuestion">Har du inget konto än?</p>
-        <button className="registerButton">Registrera dig</button>
+        <div className="register-account">
+          <p className="accountQuestion">Har du inget konto än?</p>
+          <Link
+            to={`/register`}
+            className="accountQuestion login-register-connect"
+          >
+            Registrera dig
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 import { useState, ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 import "../styles/Loggin.css";
 import registerImg from "../images/register.png";
 import googleLogo from "../images/Googlelogo.svg";
 import facebookLogo from "../images/Fcebooklogo.svg";
 import twitterLogo from "../images/Twitterlogo.svg";
-import errorIcon from "../images/Vector.png";
+import { ExclamationCircleFill } from "react-bootstrap-icons";
 
 export interface AccountInterface {
   full_name: string;
@@ -13,30 +14,30 @@ export interface AccountInterface {
 }
 
 function RegisterAccount() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [logedInUser, setLogedInUser] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [correctCheckedPassword, setCorrectCheckedPassword] = useState(true);
+  const [correctPassword, setCorrectPassword] = useState(true);
+  const [correctFullName, setCorrectFullName] = useState(true);
+  const [correctEmail, setCorrectEmail] = useState(true);
   const [account, setAccount] = useState<AccountInterface>({
     full_name: "",
     email: "",
     password: "",
   });
 
-  const registerAccount = () => {
-    fetch(
-      `http://localhost:8085/register/?email=${email}&password=${password}`,
-      {
-        method: "POST",
-        body: JSON.stringify(account),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
+  const registerAccount = (account: AccountInterface) => {
+    fetch("http://localhost:8085/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(account),
+    })
+      .then((response) => response.text())
       .then((result) => {
         console.log(result);
-        // Handle the response or update state as needed
+        setLogedInUser(result);
       });
   };
 
@@ -55,7 +56,7 @@ function RegisterAccount() {
         <h1 className="loginH1">Välkommen</h1>
         <div className="InputFields">
           <input
-            className="Input"
+            className="InputTop"
             type="text"
             name="full_name"
             placeholder="För och efternamn"
@@ -63,9 +64,22 @@ function RegisterAccount() {
             onChange={handleInputChange}
             required
           />
-
+          {!correctFullName && (
+            <div className="unauthorizedMessage">
+              <ExclamationCircleFill
+                style={{ color: "rgba(220, 53, 69, 1)" }}
+              />
+              <p
+                style={{
+                  margin: "0 7px",
+                }}
+              >
+                Namn är oblegatoriskt
+              </p>
+            </div>
+          )}
           <input
-            className="Input lastInput"
+            className="Input InputRegister"
             name="email"
             type="text"
             placeholder="Email"
@@ -73,8 +87,24 @@ function RegisterAccount() {
             onChange={handleInputChange}
             required
           />
+          {!correctEmail && (
+            <div className="unauthorizedMessage">
+              <ExclamationCircleFill
+                style={{
+                  color: "rgba(220, 53, 69, 1)",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0 7px",
+                }}
+              >
+                Använd en giltig e-post
+              </p>
+            </div>
+          )}
           <input
-            className="Input lastInput"
+            className="Input InputRegister"
             type="password"
             name="password"
             placeholder="Lösenord"
@@ -82,18 +112,36 @@ function RegisterAccount() {
             onChange={handleInputChange}
             required
           />
+          {!correctPassword && (
+            <div className="unauthorizedMessage">
+              <ExclamationCircleFill
+                style={{
+                  color: "rgba(220, 53, 69, 1)",
+                }}
+              />
+              <p
+                style={{
+                  margin: "0 7px",
+                }}
+              >
+                Måset vara minst 8 tecken
+              </p>
+            </div>
+          )}
           <input
-            className="Input lastInput"
+            className="Input InputRegister"
             type="password"
             name="password"
             placeholder="Bekräfta lösenord"
-            value={account.password}
-            onChange={handleInputChange}
+            value={checkPassword}
+            onChange={(event) => setCheckPassword(event.target.value)}
             required
           />
-          {logedInUser === "Unauthorized" && (
+          {!correctCheckedPassword && (
             <div className="unauthorizedMessage">
-              <img src={errorIcon} alt="" />
+              <ExclamationCircleFill
+                style={{ color: "rgba(220, 53, 69, 1)" }}
+              />
               <p
                 style={{
                   margin: "0 7px",
@@ -104,18 +152,49 @@ function RegisterAccount() {
             </div>
           )}
         </div>
-        <button className="logginSubmitButton" onClick={registerAccount}>
+        <button
+          className="RegisterSubmitButton"
+          onClick={() => {
+            if (
+              account.password === checkPassword &&
+              account.password !== "" &&
+              account.email !== "" &&
+              account.full_name !== ""
+            ) {
+              console.log("hej");
+              registerAccount(account);
+            } else {
+              if (account.password !== checkPassword) {
+                setCorrectCheckedPassword(false);
+              }
+              if (account.full_name === "") {
+                setCorrectFullName(false);
+              }
+              if (account.email === "") {
+                setCorrectEmail(false);
+              }
+              if (account.password === "" || account.password.length < 8) {
+                setCorrectPassword(false);
+              }
+            }
+          }}
+        >
           Registrera dig
         </button>
-        <p className="login-alternatives">Eller logga in med</p>
+        <p className="register-alternatives">Eller logga in med</p>
         <div className="logos">
           <img className="logo" src={googleLogo} alt="googles logo" />
           <img className="logo" src={facebookLogo} alt="googles logo" />
           <img className="logo" src={twitterLogo} alt="twitters logo" />
         </div>
-        <div className="alredy-account">
+        <div className="already-account">
           <p className="accountQuestion">Har du redan ett konto?</p>
-          <p className="accountQuestion login">Logga in</p>
+          <Link
+            to={`/login`}
+            className="accountQuestion login-register-connect"
+          >
+            Logga in
+          </Link>
         </div>
       </div>
     </div>

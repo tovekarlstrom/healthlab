@@ -5,7 +5,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 1000px;
+
   align-items: center;
   position: relative;
 }
@@ -36,12 +36,30 @@
   width: 100%;
   margin-top: 250px;
 }
+.InputTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 0;
+  width: 207px;
+  height: 33px;
+  background: #ffffff;
+  border-style: none;
+  border-bottom: 1px solid #383838;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0.03em;
+  color: #383838;
+  margin-top: 30px;
+}
 .Input {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 12px 0;
-  width: 261px;
+  width: 207px;
   height: 33px;
   background: #ffffff;
   border-style: none;
@@ -55,8 +73,8 @@
   margin-top: 45px;
 }
 
-.lastInput {
-  margin-top: 30px;
+.InputRegister {
+  margin-top: 35px;
 }
 .logginSubmitButton {
   padding: 6px 12px;
@@ -84,6 +102,14 @@
   font-size: 16px;
   line-height: 120%;
 }
+.register-alternatives {
+  margin-top: 21px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0.03em;
+}
 .logos {
   width: 250px;
   display: flex;
@@ -106,29 +132,39 @@
   color: #dc3545;
   display: flex;
 }
-.registerButton {
-  margin-top: 5px;
+.RegisterSubmitButton {
   padding: 6px 12px;
-  width: 261px;
-  height: 33px;
+  width: 174px;
+  height: 42px;
   background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
-  border: 1px solid #0d6efd;
   border-radius: 30px;
+  border-style: none;
+  margin-top: 36px;
 }
 
-.alredy-account {
+.already-account {
+  margin-top: 22px;
   display: flex;
   width: 288px;
   height: 18px;
 }
-.accountQuestion {
+
+.register-account {
   margin-top: 59.64px;
+  display: flex;
+  width: 317px;
+  height: 18px;
+}
+.accountQuestion {
   font-style: italic;
   font-weight: 500;
   font-size: 16px;
   line-height: 120%;
 }
 
-.login {
+.login,
+.login-register-connect {
   font-weight: 600;
+  color: #383838;
+  text-decoration: none;
 }
