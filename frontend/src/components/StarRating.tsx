@@ -1,4 +1,4 @@
-import { StarFill, Star, StarHalf } from "react-bootstrap-icons"
+import { StarFill, StarHalf } from "react-bootstrap-icons"
 
 interface IRating {
   rating: number
@@ -11,20 +11,22 @@ function StarRating(props: IRating) {
   const emptyStar = halfStar ? 5 - filledStars - 1 : 5 - filledStars
 
   let stars = []
+  const starStyle = { color: "#faca15" }
+  const emptyStarStyle = { color: "#D9D9D9" }
 
   for (let i = 0; i < filledStars; i++) {
-    stars.push(<StarFill />)
+    stars.push(<StarFill style={starStyle} />)
   }
 
   if (halfStar) {
-    stars.push(<StarHalf />)
+    stars.push(<StarHalf style={starStyle} />)
   }
 
   for (let i = 0; i < emptyStar; i++) {
-    stars.push(<Star />)
+    stars.push(<StarFill style={emptyStarStyle} />)
   }
 
-  return <div className="RecipeCard-rating"> {stars} </div>
+  return <>{stars}</>
 }
 
 export default StarRating
