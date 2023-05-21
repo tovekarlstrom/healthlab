@@ -9,8 +9,7 @@ const Footer: React.FC = () => {
     alignItems: "center",
     color: "#ffffff",
     fontFamily: "Montserrat, sans-serif",
-    // position: 'fixed', // jag placera footern
-    // bottom: 0, // den justerar den längst ner på viewporten.
+    bottom: 0,
     width: "100%",
   }
 
@@ -34,4 +33,5 @@ const Footer: React.FC = () => {
     </footer>
   )
 }
-export default Footer
+
+export default Footer;

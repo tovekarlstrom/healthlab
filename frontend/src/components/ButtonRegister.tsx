@@ -1,5 +1,3 @@
-// ButtonRegister.js
-
 import React from 'react';
 
 interface ButtonRegisterProps {

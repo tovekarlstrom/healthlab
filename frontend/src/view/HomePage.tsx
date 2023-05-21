@@ -1,64 +1,64 @@
-import React from "react";
-import ButtonRegister from "../components/ButtonRegister";
+import React from 'react';
+import ButtonRegister from '../components/ButtonRegister';
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
+  const containerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  };
+
+  const imageStyle: React.CSSProperties = {
+    width: 390,
+    height: 300,
+    objectFit: 'cover',
+  };
+
+  const contentStyle: React.CSSProperties = {
+    position: 'relative',
+    top: '-20px',
+    width: 390,
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexShrink: 0,
+    boxShadow: '0px -5px 5px rgba(0, 0, 0, 0.15)',
+  };
+
+  const buttonContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '20px',
+    gap: '20px',
+  };
+
+  const paragraphStyle: React.CSSProperties = {
+    textAlign: 'center',
+    fontSize: '16px',
+    marginBottom: '20px',
+    fontWeight: '400',
+    padding: '0px 18px 0px 18px'
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        position: "relative",
-      }}
-    >
+    <div style={containerStyle}>
       <img
-        src="/Homepage-picture.jpg"
+        src={process.env.PUBLIC_URL + '/Homepage-picture.jpg'}
         alt=""
-        style={{
-          height: "300px",
-          width: "100%",
-          objectFit: "cover",
-          position: "absolute",
-          top: "0",
-        }}
+        style={imageStyle}
       />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "white",
-          borderRadius: "30px 30px 0px 0px",
-          marginTop: "278px",
-          zIndex: "2",
-          width: "100%",
-        }}
-      >
-        <h1
-          style={{
-            textAlign: "center",
-            margin: "45px 18px 21px 18px",
-            fontWeight: "700",
-          }}
-        >
-          Välkommen
-        </h1>
-        <p style={{ textAlign: "center", width: "350px", fontWeight: "500" }}>
-          Din resa mot en bättre hälsa börjar här. Vi vill hjälpa dig på bästa
-          sätt och behöver därför veta mer om dig. Välj det alternativ som bäst
-          stämmer in på dig.
+      <div style={contentStyle}>
+        <h1 style={{ textAlign: 'center', margin: '30px 20px' }}>Välkommen</h1>
+        <p style={paragraphStyle}>
+          Din resa mot en bättre hälsa börjar här. Vi vill hjälpa dig på bästa sätt och behöver därför veta mer om dig. Välj det alternativ som bäst stämmer in på dig.
         </p>
-        <div
-          style={{
-            marginTop: "22px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "21px",
-          }}
-        >
+        <div style={buttonContainerStyle}>
           <ButtonRegister buttonText="Ner i vikt" />
-          <ButtonRegister buttonText="Behåll vikt" />
+          <ButtonRegister buttonText="Behåll vikt"  />
           <ButtonRegister buttonText="Upp i vikt" />
           <ButtonRegister buttonText="Ingen plan" />
         </div>
