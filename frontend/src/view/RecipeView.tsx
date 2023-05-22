@@ -7,12 +7,14 @@ import StarRating from "../components/StarRating";
 import "../styles/RecipeView.css";
 import { Clock } from "react-bootstrap-icons";
 import { Heart } from "react-bootstrap-icons";
+import { HeartFill } from "react-bootstrap-icons";
 import { ChatText } from "react-bootstrap-icons";
 import { Bag } from "react-bootstrap-icons";
 import Review from "../components/Review";
 
 function RecipeView() {
   const { recipeName } = useParams();
+  const [like, setLike] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   useEffect(() => {
     fetch(`http://localhost:8085/recipes/${recipeName}`)
@@ -36,6 +38,9 @@ function RecipeView() {
         <div>
           <ArrowButton />
           <div
+            onClick={() => {
+              setLike(!like);
+            }}
             className="heart"
             style={{
               backgroundColor: "rgba(249, 251, 249, 0.8)",
@@ -52,7 +57,11 @@ function RecipeView() {
               paddingTop: "3px",
             }}
           >
-            <Heart style={{ width: "34px", height: "32px" }} />
+            {!like ? (
+              <Heart style={{ width: "34px", height: "32px" }} />
+            ) : (
+              <HeartFill style={{ width: "34px", height: "32px" }} />
+            )}
           </div>
           <img className="recipeImg" src={recipe.image} alt="recipe" />
           <div className="innerContainer">
