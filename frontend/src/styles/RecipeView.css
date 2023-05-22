@@ -29,7 +29,49 @@
 
 .iconBox {
   display: flex;
+  align-items: center;
 }
 .icon {
   margin-right: 5px;
+}
+
+.greenIconBox {
+  width: 60px;
+  height: 60px;
+  background-color: #7acb94;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconBag {
+  width: 32px;
+  height: 36px;
+}
+.IconClock {
+  width: 32px;
+  height: 32px;
+}
+
+.recipeDetails {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.ingredients {
+  list-style: none;
+  padding-left: 16px;
+}
+
+.recipeH2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 120%;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: #383838;
+  margin: 15px 0;
 }

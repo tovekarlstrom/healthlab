@@ -7,6 +7,7 @@ import "../styles/RecipeView.css";
 import { Clock } from "react-bootstrap-icons";
 import { Heart } from "react-bootstrap-icons";
 import { ChatText } from "react-bootstrap-icons";
+import { Bag } from "react-bootstrap-icons";
 
 function RecipeView() {
   const { recipeName } = useParams();
@@ -53,7 +54,9 @@ function RecipeView() {
           </div>
           <img className="recipeImg" src={recipe.image} alt="recipe" />
           <div className="innerContainer">
-            <StarRating rating={recipe.rating} />
+            <div>
+              <StarRating rating={recipe.rating} />
+            </div>
             <h1 className="recipeH1">{recipe.name}</h1>
             <div className="infoIcons">
               <span className="iconBox">
@@ -69,6 +72,25 @@ function RecipeView() {
                 <p>{recipe.comments}</p>
               </span>
             </div>
+
+            <div className="greenIconBox">
+              <Bag className="iconBag" />
+            </div>
+            <h2 className="recipeH2">Ingredienser</h2>
+            <ul className="recipeDetails ingredients">
+              {recipe.ingredients.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+            <div className="greenIconBox">
+              <Clock className="IconClock" />
+            </div>
+            <h2 className="recipeH2">Instruktioner</h2>
+            <ul className="recipeDetails">
+              {recipe.instructions.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
