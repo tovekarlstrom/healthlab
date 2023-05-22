@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import HamburgerButton from "./HamburgerButton";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -29,62 +30,48 @@ const Navbar = () => {
           <img src="/Logo Mobile.svg" alt="Logo" style={{ width: "140px" }} />
         </div>
         <div>
-          {/* hamburgare knapp*/}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            onClick={toggleMenu}
-            style={{ cursor: "pointer" }}
-          >
-            <line
-              x1="3"
-              y1="12"
-              x2="21"
-              y2="12"
-              style={{ stroke: "#174E2E" }}
-            />
-            <line x1="3" y1="6" x2="21" y2="6" style={{ stroke: "#174E2E" }} />
-            <line
-              x1="3"
-              y1="18"
-              x2="21"
-              y2="18"
-              style={{ stroke: "#174E2E" }}
-            />
-          </svg>
+          <HamburgerButton onClick={toggleMenu} />
         </div>
       </div>
 
-      {isMenuOpen && (
+      <div
+        style={{
+          position: "fixed",
+          top: "0",
+          right: isMenuOpen ? "0" : "-100%",
+          bottom: "0",
+          width: "50%",
+          maxWidth: "200px",
+          backgroundColor: "#F9FBF9",
+          color: "#383838",
+          padding: "20px",
+          transition: "right 0.2s ease-in-out",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <button style={{ marginBottom: "10px" }} onClick={toggleMenu}>
+          Close Menu
+        </button>
         <div
           style={{
-            position: "fixed",
-            top: "0",
-            right: "0",
-            bottom: "0",
-            width: "200px",
-            backgroundColor: "rgba(0, 0, 0, 0.8)",
-            color: "white",
-            padding: "20px",
-            transition: "transform 0.3s ease-in-out",
-            transform: "translateX(0)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            flex: 1,
           }}
         >
-          <button style={{ marginBottom: "10px" }} onClick={toggleMenu}>
-            Close Menu
-          </button>
-          <p>Mitt konto</p>
-          <p>Recept</p>
-          <p>Logga ut</p>
+          <h1 style={{ fontSize: "20px", marginBottom: "38px" }}>Registrera dig</h1>
+          <h1 style={{ fontSize: "20px", marginBottom: "38px" }}>Logga in</h1>
+          <h1 style={{ fontSize: "20px", marginBottom: "38px" }}>Kontakta oss</h1>
         </div>
-      )}
+        <div style={{ marginTop: "auto", marginBottom: "20px" }}>
+          <img src="/Logo Mobile.svg" alt="Logo" style={{ width: "136px", height: "29px" }} />
+        </div>
+      </div>
     </div>
   );
 };

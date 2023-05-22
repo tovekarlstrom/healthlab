@@ -4,6 +4,7 @@ import Info from "../components/Info";
 import Hero from "../components/Hero";
 import { Link } from "react-router-dom";
 import "../styles/HomeView.css";
+import Review from "../components/Review";
 export interface Recipe {
   id: number;
   image: string;
@@ -40,6 +41,29 @@ function Home() {
   return (
     <div>
       <Hero />
+      <div className="Home-review-container">
+        <h2 className="h3"> Detta säger våra kunder</h2>
+        <div className="Home-reviews">
+          <Review
+            name="Jane Doe"
+            rating={3.5}
+            comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
+            image="YasminFrost.png"
+          />
+          <Review
+            name="Jane Doe"
+            rating={3.5}
+            comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
+            image="YasminFrost.png"
+          />
+          <Review
+            name="Jane Doe"
+            rating={3.5}
+            comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
+            image="YasminFrost.png"
+          />
+        </div>
+      </div>
       {recipes !== null && (
         <div className="Home-recipe-container">
           <h2 className="h2">Testa några av våra populära recept</h2>
