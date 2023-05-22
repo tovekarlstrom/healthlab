@@ -1,0 +1,35 @@
+.innerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.recipeH1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  margin-top: 15px;
+}
+
+.recipeImg {
+  height: 230px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.infoIcons {
+  display: flex;
+  justify-content: space-between;
+  width: 309px;
+  margin: 15px 40.5px 20px 40.5px;
+}
+
+.iconBox {
+  display: flex;
+}
+.icon {
+  margin-right: 5px;
+}

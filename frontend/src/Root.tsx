@@ -1,12 +1,21 @@
 import NavBar from "./components/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
+
 function Root() {
   const location = useLocation();
-  const excludeNavBarAndFooter = ["/login", "/register"];
-  const renderNavbarAndFooter = !excludeNavBarAndFooter.includes(
-    location.pathname
+  const excludeNavBarAndFooter = [
+    "/login",
+    "/register",
+    (pathname: string) => pathname.startsWith("/recipe/"),
+  ];
+
+  const renderNavbarAndFooter = !excludeNavBarAndFooter.some((exclude) =>
+    typeof exclude === "function"
+      ? exclude(location.pathname)
+      : exclude === location.pathname
   );
+
   return (
     <div>
       {renderNavbarAndFooter && <NavBar />}
@@ -15,4 +24,5 @@ function Root() {
     </div>
   );
 }
+
 export default Root;

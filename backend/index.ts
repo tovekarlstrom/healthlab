@@ -26,6 +26,14 @@ app.get("/recipes", async (request, response) => {
   console.log("rows", rows);
   response.status(200).send(rows);
 });
+app.get("/recipes/:recipeName", async (request, response) => {
+  const { recipeName } = request.params;
+  const { rows } = await client.query("SELECT * FROM recipes WHERE name = $1", [
+    recipeName,
+  ]);
+  console.log("rows", rows);
+  response.status(200).send(rows);
+});
 
 app.post("/login", async (request, response) => {
   const { email, password } = request.body;

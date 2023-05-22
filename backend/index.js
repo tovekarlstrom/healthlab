@@ -35,6 +35,14 @@ app.get("/recipes", (request, response) => __awaiter(void 0, void 0, void 0, fun
     console.log("rows", rows);
     response.status(200).send(rows);
 }));
+app.get("/recipes/:recipeName", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { recipeName } = request.params;
+    const { rows } = yield client.query("SELECT * FROM recipes WHERE name = $1", [
+        recipeName,
+    ]);
+    console.log("rows", rows);
+    response.status(200).send(rows);
+}));
 app.post("/login", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = request.body;
     const { rows } = yield client.query("SELECT * FROM users");
