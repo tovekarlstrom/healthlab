@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import HamburgerButton from "./HamburgerButton";
+import React, { useState } from "react"
+import HamburgerButton from "./HamburgerButton"
+import { XLg } from "react-bootstrap-icons"
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -52,9 +53,9 @@ const Navbar: React.FC = () => {
           justifyContent: "center",
         }}
       >
-        <button style={{ marginBottom: "10px" }} onClick={toggleMenu}>
+        <XLg style={{ marginLeft: '130px', width: '24', height: '24px' }} onClick={toggleMenu}>
           Close Menu
-        </button>
+        </XLg>
         <div
           style={{
             display: "flex",
