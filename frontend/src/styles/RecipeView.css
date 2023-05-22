@@ -53,6 +53,10 @@
   width: 32px;
   height: 32px;
 }
+.IconChat {
+  width: 37px;
+  height: 32px;
+}
 
 .recipeDetails {
   width: 100%;
@@ -74,4 +78,36 @@
   letter-spacing: 0.03em;
   color: #383838;
   margin: 15px 0;
+}
+
+.recipeReviews {
+  padding: 16px;
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+  margin-top: 47px;
+  padding-top: 10px;
+}
+
+.IconHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.LogginIfNot {
+  padding: 27px 16px 26px;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0.03em;
+  color: #383838;
+  height: 91px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.commentLink {
+  color: rgba(122, 203, 148, 1);
+  text-decoration: none;
 }
