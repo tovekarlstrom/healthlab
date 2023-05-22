@@ -27,4 +27,14 @@
   .RecipeCard-rating {
     gap: 1.6px;
   }
+
+  .RecipeCard-image {
+    width: 443px;
+  }
+
+  .RecipeCard-body {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
 }

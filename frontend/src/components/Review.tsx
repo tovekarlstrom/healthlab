@@ -10,7 +10,6 @@ interface reviewProps {
 
 function Review(props: reviewProps) {
   return (
-    // <div className="Review">
     <>
       <span className="Review-divider"></span>
       <div className="Review-body">
@@ -30,7 +29,6 @@ function Review(props: reviewProps) {
         </div>
       </div>
     </>
-    // </div>
   )
 }
 

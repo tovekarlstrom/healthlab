@@ -1,6 +1,8 @@
 .Review-body {
   display: flex;
   gap: 10px;
+  width: 100%;
+  max-width: 358px;
 }
 
 .Review-image {
@@ -30,5 +32,16 @@
   background-color: rgba(33, 37, 41, 0.25);
   display: block;
   height: 1px;
-  margin: 0 29px 38px;
+  width: 300px;
+  margin: 0 auto 38px;
+}
+
+@media (min-width: 800px) {
+  .Review-body {
+    width: 358px;
+  }
+
+  .Review-divider {
+    display: none;
+  }
 }
