@@ -1,18 +1,18 @@
 import React from 'react';
 
 interface MicronutrientCircleProps {
-  nutrientName: string
-  nutrientAmount: number
+  nutrientName: string;
+  nutrientAmount: number;
+  totalSum: number;
 }
 
 const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
   nutrientName,
   nutrientAmount,
+  totalSum,
 }) => {
-  const percentage = Math.min(Math.max(nutrientAmount, 0), 100) // lägger value mellan 0 and 100
-
-  const circumference = 2 * Math.PI * 32.5; // omkretsen av cirkeln 2 * PI * radius
-      console.log(circumference)
+  const percentage = Math.round((nutrientAmount / totalSum) * 100)
+  const circumference = 2 * Math.PI * 32.5
   const dashOffset = (circumference * (100 - percentage)) / 100
 
   const circleStyle = {
@@ -23,14 +23,12 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
     transition: 'stroke-dashoffset 0.3s ease-in-out',
   };
 
-  console.log('Rendering MicronutrientCircle:', nutrientName, nutrientAmount)
-  console.log(dashOffset)
-
-
   return (
     <div style={{ textAlign: 'center', width: '100px' }}>
       <h1 style={{ fontSize: '16px', marginBottom: '24px' }}>{nutrientName}</h1>
-      <p style={{ fontSize: '14px', marginBottom: '24px', fontWeight: '500' }}>{nutrientAmount} g</p>
+      <p style={{ fontSize: '14px', marginBottom: '24px', fontWeight: '500' }}>
+        {nutrientAmount} g
+      </p>
       <svg width="65" height="65">
         <circle
           cx="32.5"
@@ -49,8 +47,17 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
   );
 };
 
-const MicroNutrient: React.FC = () => {
-  console.log('renderar MicroNutrient')
+interface MicroNutrientProps {
+  carbs: number;
+  fat: number;
+  protein: number;
+  kcal: number;
+}
+
+const MicroNutrient: React.FC<MicroNutrientProps> = ({ carbs, fat, protein, kcal }) => {
+  console.log('Rendering MicroNutrient')
+
+  const totalSum = protein + carbs + fat
 
   return (
     <div
@@ -66,13 +73,13 @@ const MicroNutrient: React.FC = () => {
         margin: '0 auto',
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-evenly'}}>
-        <MicronutrientCircle nutrientName="Protein" nutrientAmount={75} />
-        <MicronutrientCircle nutrientName="Kolhydrater" nutrientAmount={12} />
-        <MicronutrientCircle nutrientName="Fett" nutrientAmount={12} />
+      <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+        <MicronutrientCircle nutrientName="Protein" nutrientAmount={protein} totalSum={totalSum} />
+        <MicronutrientCircle nutrientName="Kolhydrater" nutrientAmount={carbs} totalSum={totalSum} />
+        <MicronutrientCircle nutrientName="Fett" nutrientAmount={fat} totalSum={totalSum} />
       </div>
       <p style={{ fontSize: '16px', marginTop: '24px', fontWeight: '500' }}>
-        <span style={{ fontWeight: '600' }}>Totalt:</span> {"{nummer}"}kcal
+        <span style={{ fontWeight: '600' }}>Totalt:</span> {kcal} kcal
       </p>
     </div>
   )
