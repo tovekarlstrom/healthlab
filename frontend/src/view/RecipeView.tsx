@@ -11,6 +11,7 @@ import { HeartFill } from "react-bootstrap-icons"
 import { ChatText } from "react-bootstrap-icons"
 import { Bag } from "react-bootstrap-icons"
 import Review from "../components/Review"
+import MicroNutrients from "../components/MicroNutrients"
 
 interface likeInteface {
   id: number
@@ -139,6 +140,15 @@ function RecipeView() {
                 <p>{recipe.comments}</p>
               </span>
             </div>
+
+            <span style={{ margin: "20px 0px 20px 0px" }}>
+              <MicroNutrients
+                carbs={recipe.carbs}
+                fat={recipe.fat}
+                protein={recipe.protein}
+                kcal={recipe.kcal}
+              />
+            </span>
 
             <div className="greenIconBox">
               <Bag className="iconBag" />
