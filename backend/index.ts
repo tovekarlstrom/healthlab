@@ -3,6 +3,7 @@ import express from "express";
 import { Client } from "pg";
 import cors from "cors";
 import { request } from "http";
+import { log } from "console";
 
 dotenv.config();
 const client = new Client({
@@ -82,6 +83,56 @@ app.post("/register", async (request, response) => {
     response
       .status(400)
       .send('"full_name, email or password has not been added"');
+  }
+});
+
+app.post("/likes", async (request, response) => {
+  const { user_id } = request.body;
+  let { rows } = await client.query("SELECT * FROM likes WHERE user_id = $1", [
+    user_id,
+  ]);
+
+  response.send(rows);
+});
+
+app.post("/recipes/:recipeName", async (request, response) => {
+  const { recipe_id, user_id } = request.body;
+
+  const values = [recipe_id, user_id];
+  const query = "SELECT * FROM likes WHERE recipe_id = $1 AND user_id = $2";
+
+  const insertQuery = "INSERT INTO likes (recipe_id, user_id) VALUES ($1, $2)";
+
+  const delQuery = "DELETE FROM likes WHERE recipe_id = $1 AND user_id = $2";
+
+  if (recipe_id && user_id) {
+    let { rows } = await client.query(query, values);
+
+    if (rows.length > 0) {
+      // exists, remove from liked
+      const removeLike = await client.query(delQuery, values);
+      let { rows } = await client.query("SELECT * FROM likes");
+
+      const addLike = await client.query(
+        "UPDATE recipes SET likes = likes - 1 WHERE id =$1",
+        [recipe_id]
+      );
+
+      response.status(200).send(false);
+    } else {
+      // add to like
+      const saveLike = await client.query(insertQuery, values);
+      let { rows } = await client.query("SELECT * FROM likes");
+
+      const addLike = await client.query(
+        "UPDATE recipes SET likes = likes + 1 WHERE id =$1",
+        [recipe_id]
+      );
+
+      response.status(200).send(true);
+    }
+  } else {
+    response.status(400).send("error: missing id");
   }
 });
 

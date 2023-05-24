@@ -5,7 +5,7 @@ import { Recipe } from "./HomeView";
 import ArrowButton from "../components/ArrowButton";
 import StarRating from "../components/StarRating";
 import "../styles/RecipeView.css";
-import { Clock } from "react-bootstrap-icons";
+import { Clock, Lightbulb } from "react-bootstrap-icons";
 import { Heart } from "react-bootstrap-icons";
 import { HeartFill } from "react-bootstrap-icons";
 import { ChatText } from "react-bootstrap-icons";
@@ -15,11 +15,13 @@ import MicroNutrients from "../components/MicroNutrients";
 import { useContext } from "react";
 import { LoggedInContext } from "../LoggedInContext";
 
+interface likeInteface {
+  id: number;
+  recipe_id: number;
+  user_id: number;
+}
+
 function RecipeView() {
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
-    loggedIn: null,
-    setLoggedIn: null,
-  };
   const { recipeName } = useParams();
   const [like, setLike] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -34,11 +36,57 @@ function RecipeView() {
       .then((result) => {
         console.log(result);
         setRecipe(result[0]);
+        setLikeCount(result[0].likes);
       })
       .catch((error) => {
         console.log("Error:", error.message);
       });
+
+    //check if already liked
+
+    fetch("http://localhost:8085/likes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: user_id }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        setLikeArray(result);
+      });
   }, []);
+
+  useEffect(() => {
+    if (recipe && likeArray) {
+      const alreadyLiked = likeArray.some(
+        (item) => item.recipe_id === recipe.id
+      );
+      setLike(alreadyLiked);
+    }
+  }, [likeArray]);
+
+  async function handleLike() {
+    if (recipe) {
+      const response = await fetch(
+        `http://localhost:8085/recipes/${recipeName}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            recipe_id: recipe.id,
+            user_id: user_id,
+          }),
+        }
+      );
+      const result = await response.json();
+      if (result) {
+        setLikeCount(likeCount + 1);
+      } else if (result === false) {
+        setLikeCount(likeCount - 1);
+      }
+      setLike(result);
+    }
+  }
+
   return (
     <div>
       {recipe !== null && (
@@ -46,9 +94,7 @@ function RecipeView() {
           {loggedIn && <p>{loggedIn.id}</p>}
           <ArrowButton />
           <div
-            onClick={() => {
-              setLike(!like);
-            }}
+            onClick={handleLike}
             className="heart"
             style={{
               backgroundColor: "rgba(249, 251, 249, 0.8)",
@@ -68,7 +114,9 @@ function RecipeView() {
             {!like ? (
               <Heart style={{ width: "34px", height: "32px" }} />
             ) : (
-              <HeartFill style={{ width: "34px", height: "32px" }} />
+              <HeartFill
+                style={{ width: "34px", height: "32px", color: "#174E2E" }}
+              />
             )}
           </div>
           <img className="recipeImg" src={recipe.image} alt="recipe" />
@@ -84,7 +132,7 @@ function RecipeView() {
               </span>
               <span className="iconBox">
                 <Heart className="icon" />
-                <p>{recipe.likes}</p>
+                <p>{likeCount}</p>
               </span>
               <span className="iconBox">
                 <ChatText className="icon" />

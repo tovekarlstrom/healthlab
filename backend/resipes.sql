@@ -62,3 +62,14 @@ ARRAY[
 );
 INSERT INTO users (full_name, email, password)
 VALUES('test user','test@test.com', 'test123');
+
+
+CREATE TABLE likes (
+  id serial PRIMARY KEY,
+  recipe_id INTEGER,
+  user_id INTEGER,
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+INSERT INTO likes (recipe_id, user_id) VALUES (1 ,1 );
