@@ -12,8 +12,6 @@ import { ChatText } from "react-bootstrap-icons";
 import { Bag } from "react-bootstrap-icons";
 import Review from "../components/Review";
 import MicroNutrients from "../components/MicroNutrients";
-import { useContext } from "react";
-import { LoggedInContext } from "../LoggedInContext";
 
 interface likeInteface {
   id: number;
