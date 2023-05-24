@@ -43,8 +43,10 @@ function Login() {
       })
       .then((result) => {
         console.log(result);
+        const parsedResult = JSON.parse(result);
         if (setLoggedIn) {
-          setLoggedIn(JSON.parse(result));
+          setLoggedIn(parsedResult);
+          localStorage.setItem("loggedInUser", JSON.stringify(parsedResult));
         }
       });
   };
