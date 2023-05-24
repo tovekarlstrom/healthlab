@@ -42,9 +42,11 @@ function RecipeView() {
       .catch((error) => {
         console.log("Error:", error.message)
       })
+  }, [])
 
-    //get likes if logged in
-    if (loggedIn && loggedIn.id !== "") {
+  //get likes if logged in
+  useEffect(() => {
+    if (loggedIn && typeof loggedIn.id === "number") {
       fetch("http://localhost:8085/likes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -53,17 +55,19 @@ function RecipeView() {
         .then((response) => response.json())
         .then((result) => {
           setLikeArray(result)
+          console.log(result)
         })
     }
-  }, [])
+  }, [recipe])
 
-  //check if already liked
+  // check if already liked
   useEffect(() => {
-    if (recipe && likeArray) {
+    if (recipe && likeArray.length > 0) {
       const alreadyLiked = likeArray.some(
         (item) => item.recipe_id === recipe.id
       )
       setLike(alreadyLiked)
+      console.log("set heart")
     }
   }, [likeArray])
 
