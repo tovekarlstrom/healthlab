@@ -15,15 +15,15 @@ function StarRating(props: IRating) {
   const emptyStarStyle = { color: "#D9D9D9" }
 
   for (let i = 0; i < filledStars; i++) {
-    stars.push(<StarFill style={starStyle} />)
+    stars.push(<StarFill key={i} style={starStyle} />)
   }
 
   if (halfStar) {
-    stars.push(<StarHalf style={starStyle} />)
+    stars.push(<StarHalf key={filledStars + 1} style={starStyle} />)
   }
 
   for (let i = 0; i < emptyStar; i++) {
-    stars.push(<StarFill style={emptyStarStyle} />)
+    stars.push(<StarFill key={5 - i} style={emptyStarStyle} />)
   }
 
   return <>{stars}</>
