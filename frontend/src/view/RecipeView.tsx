@@ -68,25 +68,36 @@ function RecipeView() {
   }, [likeArray])
 
   async function handleLike() {
-    if (recipe && loggedIn) {
-      const response = await fetch(
-        `http://localhost:8085/recipes/${recipeName}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            recipe_id: recipe.id,
-            user_id: loggedIn.id,
-          }),
+    try {
+      if (recipe && loggedIn) {
+        const response = await fetch(
+          `http://localhost:8085/recipes/${recipeName}`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              recipe_id: recipe.id,
+              user_id: loggedIn.id,
+            }),
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error("Failed to like the recipe.")
         }
-      )
-      const result = await response.json()
-      if (result) {
-        setLikeCount(likeCount + 1)
-      } else if (result === false) {
-        setLikeCount(likeCount - 1)
+
+        const result = await response.json()
+
+        if (result) {
+          setLikeCount(likeCount + 1)
+        } else if (result === false) {
+          setLikeCount(likeCount - 1)
+        }
+
+        setLike(result)
       }
-      setLike(result)
+    } catch (error) {
+      alert("Logga in för att spara recept!")
     }
   }
 
