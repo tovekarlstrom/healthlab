@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { createHashRouter, RouterProvider } from "react-router-dom";
-import Root from "./Root";
-import "./App.css";
-import Login from "./components/Login";
-import HomeView from "./view/HomeView";
-import HomePage from "./view/HomePage";
-import RegisterAccount from "./components/RegisterAccount";
-import RecipeView from "./view/RecipeView";
-import { LoggedInContext } from "./LoggedInContext";
-import LoggedInHomePage from "./view/LoggedInHomePage";
+import React, { useState } from "react"
+import { createHashRouter, RouterProvider } from "react-router-dom"
+import Root from "./Root"
+import "./App.css"
+import Login from "./components/Login"
+import HomeView from "./view/HomeView"
+import HomePage from "./view/HomePage"
+import RegisterAccount from "./components/RegisterAccount"
+import RecipeView from "./view/RecipeView"
+import { LoggedInContext } from "./LoggedInContext"
+import LoggedInHomePage from "./view/LoggedInHomePage"
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({
     id: "",
     full_name: "",
     email: "",
-  });
+  })
   const router = createHashRouter([
     {
       children: [
@@ -28,12 +28,12 @@ function App() {
       ],
       element: <Root />,
     },
-  ]);
+  ])
   return (
     <LoggedInContext.Provider value={{ loggedIn, setLoggedIn }}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </LoggedInContext.Provider>
-  );
+  )
 }
 
-export default App;
+export default App
