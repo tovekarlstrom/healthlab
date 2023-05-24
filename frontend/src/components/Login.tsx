@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import "../styles/Loggin.css";
@@ -17,8 +17,9 @@ function Login() {
   };
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [correctEmail, setCorrectEmail] = useState(true);
-  const [correctPassword, setCorrectPassword] = useState(true);
+  const [incorrectEmail, setIncorrectEmail] = useState(false);
+  const [incorrectPassword, setIncorrectPassword] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
   const loginUser = () => {
     const data = {
@@ -33,17 +34,25 @@ function Login() {
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 401) {
+          setShowErrorMessage(true);
+          setIncorrectPassword(false);
+        }
+        return response.text();
+      })
       .then((result) => {
         console.log(result);
         if (setLoggedIn) {
-          setLoggedIn(result);
-          if (loggedIn.length > 4) {
-            navigate("/loggedInHomePage");
-          }
+          setLoggedIn(JSON.parse(result));
         }
       });
   };
+  useEffect(() => {
+    if (loggedIn && loggedIn.id !== "") {
+      navigate("/loggedInHomePage");
+    }
+  }, [loggedIn, navigate]);
 
   return (
     <div className="container">
@@ -51,8 +60,10 @@ function Login() {
         <ArrowButton />
         <img className="login-img" src={loginImg} alt="" />
       </div>
+      {loggedIn && <p>{loggedIn.id}</p>}
+
       <div className="content">
-        <p>{loggedIn}</p>
+        <p>{loggedIn?.email}</p>
         <div className="Form">
           <h1 className="loginH1">Välkommen</h1>
           <div className="InputFields">
@@ -65,7 +76,7 @@ function Login() {
               onChange={(event) => setEmail?.(event.target.value)}
               required
             />
-            {!correctEmail && (
+            {incorrectEmail && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{
@@ -90,7 +101,7 @@ function Login() {
               onChange={(event) => setPassword?.(event.target.value)}
               required
             />
-            {!correctPassword && (
+            {incorrectPassword && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{ color: "rgba(220, 53, 69, 1)" }}
@@ -104,7 +115,7 @@ function Login() {
                 </p>
               </div>
             )}
-            {loggedIn === "Unauthorized" && (
+            {showErrorMessage && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{ color: "rgba(220, 53, 69, 1)" }}
@@ -126,10 +137,17 @@ function Login() {
                 loginUser();
               } else {
                 if (password === "") {
-                  setCorrectPassword(false);
+                  console.log("hr");
+
+                  setShowErrorMessage(false);
+                  setIncorrectPassword(true);
+                  if (email !== "") {
+                    setIncorrectEmail(false);
+                  }
                 }
                 if (email === "") {
-                  setCorrectEmail(false);
+                  console.log(email);
+                  setIncorrectEmail(true);
                 }
               }
             }}

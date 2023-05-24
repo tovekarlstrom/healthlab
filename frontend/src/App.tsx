@@ -11,7 +11,11 @@ import { LoggedInContext } from "./LoggedInContext";
 import LoggedInHomePage from "./view/LoggedInHomePage";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState("");
+  const [loggedIn, setLoggedIn] = useState({
+    id: "",
+    full_name: "",
+    email: "",
+  });
   const router = createHashRouter([
     {
       children: [

@@ -1,7 +1,14 @@
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
+
+interface User {
+  id: string;
+  full_name: string;
+  email: string;
+}
 
 interface LoggedInContextValue {
-  loggedIn: string;
-  setLoggedIn: ((newValue: string) => void) | undefined;
+  loggedIn: User;
+  setLoggedIn: Dispatch<SetStateAction<User>> | undefined;
 }
+
 export const LoggedInContext = createContext<LoggedInContextValue | null>(null);

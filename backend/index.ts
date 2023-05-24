@@ -50,7 +50,9 @@ app.post("/login", async (request, response) => {
       response.status(200).send(loggedInUser);
     } else {
       console.log("fel lösen eller användarnamn");
-      response.status(401).send("Unauthorized");
+      response
+        .status(401)
+        .send({ id: "", full_name: "", email: "", password: "" });
     }
   } else {
     console.log("errr");

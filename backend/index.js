@@ -56,7 +56,9 @@ app.post("/login", (request, response) => __awaiter(void 0, void 0, void 0, func
         }
         else {
             console.log("fel lösen eller användarnamn");
-            response.status(401).send("Unauthorized");
+            response
+                .status(401)
+                .send({ id: "", full_name: "", email: "", password: "" });
         }
     }
     else {

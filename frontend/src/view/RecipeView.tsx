@@ -12,8 +12,14 @@ import { ChatText } from "react-bootstrap-icons";
 import { Bag } from "react-bootstrap-icons";
 import Review from "../components/Review";
 import MicroNutrients from "../components/MicroNutrients";
+import { useContext } from "react";
+import { LoggedInContext } from "../LoggedInContext";
 
 function RecipeView() {
+  const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
+    loggedIn: null,
+    setLoggedIn: null,
+  };
   const { recipeName } = useParams();
   const [like, setLike] = useState(false);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -37,6 +43,7 @@ function RecipeView() {
     <div>
       {recipe !== null && (
         <div>
+          {loggedIn && <p>{loggedIn.id}</p>}
           <ArrowButton />
           <div
             onClick={() => {
@@ -85,8 +92,13 @@ function RecipeView() {
               </span>
             </div>
 
-            <span style={{margin: '20px 0px 20px 0px'}}>
-               <MicroNutrients carbs={recipe.carbs} fat={recipe.fat} protein={recipe.protein} kcal={recipe.kcal}/>
+            <span style={{ margin: "20px 0px 20px 0px" }}>
+              <MicroNutrients
+                carbs={recipe.carbs}
+                fat={recipe.fat}
+                protein={recipe.protein}
+                kcal={recipe.kcal}
+              />
             </span>
 
             <div className="greenIconBox">
