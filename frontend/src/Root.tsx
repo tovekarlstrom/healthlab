@@ -4,23 +4,26 @@ import Footer from "./components/Footer";
 
 function Root() {
   const location = useLocation();
-  const excludeNavBarAndFooter = [
+  const excludeNavbar = [
     "/login",
     "/register",
     (pathname: string) => pathname.startsWith("/recipe/"),
   ];
 
-  const renderNavbarAndFooter = !excludeNavBarAndFooter.some((exclude) =>
+  const excludeFooter = ["/login", "/register"];
+
+  const renderNavbar = !excludeNavbar.some((exclude) =>
     typeof exclude === "function"
       ? exclude(location.pathname)
       : exclude === location.pathname
   );
 
+  const renderFooter = !excludeFooter.includes(location.pathname);
   return (
     <div>
-      {renderNavbarAndFooter && <NavBar />}
+      {renderNavbar && <NavBar />}
       <Outlet />
-      {renderNavbarAndFooter && <Footer />}
+      {renderFooter && <Footer />}
     </div>
   );
 }

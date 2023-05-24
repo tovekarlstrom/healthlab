@@ -23,12 +23,12 @@
   font-size: 24px;
   line-height: 120%;
   margin-top: 45px;
+  color: #383838;
 }
-
-.Form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.topContent {
+  width: 100%;
+}
+.content {
   z-index: 10;
   background-color: white;
   border-top-left-radius: 30px;
@@ -36,6 +36,12 @@
   width: 100%;
   margin-top: 250px;
   box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.15);
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .InputTop {
   display: flex;
@@ -111,17 +117,24 @@
   line-height: 120%;
   letter-spacing: 0.03em;
 }
-.logos {
-  width: 250px;
-  display: flex;
-  justify-content: space-around;
+.logos,
+.registerLogos {
   margin-top: 15px;
 }
-.logo {
+
+.logoGoogle {
   width: 32px;
-  height: 32px;
-  object-fit: cover;
-  cursor: pointer;
+  height: 32.64px;
+  margin-right: 50px;
+}
+.logoFacebook {
+  width: 33.2px;
+  height: 33px;
+  margin-right: 51px;
+}
+.logoTwitter {
+  width: 58.33px;
+  height: 50px;
 }
 .unauthorizedMessage {
   height: 19px;
@@ -141,6 +154,7 @@
   border-radius: 30px;
   border-style: none;
   margin-top: 36px;
+  color: #174e2e;
 }
 
 .already-account {
@@ -168,4 +182,135 @@
   font-weight: 600;
   color: #383838;
   text-decoration: none;
+}
+
+@media (min-width: 800px) {
+  .container {
+    flex-direction: row;
+    justify-content: end;
+    height: 1024px;
+    overflow: hidden;
+    background: #f9fbf9;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+  }
+  .login-img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .Form {
+    padding-top: 350px;
+    width: 100%;
+    border-radius: 0;
+    height: 100%;
+    margin-top: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .content {
+    border-top-left-radius: 70%;
+    border-bottom-left-radius: 70%;
+    width: 200%;
+    position: relative;
+    overflow: hidden;
+    height: 150%;
+
+    z-index: 10;
+    background-color: white;
+    right: -70px;
+    margin-top: 0;
+    /* clip-path: circle(70% at 90% 50%); */
+  }
+  .logginSubmitButton {
+    border-style: none;
+    cursor: pointer;
+
+    background: linear-gradient(96.22deg, #7acb94 0%, #eedf76 100%);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    height: 48px;
+    width: 193px;
+    padding: 6px 12px 6px 12px;
+  }
+
+  .RegisterSubmitButton {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0.03em;
+    color: #174e2e;
+    margin-top: 85px;
+    margin-bottom: 41px;
+    height: 48px;
+    width: 193px;
+    border-radius: 100px;
+    padding: 6px 12px 6px 12px;
+  }
+
+  .logoGoogle {
+    width: 50px;
+    height: 50.63px;
+    margin-right: 71px;
+  }
+  .logoFacebook {
+    width: 52px;
+    height: 50.5px;
+    margin-right: 74px;
+  }
+  .logoTwitter {
+    width: 58.33px;
+    height: 50px;
+  }
+
+  .logos {
+    margin-top: 43px;
+  }
+  .registerLogos {
+    margin-top: 34px;
+  }
+
+  .already-account {
+    margin-top: 34px;
+  }
+
+  .login-alternatives {
+    margin-top: 75px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+  }
+
+  .InputTop {
+    width: 508px;
+    font-size: 18px;
+    margin-top: 58px;
+  }
+
+  .Input {
+    width: 508px;
+    margin-top: 45px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 120%;
+    letter-spacing: 0.03em;
+    color: #383838;
+  }
+
+  .loginH1 {
+    font-weight: 700;
+    font-style: normal;
+    font-size: 48px;
+    line-height: 59px;
+    letter-spacing: 0.03em;
+    color: #383838;
+  }
 }

@@ -47,7 +47,7 @@ app.post("/login", async (request, response) => {
     console.log("loggedInUser", loggedInUser);
     if (loggedInUser) {
       console.log("inloggad");
-      response.status(200).send("success");
+      response.status(200).send(loggedInUser);
     } else {
       console.log("fel lösen eller användarnamn");
       response.status(401).send("Unauthorized");

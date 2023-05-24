@@ -52,7 +52,7 @@ app.post("/login", (request, response) => __awaiter(void 0, void 0, void 0, func
         console.log("loggedInUser", loggedInUser);
         if (loggedInUser) {
             console.log("inloggad");
-            response.status(200).send("success");
+            response.status(200).send(loggedInUser);
         }
         else {
             console.log("fel lösen eller användarnamn");
