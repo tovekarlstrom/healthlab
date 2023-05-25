@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ButtonRegister from '../components/ButtonRegister';
+import HomePageDesktop from './HomePageDesktop';
 
 const HomePage: React.FC = () => {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024)
+    };
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
@@ -17,7 +33,7 @@ const HomePage: React.FC = () => {
   const contentStyle: React.CSSProperties = {
     position: 'relative',
     top: '-20px',
-    width: 390,
+    width: '100%',
     backgroundColor: 'white',
     borderRadius: '20px',
     display: 'flex',
@@ -44,6 +60,10 @@ const HomePage: React.FC = () => {
     padding: '0px 18px 0px 18px'
   };
 
+  if (isDesktop) {
+    return <HomePageDesktop />;
+  }
+
   return (
     <div style={containerStyle}>
       <img
@@ -58,13 +78,13 @@ const HomePage: React.FC = () => {
         </p>
         <div style={buttonContainerStyle}>
           <ButtonRegister buttonText="Ner i vikt" />
-          <ButtonRegister buttonText="Behåll vikt"  />
+          <ButtonRegister buttonText="Behåll vikt" />
           <ButtonRegister buttonText="Upp i vikt" />
           <ButtonRegister buttonText="Ingen plan" />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

@@ -82,12 +82,13 @@ app.post("/register", async (request, response) => {
 
 app.post("/likes", async (request, response) => {
   const { user_id } = request.body;
-  let { rows } = await client.query("SELECT * FROM likes WHERE user_id = $1", [
-    user_id,
-  ]);
-
+  const { rows } = await client.query(
+    "SELECT * FROM likes WHERE user_id = $1",
+    [user_id]
+  );
   response.send(rows);
 });
+
 app.get("/comments/:recipe_id", async (request, response) => {
   const { recipe_id } = request.params;
   const query = `
@@ -131,6 +132,11 @@ app.post("/comments", async (request, response) => {
   }
 });
 
+app.get("/likes", async (request, response) => {
+  const { rows } = await client.query("SELECT * FROM likes");
+  response.send(rows);
+});
+
 app.post("/recipes/:recipeName", async (request, response) => {
   const { recipe_id, user_id } = request.body;
 
@@ -147,7 +153,6 @@ app.post("/recipes/:recipeName", async (request, response) => {
     if (rows.length > 0) {
       // exists, remove from liked
       const removeLike = await client.query(delQuery, values);
-      let { rows } = await client.query("SELECT * FROM likes");
 
       const addLike = await client.query(
         "UPDATE recipes SET likes = likes - 1 WHERE id =$1",
@@ -158,7 +163,6 @@ app.post("/recipes/:recipeName", async (request, response) => {
     } else {
       // add to like
       const saveLike = await client.query(insertQuery, values);
-      let { rows } = await client.query("SELECT * FROM likes");
 
       const addLike = await client.query(
         "UPDATE recipes SET likes = likes + 1 WHERE id =$1",
@@ -168,7 +172,7 @@ app.post("/recipes/:recipeName", async (request, response) => {
       response.status(200).send(true);
     }
   } else {
-    response.status(400).send("error: missing id");
+    response.status(400).send({ error: "missing id" });
   }
 });
 

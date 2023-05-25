@@ -60,9 +60,11 @@ function RecipeView() {
       .catch((error) => {
         console.log("Error:", error.message);
       });
+  }, []);
 
-    //get likes if logged in
-    if (loggedIn && loggedIn.id !== "") {
+  //get likes if logged in
+  useEffect(() => {
+    if (loggedIn && typeof loggedIn.id === "number") {
       fetch("http://localhost:8085/likes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -75,9 +77,9 @@ function RecipeView() {
     }
   }, []);
 
-  //check if already liked
+  // check if already liked
   useEffect(() => {
-    if (recipe && likeArray) {
+    if (recipe && likeArray.length > 0) {
       const alreadyLiked = likeArray.some(
         (item) => item.recipe_id === recipe.id
       );
@@ -107,7 +109,6 @@ function RecipeView() {
       setLike(result);
     }
   }
-
   async function uploadReview() {
     if (recipe && loggedIn) {
       const response = await fetch(`http://localhost:8085/comments`, {
