@@ -107,6 +107,32 @@
   box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.commentBox {
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  height: 91px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  height: 100%;
+  width: 100%;
+}
+.stars {
+  margin-top: 10px;
+}
+
+.commentField {
+  margin-top: 5px;
+  border-style: none;
+  width: 100%;
+}
+
 .commentLink {
   color: rgba(122, 203, 148, 1);
   text-decoration: none;

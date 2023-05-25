@@ -1,0 +1,40 @@
+.mealCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  width: 358px;
+  height: 55px;
+  background: #ffffff;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 15px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  /* or 19px */
+
+  letter-spacing: 0.03em;
+
+  color: #000000;
+}
+.mealP {
+  width: 390px;
+  padding-left: 35px;
+}
+.mealImg {
+  width: 36px;
+  height: 36px;
+}
+.mealImgTraining {
+  width: 40px;
+  height: 40px;
+}
+
+.plusCircle {
+  width: 32px;
+  height: 32px;
+  color: rgba(122, 203, 148, 1);
+}

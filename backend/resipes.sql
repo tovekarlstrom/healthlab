@@ -73,3 +73,12 @@ CREATE TABLE likes (
 );
 
 INSERT INTO likes (recipe_id, user_id) VALUES (1 ,1 );
+
+CREATE TABLE comments (
+  id serial PRIMARY KEY,
+  recipe_id INTEGER,
+  user_id INTEGER,
+  comment text NOT NULL,
+   FOREIGN KEY (recipe_id) REFERENCES recipes(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);

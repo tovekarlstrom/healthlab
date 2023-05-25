@@ -30,7 +30,7 @@ const HomePageButton: React.FC<HomePageButtonProps> = ({ header, paragraph }) =>
           marginBottom: '10px',
         }}
       ></div>
-      <p style={{ marginBottom: '10px', textAlign: 'center', fontSize:'20px', fontWeight: '500' }}>{paragraph}</p>
+      <p style={{ marginBottom: '10px', width:'200px', textAlign: 'center', fontSize:'20px', fontWeight: '500' }}>{paragraph}</p>
       <button
         style={{
           backgroundColor: '#7ACB94',
@@ -40,7 +40,8 @@ const HomePageButton: React.FC<HomePageButtonProps> = ({ header, paragraph }) =>
           height: '48px',
           border: 'none',
           fontSize: '20px',
-          fontWeight: '600'
+          fontWeight: '600',
+          cursor:'pointer'
         }}
       >
         Välj
