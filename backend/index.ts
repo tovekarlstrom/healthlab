@@ -24,7 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/recipes", async (request, response) => {
   const { rows } = await client.query("SELECT * FROM recipes");
-  console.log("rows", rows);
   response.status(200).send(rows);
 });
 app.get("/recipes/:recipeName", async (request, response) => {
@@ -32,7 +31,6 @@ app.get("/recipes/:recipeName", async (request, response) => {
   const { rows } = await client.query("SELECT * FROM recipes WHERE name = $1", [
     recipeName,
   ]);
-  console.log("rows", rows);
   response.status(200).send(rows);
 });
 
@@ -40,23 +38,19 @@ app.post("/login", async (request, response) => {
   const { email, password } = request.body;
 
   const { rows } = await client.query("SELECT * FROM users");
-  console.log("rows", rows);
   if (email && password) {
     const loggedInUser = rows.find(
       (item) => item.email === email && item.password === password
     );
     console.log("loggedInUser", loggedInUser);
     if (loggedInUser) {
-      console.log("inloggad");
       response.status(200).send(loggedInUser);
     } else {
-      console.log("fel lösen eller användarnamn");
       response
         .status(401)
         .send({ id: "", full_name: "", email: "", password: "" });
     }
   } else {
-    console.log("errr");
     response.status(400).send("email or password has not been added");
   }
 });
@@ -93,6 +87,48 @@ app.post("/likes", async (request, response) => {
   ]);
 
   response.send(rows);
+});
+app.get("/comments/:recipe_id", async (request, response) => {
+  const { recipe_id } = request.params;
+  const query = `
+  SELECT c.id, c.recipe_id, c.user_id, c.comment, u.full_name
+  FROM comments c
+  JOIN users u ON c.user_id = u.id
+  WHERE c.recipe_id = $1
+`;
+
+  const { rows } = await client.query(query, [recipe_id]);
+
+  if (rows) {
+    console.log("rows", rows);
+    response.status(200).json(rows);
+  } else {
+    response.status(201).send("no added comment");
+  }
+});
+app.post("/comments", async (request, response) => {
+  const { recipe_id, user_id, comment } = request.body;
+  console.log(recipe_id);
+  console.log(user_id);
+  console.log(comment);
+  const { rows } = await client.query("SELECT * FROM comments");
+  if (rows) {
+    console.log("fe", rows);
+  } else {
+    console.log("hej");
+  }
+  if (recipe_id && user_id && comment) {
+    const insertComment = {
+      text: "INSERT INTO comments (recipe_id, user_id, comment) VALUES ($1, $2, $3)",
+      values: [recipe_id, user_id, comment],
+    };
+    const addRecipeComment = await client.query(insertComment);
+    if (addRecipeComment) {
+      response.status(200).json(addRecipeComment);
+    } else {
+      response.status(400).send("Comment where not added correctly");
+    }
+  }
 });
 
 app.post("/recipes/:recipeName", async (request, response) => {

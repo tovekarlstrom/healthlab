@@ -1,47 +1,65 @@
-import { useEffect, useState, useContext } from "react"
-import { useParams, Link } from "react-router-dom"
-import { Recipe } from "./HomeView"
-import ArrowButton from "../components/ArrowButton"
-import StarRating from "../components/StarRating"
-import "../styles/RecipeView.css"
-import { Clock, Heart, HeartFill, ChatText, Bag } from "react-bootstrap-icons"
-import Review from "../components/Review"
-import MicroNutrients from "../components/MicroNutrients"
-import { LoggedInContext } from "../LoggedInContext"
+import { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
+import { Recipe } from "./HomeView";
+import ArrowButton from "../components/ArrowButton";
+import ClickStarRating from "../components/ClickStarRating";
+import StarRating from "../components/StarRating";
+import "../styles/RecipeView.css";
+import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
+import {
+  Clock,
+  Heart,
+  HeartFill,
+  ChatText,
+  Bag,
+  SendFill,
+} from "react-bootstrap-icons";
+import Review from "../components/Review";
+import MicroNutrients from "../components/MicroNutrients";
+import { LoggedInContext } from "../LoggedInContext";
 
 interface likeInteface {
-  id: number
-  recipe_id: number
-  user_id: number
+  id: number;
+  recipe_id: number;
+  user_id: number;
+}
+interface commentInteface {
+  id: number;
+  recipe_id: number;
+  user_id: number;
+  comment: string;
+  full_name: string;
 }
 
 function RecipeView() {
-  const { recipeName } = useParams()
-  const [like, setLike] = useState(false)
-  const [likeCount, setLikeCount] = useState<number>(0)
-  const [recipe, setRecipe] = useState<Recipe | null>(null)
-  const [likeArray, setLikeArray] = useState<likeInteface[]>([])
+  const { recipeName } = useParams();
+  const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState<number>(0);
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [likeArray, setLikeArray] = useState<likeInteface[]>([]);
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  }
-
+  };
+  const [allComments, setAllComments] = useState<commentInteface[]>([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   useEffect(() => {
     fetch(`http://localhost:8085/recipes/${recipeName}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok")
+          throw new Error("Network response was not ok");
         }
-        return response.json()
+        return response.json();
       })
       .then((result) => {
-        console.log(result)
-        setRecipe(result[0])
-        setLikeCount(result[0].likes)
+        console.log(result);
+        setRecipe(result[0]);
+        setLikeCount(result[0].likes);
       })
       .catch((error) => {
-        console.log("Error:", error.message)
-      })
+        console.log("Error:", error.message);
+      });
 
     //get likes if logged in
     if (loggedIn && loggedIn.id !== "") {
@@ -52,20 +70,20 @@ function RecipeView() {
       })
         .then((response) => response.json())
         .then((result) => {
-          setLikeArray(result)
-        })
+          setLikeArray(result);
+        });
     }
-  }, [])
+  }, []);
 
   //check if already liked
   useEffect(() => {
     if (recipe && likeArray) {
       const alreadyLiked = likeArray.some(
         (item) => item.recipe_id === recipe.id
-      )
-      setLike(alreadyLiked)
+      );
+      setLike(alreadyLiked);
     }
-  }, [likeArray])
+  }, [likeArray]);
 
   async function handleLike() {
     if (recipe && loggedIn) {
@@ -79,16 +97,54 @@ function RecipeView() {
             user_id: loggedIn.id,
           }),
         }
-      )
-      const result = await response.json()
+      );
+      const result = await response.json();
       if (result) {
-        setLikeCount(likeCount + 1)
+        setLikeCount(likeCount + 1);
       } else if (result === false) {
-        setLikeCount(likeCount - 1)
+        setLikeCount(likeCount - 1);
       }
-      setLike(result)
+      setLike(result);
     }
   }
+
+  async function uploadReview() {
+    if (recipe && loggedIn) {
+      const response = await fetch(`http://localhost:8085/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipe_id: recipe.id,
+          user_id: loggedIn.id,
+          comment: comment,
+        }),
+      });
+      if (response.ok) {
+        const newComment = {
+          id: -1,
+          recipe_id: recipe.id,
+          user_id: Number(loggedIn.id),
+          comment: comment,
+          full_name: loggedIn.full_name,
+        };
+        setAllComments((prevComments) => [...prevComments, newComment]);
+        console.log("Comment added successfully");
+      } else {
+        console.log("Failed to add comment");
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (recipe) {
+      fetch(`http://localhost:8085/comments/${recipe.id}`)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+          setAllComments(result.reverse());
+        });
+    }
+  }, [recipe]);
 
   return (
     <div>
@@ -195,25 +251,59 @@ function RecipeView() {
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
                 image="YasminFrost.png"
               />
+              {allComments &&
+                allComments.map((item) => (
+                  <Review
+                    key={item.id}
+                    name={item.full_name}
+                    rating={3.5}
+                    comment={item.comment}
+                    image="YasminFrost.png"
+                  />
+                ))}
             </div>
-            <div className="LogginIfNot">
-              <p>
-                Du måste vara inloggad för att skriva en recension,{" "}
-                <Link className="commentLink" to="/login">
-                  logga in
-                </Link>{" "}
-                eller{" "}
-                <Link className="commentLink" to="/register">
-                  registrera dig
-                </Link>
-                .
-              </p>
-            </div>
+            {loggedIn ? (
+              <div className="commentBox">
+                <img src="" alt="" />
+                <div className="comment">
+                  <div className="stars">
+                    <ClickStarRating rating={rating} />
+                  </div>
+                  <input
+                    className="commentField"
+                    type="text"
+                    placeholder="Skriv en recension här..."
+                    onChange={(event) => {
+                      setComment(event.target.value);
+                    }}
+                  />
+                </div>
+                <SendFill
+                  onClick={() => {
+                    uploadReview();
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="LogginIfNot">
+                <p>
+                  Du måste vara inloggad för att skriva en recension,{" "}
+                  <Link className="commentLink" to="/login">
+                    logga in
+                  </Link>{" "}
+                  eller{" "}
+                  <Link className="commentLink" to="/register">
+                    registrera dig
+                  </Link>
+                  .
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default RecipeView
+export default RecipeView;
