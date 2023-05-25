@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
   const contentStyle: React.CSSProperties = {
     position: 'relative',
     top: '-20px',
-    width: 390,
+    width: '100%',
     backgroundColor: 'white',
     borderRadius: '20px',
     display: 'flex',
