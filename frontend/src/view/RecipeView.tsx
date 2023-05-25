@@ -55,7 +55,6 @@ function RecipeView() {
         .then((response) => response.json())
         .then((result) => {
           setLikeArray(result)
-          console.log(result)
         })
     }
   }, [recipe])
@@ -67,7 +66,6 @@ function RecipeView() {
         (item) => item.recipe_id === recipe.id
       )
       setLike(alreadyLiked)
-      console.log("set heart")
     }
   }, [likeArray])
 
@@ -109,7 +107,6 @@ function RecipeView() {
     <div>
       {recipe !== null && (
         <div>
-          {loggedIn && <p>{loggedIn.id}</p>}
           <ArrowButton />
           <div
             onClick={handleLike}

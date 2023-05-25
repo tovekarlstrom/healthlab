@@ -1,4 +1,9 @@
+import Circle from "../components/Circle"
 function LoggedInHomePage() {
-  return <div></div>;
+  return (
+    <div>
+      <Circle />
+    </div>
+  )
 }
-export default LoggedInHomePage;
+export default LoggedInHomePage
