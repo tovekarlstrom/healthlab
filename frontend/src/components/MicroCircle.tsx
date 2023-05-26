@@ -1,10 +1,11 @@
 import "../styles/Circle.css"
 
-export default function Circle() {
-  const nutrientAmount = 20
-  const totalSum = 100
-  const calories = 1134
-
+interface MicroCircleProps {
+  nutrientAmount: number
+  totalSum: number
+}
+export default function MicroCircle(props: MicroCircleProps) {
+  const { nutrientAmount, totalSum } = props
   const percentage = Math.round((nutrientAmount / totalSum) * 100)
   const circumference = 2 * Math.PI * 32.5
   const dashOffset = (circumference * (100 - percentage)) / 100
@@ -16,37 +17,42 @@ export default function Circle() {
     transformOrigin: "center",
     transition: "stroke-dashoffset 0.3s ease-in-out",
   }
-
   return (
     <div className="Circle">
-      <div className="CircleBackground">
+      <div className="MicroCircleBackground">
         <svg viewBox="0 0 70 70">
           <circle
-            cx="35"
-            cy="35"
-            r="32.5"
+            cx="32.5"
+            cy="32.5"
+            r="27.5"
             fill="transparent"
             stroke="#FFF"
             strokeWidth="5"
           />
         </svg>
       </div>
-      <div className="CircleFill">
+
+      <div className="MircoCircleFill">
         <svg viewBox="0 0 70 70">
           <circle
-            cx="35"
-            cy="35"
-            r="32.5"
+            cx="32.5"
+            cy="32.5"
+            r="27.5"
             fill="transparent"
             stroke="#7ACB94"
             strokeWidth="5"
             style={circleStyle}
           />
+          <text
+            x="50%"
+            y="54%"
+            textAnchor="middle"
+            dominantBaseline="central"
+            className="MicroCircleText"
+          >
+            {percentage}%
+          </text>
         </svg>
-        <div className="CircleText">
-          <p className="h1"> {calories} </p>
-          <p>kcal kvar</p>
-        </div>
       </div>
     </div>
   )

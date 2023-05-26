@@ -40,7 +40,11 @@
 
 .MircoCircleFill {
   position: absolute;
-  top: -5px;
+  top: -4.8px;
+}
+
+.MicroCircleText {
+  font-size: 16px;
 }
 
 @media (min-width: 750px) {
