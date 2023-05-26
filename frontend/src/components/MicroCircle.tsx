@@ -22,9 +22,9 @@ export default function MicroCircle(props: MicroCircleProps) {
       <div className="MicroCircleBackground">
         <svg viewBox="0 0 70 70">
           <circle
-            cx="32.5"
-            cy="32.5"
-            r="27.5"
+            cx="35"
+            cy="35"
+            r="32.5"
             fill="transparent"
             stroke="#FFF"
             strokeWidth="5"
@@ -35,24 +35,18 @@ export default function MicroCircle(props: MicroCircleProps) {
       <div className="MircoCircleFill">
         <svg viewBox="0 0 70 70">
           <circle
-            cx="32.5"
-            cy="32.5"
-            r="27.5"
+            cx="35"
+            cy="35"
+            r="32.5"
             fill="transparent"
             stroke="#7ACB94"
             strokeWidth="5"
             style={circleStyle}
           />
-          <text
-            x="50%"
-            y="54%"
-            textAnchor="middle"
-            dominantBaseline="central"
-            className="MicroCircleText"
-          >
-            {percentage}%
-          </text>
         </svg>
+        <div className="MicroCircleText">
+          <p> {percentage}% </p>
+        </div>
       </div>
     </div>
   )

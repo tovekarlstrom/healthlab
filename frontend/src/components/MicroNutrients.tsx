@@ -1,4 +1,5 @@
 import React from "react"
+import MicroCircle from "./MicroCircle"
 
 interface MicronutrientCircleProps {
   nutrientName: string
@@ -15,58 +16,13 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
   const circumference = 2 * Math.PI * 32.5
   const dashOffset = (circumference * (100 - percentage)) / 100
 
-  const circleStyle = {
-    strokeDasharray: `${circumference}`,
-    strokeDashoffset: dashOffset,
-    transform: "rotate(-90deg)",
-    transformOrigin: "center",
-    transition: "stroke-dashoffset 0.3s ease-in-out",
-  }
-
   return (
     <div style={{ textAlign: "center", width: "100px" }}>
       <h1 style={{ fontSize: "16px", marginBottom: "24px" }}>{nutrientName}</h1>
       <p style={{ fontSize: "14px", marginBottom: "24px", fontWeight: "500" }}>
         {nutrientAmount} g
       </p>
-
-      <div className="Circle">
-        <div className="MicroCircleBackground">
-          <svg viewBox="0 0 70 70">
-            <circle
-              cx="32.5"
-              cy="32.5"
-              r="27.5"
-              fill="transparent"
-              stroke="#FFF"
-              strokeWidth="5"
-            />
-          </svg>
-        </div>
-
-        <div className="MircoCircleFill">
-          <svg viewBox="0 0 70 70">
-            <circle
-              cx="32.5"
-              cy="32.5"
-              r="27.5"
-              fill="transparent"
-              stroke="#7ACB94"
-              strokeWidth="5"
-              style={circleStyle}
-            />
-            <text
-              x="50%"
-              y="52%"
-              textAnchor="middle"
-              dominantBaseline="central"
-              fontSize="14"
-            >
-              {percentage}%
-            </text>
-          </svg>
-        </div>
-      </div>
+      <MicroCircle nutrientAmount={nutrientAmount} totalSum={totalSum} />
     </div>
   )
 }

@@ -122,3 +122,11 @@
   border-radius: 30px;
   margin: 0 auto 20px;
 }
+
+@media (min-width: 750px) {
+  .LoggedInMacros .MicroCircleBackground,
+  .LoggedInMacros .MircoCircleFill {
+    width: 85px;
+    height: 85px;
+  }
+}

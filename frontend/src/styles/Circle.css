@@ -17,10 +17,13 @@
   height: 100%;
 }
 
-.CircleText {
+.CircleText,
+.MicroCircleText {
   font-size: 16px;
   position: absolute;
-  top: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 100%;
   text-align: center;
 }
@@ -40,7 +43,6 @@
 
 .MircoCircleFill {
   position: absolute;
-  top: -4.8px;
 }
 
 .MicroCircleText {
@@ -61,11 +63,7 @@
     height: 250px;
   }
 
-  .CircleText {
-    top: 35%;
-  }
-
-  .MircoCircleFill {
-    top: -7px;
+  .MicroCircleText {
+    font-size: 20px;
   }
 }
