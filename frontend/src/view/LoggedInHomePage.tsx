@@ -6,7 +6,7 @@ import meal3 from "../images/meal3.png";
 import training from "../images/training.png";
 function LoggedInHomePage() {
   return (
-    <div>
+    <div className="container">
       <div className="mealCards">
         <div className="mealCard">
           <img className="mealImg" src={meal1} alt="Breakfast smoothie" />

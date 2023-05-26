@@ -79,6 +79,7 @@ CREATE TABLE comments (
   recipe_id INTEGER,
   user_id INTEGER,
   comment text NOT NULL,
+  rating INTEGER NOT NULL,
    FOREIGN KEY (recipe_id) REFERENCES recipes(id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );

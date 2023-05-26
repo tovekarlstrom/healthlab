@@ -6,6 +6,14 @@ import ClickStarRating from "../components/ClickStarRating";
 import StarRating from "../components/StarRating";
 import "../styles/RecipeView.css";
 import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
+import img1 from "../images/1.png";
+import img2 from "../images/2.png";
+import img3 from "../images/3.png";
+import img4 from "../images/4.png";
+import img5 from "../images/5.png";
+import img6 from "../images/6.png";
+import img7 from "../images/7.png";
+
 import {
   Clock,
   Heart,
@@ -28,6 +36,7 @@ interface commentInteface {
   recipe_id: number;
   user_id: number;
   comment: string;
+  rating: number;
   full_name: string;
 }
 
@@ -118,6 +127,7 @@ function RecipeView() {
           recipe_id: recipe.id,
           user_id: loggedIn.id,
           comment: comment,
+          rating: rating,
         }),
       });
       if (response.ok) {
@@ -126,6 +136,7 @@ function RecipeView() {
           recipe_id: recipe.id,
           user_id: Number(loggedIn.id),
           comment: comment,
+          rating: rating,
           full_name: loggedIn.full_name,
         };
         setAllComments((prevComments) => [...prevComments, newComment]);
@@ -146,6 +157,13 @@ function RecipeView() {
         });
     }
   }, [recipe]);
+
+  function imgPicker() {
+    const images = [img1, img2, img3, img4, img5, img6, img7];
+    const randomeIndex = Math.floor(Math.random() * images.length);
+    const randomeImage = images[randomeIndex];
+    return randomeImage;
+  }
 
   return (
     <div>
@@ -238,37 +256,37 @@ function RecipeView() {
                 name="Jane Doe"
                 rating={3.5}
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image="YasminFrost.png"
+                image={imgPicker()}
               />
               <Review
                 name="Jane Doe"
                 rating={3.5}
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image="YasminFrost.png"
+                image={imgPicker()}
               />
               <Review
                 name="Jane Doe"
                 rating={3.5}
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image="YasminFrost.png"
+                image={imgPicker()}
               />
               {allComments &&
                 allComments.map((item) => (
                   <Review
                     key={item.id}
                     name={item.full_name}
-                    rating={3.5}
+                    rating={item.rating}
                     comment={item.comment}
-                    image="YasminFrost.png"
+                    image={imgPicker()}
                   />
                 ))}
             </div>
             {loggedIn ? (
               <div className="commentBox">
-                <img src="" alt="" />
+                <img className="imgPick" src={imgPicker()} alt="" />
                 <div className="comment">
                   <div className="stars">
-                    <ClickStarRating rating={rating} />
+                    <ClickStarRating rating={rating} setRating={setRating} />
                   </div>
                   <input
                     className="commentField"
