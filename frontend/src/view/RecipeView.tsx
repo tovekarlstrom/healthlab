@@ -1,11 +1,19 @@
-import { useEffect, useState, useContext } from "react"
-import { useParams, Link } from "react-router-dom"
-import { Recipe } from "./HomeView"
-import ArrowButton from "../components/ArrowButton"
-import ClickStarRating from "../components/ClickStarRating"
-import StarRating from "../components/StarRating"
-import "../styles/RecipeView.css"
-import { StarFill, StarHalf, Star } from "react-bootstrap-icons"
+import { useEffect, useState, useContext } from "react";
+import { useParams, Link } from "react-router-dom";
+import { Recipe } from "./HomeView";
+import ArrowButton from "../components/ArrowButton";
+import ClickStarRating from "../components/ClickStarRating";
+import StarRating from "../components/StarRating";
+import "../styles/RecipeView.css";
+import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
+import img1 from "../images/1.png";
+import img2 from "../images/2.png";
+import img3 from "../images/3.png";
+import img4 from "../images/4.png";
+import img5 from "../images/5.png";
+import img6 from "../images/6.png";
+import img7 from "../images/7.png";
+
 import {
   Clock,
   Heart,
@@ -13,54 +21,55 @@ import {
   ChatText,
   Bag,
   SendFill,
-} from "react-bootstrap-icons"
-import Review from "../components/Review"
-import MicroNutrients from "../components/MicroNutrients"
-import { LoggedInContext } from "../LoggedInContext"
+} from "react-bootstrap-icons";
+import Review from "../components/Review";
+import MicroNutrients from "../components/MicroNutrients";
+import { LoggedInContext } from "../LoggedInContext";
 
 interface likeInteface {
-  id: number
-  recipe_id: number
-  user_id: number
+  id: number;
+  recipe_id: number;
+  user_id: number;
 }
 interface commentInteface {
-  id: number
-  recipe_id: number
-  user_id: number
-  comment: string
-  full_name: string
+  id: number;
+  recipe_id: number;
+  user_id: number;
+  comment: string;
+  rating: number;
+  full_name: string;
 }
 
 function RecipeView() {
-  const { recipeName } = useParams()
-  const [like, setLike] = useState(false)
-  const [likeCount, setLikeCount] = useState<number>(0)
-  const [recipe, setRecipe] = useState<Recipe | null>(null)
-  const [likeArray, setLikeArray] = useState<likeInteface[]>([])
+  const { recipeName } = useParams();
+  const [like, setLike] = useState(false);
+  const [likeCount, setLikeCount] = useState<number>(0);
+  const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [likeArray, setLikeArray] = useState<likeInteface[]>([]);
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  }
-  const [allComments, setAllComments] = useState<commentInteface[]>([])
-  const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState("")
+  };
+  const [allComments, setAllComments] = useState<commentInteface[]>([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
   useEffect(() => {
     fetch(`http://localhost:8085/recipes/${recipeName}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok")
+          throw new Error("Network response was not ok");
         }
-        return response.json()
+        return response.json();
       })
       .then((result) => {
-        console.log(result)
-        setRecipe(result[0])
-        setLikeCount(result[0].likes)
+        console.log(result);
+        setRecipe(result[0]);
+        setLikeCount(result[0].likes);
       })
       .catch((error) => {
-        console.log("Error:", error.message)
-      })
-  }, [])
+        console.log("Error:", error.message);
+      });
+  }, []);
 
   //get likes if logged in
   useEffect(() => {
@@ -72,20 +81,20 @@ function RecipeView() {
       })
         .then((response) => response.json())
         .then((result) => {
-          setLikeArray(result)
-        })
+          setLikeArray(result);
+        });
     }
-  }, [])
+  }, []);
 
   // check if already liked
   useEffect(() => {
     if (recipe && likeArray.length > 0) {
       const alreadyLiked = likeArray.some(
         (item) => item.recipe_id === recipe.id
-      )
-      setLike(alreadyLiked)
+      );
+      setLike(alreadyLiked);
     }
-  }, [likeArray])
+  }, [likeArray]);
 
   async function handleLike() {
     if (recipe && loggedIn) {
@@ -99,14 +108,14 @@ function RecipeView() {
             user_id: loggedIn.id,
           }),
         }
-      )
-      const result = await response.json()
+      );
+      const result = await response.json();
       if (result) {
-        setLikeCount(likeCount + 1)
+        setLikeCount(likeCount + 1);
       } else if (result === false) {
-        setLikeCount(likeCount - 1)
+        setLikeCount(likeCount - 1);
       }
-      setLike(result)
+      setLike(result);
     }
   }
   async function uploadReview() {
@@ -118,20 +127,22 @@ function RecipeView() {
           recipe_id: recipe.id,
           user_id: loggedIn.id,
           comment: comment,
+          rating: rating,
         }),
-      })
+      });
       if (response.ok) {
         const newComment = {
           id: -1,
           recipe_id: recipe.id,
           user_id: Number(loggedIn.id),
           comment: comment,
+          rating: rating,
           full_name: loggedIn.full_name,
-        }
-        setAllComments((prevComments) => [...prevComments, newComment])
-        console.log("Comment added successfully")
+        };
+        setAllComments((prevComments) => [...prevComments, newComment]);
+        console.log("Comment added successfully");
       } else {
-        console.log("Failed to add comment")
+        console.log("Failed to add comment");
       }
     }
   }
@@ -141,11 +152,18 @@ function RecipeView() {
       fetch(`http://localhost:8085/comments/${recipe.id}`)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result)
-          setAllComments(result.reverse())
-        })
+          console.log(result);
+          setAllComments(result.reverse());
+        });
     }
-  }, [recipe])
+  }, [recipe]);
+
+  function imgPicker() {
+    const images = [img1, img2, img3, img4, img5, img6, img7];
+    const randomeIndex = Math.floor(Math.random() * images.length);
+    const randomeImage = images[randomeIndex];
+    return randomeImage;
+  }
 
   return (
     <div>
@@ -237,50 +255,50 @@ function RecipeView() {
                 name="Jane Doe"
                 rating={3.5}
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image="YasminFrost.png"
+                image={imgPicker()}
               />
               <Review
                 name="Jane Doe"
                 rating={3.5}
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image="YasminFrost.png"
+                image={imgPicker()}
               />
               <Review
                 name="Jane Doe"
                 rating={3.5}
                 comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image="YasminFrost.png"
+                image={imgPicker()}
               />
               {allComments &&
                 allComments.map((item) => (
                   <Review
                     key={item.id}
                     name={item.full_name}
-                    rating={3.5}
+                    rating={item.rating}
                     comment={item.comment}
-                    image="YasminFrost.png"
+                    image={imgPicker()}
                   />
                 ))}
             </div>
             {loggedIn ? (
               <div className="commentBox">
-                <img src="" alt="" />
+                <img className="imgPick" src={imgPicker()} alt="" />
                 <div className="comment">
                   <div className="stars">
-                    <ClickStarRating rating={rating} />
+                    <ClickStarRating rating={rating} setRating={setRating} />
                   </div>
                   <input
                     className="commentField"
                     type="text"
                     placeholder="Skriv en recension här..."
                     onChange={(event) => {
-                      setComment(event.target.value)
+                      setComment(event.target.value);
                     }}
                   />
                 </div>
                 <SendFill
                   onClick={() => {
-                    uploadReview()
+                    uploadReview();
                   }}
                 />
               </div>
@@ -303,7 +321,7 @@ function RecipeView() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default RecipeView
+export default RecipeView;

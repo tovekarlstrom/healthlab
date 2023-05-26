@@ -93,7 +93,7 @@ app.post("/likes", (request, response) => __awaiter(void 0, void 0, void 0, func
 app.get("/comments/:recipe_id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { recipe_id } = request.params;
     const query = `
-  SELECT c.id, c.recipe_id, c.user_id, c.comment, u.full_name
+  SELECT c.id, c.recipe_id, c.user_id, c.comment, c.rating, u.full_name
   FROM comments c
   JOIN users u ON c.user_id = u.id
   WHERE c.recipe_id = $1
@@ -108,10 +108,11 @@ app.get("/comments/:recipe_id", (request, response) => __awaiter(void 0, void 0,
     }
 }));
 app.post("/comments", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const { recipe_id, user_id, comment } = request.body;
+    const { recipe_id, user_id, comment, rating } = request.body;
     console.log(recipe_id);
     console.log(user_id);
     console.log(comment);
+    console.log(rating);
     const { rows } = yield client.query("SELECT * FROM comments");
     if (rows) {
         console.log("fe", rows);
@@ -121,8 +122,8 @@ app.post("/comments", (request, response) => __awaiter(void 0, void 0, void 0, f
     }
     if (recipe_id && user_id && comment) {
         const insertComment = {
-            text: "INSERT INTO comments (recipe_id, user_id, comment) VALUES ($1, $2, $3)",
-            values: [recipe_id, user_id, comment],
+            text: "INSERT INTO comments (recipe_id, user_id, comment, rating) VALUES ($1, $2, $3, $4)",
+            values: [recipe_id, user_id, comment, rating],
         };
         const addRecipeComment = yield client.query(insertComment);
         if (addRecipeComment) {
