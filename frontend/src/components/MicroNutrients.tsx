@@ -29,26 +29,44 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
       <p style={{ fontSize: "14px", marginBottom: "24px", fontWeight: "500" }}>
         {nutrientAmount} g
       </p>
-      <svg width="65" height="65">
-        <circle
-          cx="32.5"
-          cy="32.5"
-          r="27.5"
-          fill="transparent"
-          stroke="#7ACB94"
-          strokeWidth="5"
-          style={circleStyle}
-        />
-        <text
-          x="50%"
-          y="50%"
-          textAnchor="middle"
-          dominantBaseline="central"
-          fontSize="14"
-        >
-          {percentage}%
-        </text>
-      </svg>
+
+      <div className="Circle">
+        <div className="MicroCircleBackground">
+          <svg viewBox="0 0 70 70">
+            <circle
+              cx="32.5"
+              cy="32.5"
+              r="27.5"
+              fill="transparent"
+              stroke="#FFF"
+              strokeWidth="5"
+            />
+          </svg>
+        </div>
+
+        <div className="MircoCircleFill">
+          <svg viewBox="0 0 70 70">
+            <circle
+              cx="32.5"
+              cy="32.5"
+              r="27.5"
+              fill="transparent"
+              stroke="#7ACB94"
+              strokeWidth="5"
+              style={circleStyle}
+            />
+            <text
+              x="50%"
+              y="52%"
+              textAnchor="middle"
+              dominantBaseline="central"
+              fontSize="14"
+            >
+              {percentage}%
+            </text>
+          </svg>
+        </div>
+      </div>
     </div>
   )
 }
@@ -66,8 +84,6 @@ const MicroNutrient: React.FC<MicroNutrientProps> = ({
   protein,
   kcal,
 }) => {
-  // console.log('Rendering MicroNutrient')
-
   const totalSum = protein + carbs + fat
 
   return (

@@ -1,7 +1,8 @@
 import heroImage from "../images/Pannkakor.png"
 import "../styles/Hero.css"
 import { Link } from "react-router-dom"
-import { StarFill } from "react-bootstrap-icons"
+import TrustpilotStar from "../images/icons/trustpilot-star.png"
+import Star from "../images/icons/Star.png"
 
 export default function Hero() {
   return (
@@ -26,15 +27,15 @@ export default function Hero() {
         </div>
         <div className="Hero-trustpilot">
           <div className="Hero-trustpilot-title">
-            <StarFill />
+            <img src={Star} alt="trustpilot star" />
             <p className="pBig">Trustpilot</p>
           </div>
           <div className="Hero-trustpilot-stars">
-            <StarFill />
-            <StarFill />
-            <StarFill />
-            <StarFill />
-            <StarFill />
+            <img src={TrustpilotStar} alt="trustpilot rating" />
+            <img src={TrustpilotStar} alt="trustpilot rating" />
+            <img src={TrustpilotStar} alt="trustpilot rating" />
+            <img src={TrustpilotStar} alt="trustpilot rating" />
+            <img src={TrustpilotStar} alt="trustpilot rating" />
           </div>
           <p className="pSmall"> Trust score 4.9 | Reviews 578</p>
         </div>

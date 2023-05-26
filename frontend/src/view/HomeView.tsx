@@ -69,8 +69,8 @@ function Home() {
           <h2 className="h2">Testa några av våra populära recept</h2>
           <div className="Home-recipe-cards">
             {recipes.map((item) => (
-              <Link to={`/recipe/${item.name}`}>
-                <RecipeCard key={item.id} item={item} />
+              <Link to={`/recipe/${item.name}`} key={item.id}>
+                <RecipeCard item={item} />
               </Link>
             ))}
           </div>

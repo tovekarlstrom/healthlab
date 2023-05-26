@@ -169,7 +169,6 @@ function RecipeView() {
     <div>
       {recipe !== null && (
         <div>
-          {loggedIn && <p>{loggedIn.id}</p>}
           <ArrowButton />
           <div
             onClick={handleLike}

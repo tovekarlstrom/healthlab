@@ -1,0 +1,71 @@
+.Circle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CircleBackground,
+.CircleFill {
+  position: absolute;
+  width: 186px;
+  height: 186px;
+}
+
+.Circle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.CircleText {
+  font-size: 16px;
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+}
+
+.CircleBackground,
+.MicroCircleBackground {
+  filter: drop-shadow(0px 1px 4px rgb(0 0 0 / 0.4));
+}
+
+/* MICRO NUTRIENTS */
+
+.MicroCircleBackground,
+.MircoCircleFill {
+  width: 65px;
+  height: 65px;
+}
+
+.MircoCircleFill {
+  position: absolute;
+  top: -4.8px;
+}
+
+.MicroCircleText {
+  font-size: 16px;
+}
+
+@media (min-width: 750px) {
+  .MicroCircleBackground,
+  .MircoCircleFill {
+    width: 95px;
+    height: 95px;
+  }
+
+  .CircleBackground,
+  .CircleFill {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+  }
+
+  .CircleText {
+    top: 35%;
+  }
+
+  .MircoCircleFill {
+    top: -7px;
+  }
+}
