@@ -61,7 +61,7 @@ app.post("/login", (request, response) => __awaiter(void 0, void 0, void 0, func
     }
 }));
 app.post("/register", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
-    const { full_name, email, password } = request.body;
+    const { full_name, email, password, img } = request.body;
     const { rows } = yield client.query("SELECT * FROM users");
     if (full_name && email && password) {
         const loggedInUser = rows.find((item) => item.email === email);
@@ -71,8 +71,8 @@ app.post("/register", (request, response) => __awaiter(void 0, void 0, void 0, f
         }
         else {
             const insertQuery = {
-                text: "INSERT INTO users (full_name, email, password) VALUES ($1, $2, $3)",
-                values: [full_name, email, password],
+                text: "INSERT INTO users (full_name, email, password, img) VALUES ($1, $2, $3, $4)",
+                values: [full_name, email, password, img],
             };
             const registerAccount = yield client.query(insertQuery);
             console.log("registerAccount", registerAccount);
@@ -103,7 +103,7 @@ app.get("/likedRecipes/:user_id", (request, response) => __awaiter(void 0, void 
 app.get("/comments/:recipe_id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { recipe_id } = request.params;
     const query = `
-  SELECT c.id, c.recipe_id, c.user_id, c.comment, c.rating, u.full_name
+  SELECT c.id, c.recipe_id, c.user_id, c.comment, c.rating, u.full_name, u.img
   FROM comments c
   JOIN users u ON c.user_id = u.id
   WHERE c.recipe_id = $1

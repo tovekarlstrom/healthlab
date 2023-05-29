@@ -56,7 +56,7 @@ app.post("/login", async (request, response) => {
 });
 
 app.post("/register", async (request, response) => {
-  const { full_name, email, password } = request.body;
+  const { full_name, email, password, img } = request.body;
 
   const { rows } = await client.query("SELECT * FROM users");
   if (full_name && email && password) {
@@ -66,8 +66,8 @@ app.post("/register", async (request, response) => {
       response.status(409).send("Conflict account already exists");
     } else {
       const insertQuery = {
-        text: "INSERT INTO users (full_name, email, password) VALUES ($1, $2, $3)",
-        values: [full_name, email, password],
+        text: "INSERT INTO users (full_name, email, password, img) VALUES ($1, $2, $3, $4)",
+        values: [full_name, email, password, img],
       };
       const registerAccount = await client.query(insertQuery);
       console.log("registerAccount", registerAccount);
@@ -110,7 +110,7 @@ app.get("/likedRecipes/:user_id", async (request, response) => {
 app.get("/comments/:recipe_id", async (request, response) => {
   const { recipe_id } = request.params;
   const query = `
-  SELECT c.id, c.recipe_id, c.user_id, c.comment, c.rating, u.full_name
+  SELECT c.id, c.recipe_id, c.user_id, c.comment, c.rating, u.full_name, u.img
   FROM comments c
   JOIN users u ON c.user_id = u.id
   WHERE c.recipe_id = $1
