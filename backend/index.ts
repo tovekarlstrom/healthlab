@@ -89,6 +89,24 @@ app.post("/likes", async (request, response) => {
   response.send(rows);
 });
 
+app.get("/likedRecipes/:user_id", async (request, response) => {
+  const { user_id } = request.params;
+  const { rows } = await client.query(
+    "SELECT * FROM likes WHERE user_id = $1",
+    [user_id]
+  );
+
+  if (rows.length > 0) {
+    const recipeIds = rows.map((item) => item.recipe_id);
+    const result = await client.query(
+      "SELECT * FROM recipes WHERE id = ANY($1)",
+      [recipeIds]
+    );
+    const likedRecipes = result.rows;
+    response.send(likedRecipes);
+  }
+});
+
 app.get("/comments/:recipe_id", async (request, response) => {
   const { recipe_id } = request.params;
   const query = `
@@ -178,6 +196,6 @@ app.post("/recipes/:recipeName", async (request, response) => {
 });
 
 const port = process.env.PORT || 8085;
-app.listen(8085, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

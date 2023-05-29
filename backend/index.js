@@ -90,6 +90,16 @@ app.post("/likes", (request, response) => __awaiter(void 0, void 0, void 0, func
     const { rows } = yield client.query("SELECT * FROM likes WHERE user_id = $1", [user_id]);
     response.send(rows);
 }));
+app.get("/likedRecipes/:user_id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { user_id } = request.params;
+    const { rows } = yield client.query("SELECT * FROM likes WHERE user_id = $1", [user_id]);
+    if (rows.length > 0) {
+        const recipeIds = rows.map((item) => item.recipe_id);
+        const result = yield client.query("SELECT * FROM recipes WHERE id = ANY($1)", [recipeIds]);
+        const likedRecipes = result.rows;
+        response.send(likedRecipes);
+    }
+}));
 app.get("/comments/:recipe_id", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { recipe_id } = request.params;
     const query = `
@@ -164,6 +174,6 @@ app.post("/recipes/:recipeName", (request, response) => __awaiter(void 0, void 0
     }
 }));
 const port = process.env.PORT || 8085;
-app.listen(8085, () => {
+app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

@@ -10,7 +10,7 @@ import weightBar from "../images/weightbar.png";
 import { LoggedInContext } from "../LoggedInContext";
 import { useContext } from "react";
 import MicroCircle from "../components/MicroCircle";
-
+import SavedRecipes from "../components/SavedRecipes";
 function LoggedInHomePage() {
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
@@ -79,6 +79,7 @@ function LoggedInHomePage() {
             <PlusCircle className="plusCircle" />
           </div>
         </div>
+        <SavedRecipes />
       </div>
     </div>
   );
