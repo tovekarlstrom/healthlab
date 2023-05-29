@@ -142,3 +142,34 @@
   width: 50px;
   height: 50px;
 }
+
+/* Media Queries */
+
+@media (min-width: 750px) {
+  .innerContainer {
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 40px;
+  }
+
+  .recipeImg {
+    height: 330px;
+    width: 330px;
+    margin-right: 40px;
+  }
+
+  .infoIcons {
+    width: 100%;
+    margin: 0;
+    margin-top: 40px;
+  }
+
+  .recipeDetails {
+    width: auto;
+  }
+
+  .recipeReviews {
+    margin-top: 0;
+    margin-left: 40px;
+  }
+}

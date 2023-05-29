@@ -166,7 +166,7 @@ function RecipeView() {
   }
 
   return (
-    <div>
+    <div className="mobileContainer">
       {recipe !== null && (
         <div>
           <ArrowButton />
