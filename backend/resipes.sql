@@ -58,7 +58,8 @@ ARRAY[
   id serial PRIMARY key,
   full_name text NOT NULL,
   email text UNIQUE NOT NULL,
-  password text NOT NULL
+  password text NOT NULL,
+  img text NOT NULL
 );
 INSERT INTO users (full_name, email, password)
 VALUES('test user','test@test.com', 'test123');

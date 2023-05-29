@@ -1,4 +1,4 @@
-import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
+import { StarFill, Star } from "react-bootstrap-icons";
 
 interface IRating {
   rating: number;
@@ -34,7 +34,7 @@ function ClickStarRating(props: IRating) {
       />
     );
   }
-  console.log(stars);
+
   return <>{stars}</>;
 }
 

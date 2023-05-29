@@ -8,10 +8,6 @@ import "../styles/RecipeView.css"
 import img1 from "../images/1.png"
 import img2 from "../images/2.png"
 import img3 from "../images/3.png"
-import img4 from "../images/4.png"
-import img5 from "../images/5.png"
-import img6 from "../images/6.png"
-import img7 from "../images/7.png"
 
 import {
   Clock,
@@ -37,6 +33,7 @@ interface commentInteface {
   comment: string
   rating: number
   full_name: string
+  img: string
 }
 
 function RecipeView() {
@@ -45,7 +42,7 @@ function RecipeView() {
   const [likeCount, setLikeCount] = useState<number>(0)
   const [recipe, setRecipe] = useState<Recipe | null>(null)
   const [likeArray, setLikeArray] = useState<likeInteface[]>([])
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
+  const { loggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
   }
@@ -68,7 +65,7 @@ function RecipeView() {
       .catch((error) => {
         console.log("Error:", error.message)
       })
-  }, [])
+  }, [recipeName])
 
   //get likes if logged in
   useEffect(() => {
@@ -83,7 +80,7 @@ function RecipeView() {
           setLikeArray(result)
         })
     }
-  }, [])
+  }, [loggedIn])
 
   // check if already liked
   useEffect(() => {
@@ -93,7 +90,7 @@ function RecipeView() {
       )
       setLike(alreadyLiked)
     }
-  }, [likeArray])
+  }, [recipe, likeArray])
 
   async function handleLike() {
     if (recipe && loggedIn) {
@@ -137,6 +134,7 @@ function RecipeView() {
           comment: comment,
           rating: rating,
           full_name: loggedIn.full_name,
+          img: loggedIn.img,
         }
         setAllComments((prevComments) => [...prevComments, newComment])
         console.log("Comment added successfully")
@@ -152,17 +150,10 @@ function RecipeView() {
         .then((response) => response.json())
         .then((result) => {
           console.log(result)
-          setAllComments(result.reverse())
+          setAllComments(result)
         })
     }
   }, [recipe])
-
-  function imgPicker() {
-    const images = [img1, img2, img3, img4, img5, img6, img7]
-    const randomeIndex = Math.floor(Math.random() * images.length)
-    const randomeImage = images[randomeIndex]
-    return randomeImage
-  }
 
   return (
     <div className="mobileContainer">
@@ -272,13 +263,13 @@ function RecipeView() {
                     name={item.full_name}
                     rating={item.rating}
                     comment={item.comment}
-                    image={imgPicker()}
+                    image={item.img}
                   />
                 ))}
             </div>
             {loggedIn ? (
               <div className="commentBox">
-                <img className="imgPick" src={imgPicker()} alt="" />
+                <img className="imgPick" src={loggedIn.img} alt="" />
                 <div className="comment">
                   <div className="stars">
                     <ClickStarRating rating={rating} setRating={setRating} />
@@ -293,6 +284,7 @@ function RecipeView() {
                   />
                 </div>
                 <SendFill
+                  className="sendButton"
                   onClick={() => {
                     uploadReview()
                   }}

@@ -8,10 +8,19 @@ import twitterLogo from "../images/Twitterlogo.svg";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
 import ArrowButton from "./ArrowButton";
 
+import img1 from "../images/1.png";
+import img2 from "../images/2.png";
+import img3 from "../images/3.png";
+import img4 from "../images/4.png";
+import img5 from "../images/5.png";
+import img6 from "../images/6.png";
+import img7 from "../images/7.png";
+
 export interface AccountInterface {
   full_name: string;
   email: string;
   password: string;
+  img: string;
 }
 
 function RegisterAccount() {
@@ -25,6 +34,7 @@ function RegisterAccount() {
     full_name: "",
     email: "",
     password: "",
+    img: "",
   });
 
   const registerAccount = (account: AccountInterface) => {
@@ -49,6 +59,13 @@ function RegisterAccount() {
       [name]: value,
     }));
   };
+
+  function imgPicker() {
+    const images = [img1, img2, img3, img4, img5, img6, img7];
+    const randomeIndex = Math.floor(Math.random() * images.length);
+    const randomeImage = images[randomeIndex];
+    return randomeImage;
+  }
 
   return (
     <div className="container">
@@ -183,7 +200,9 @@ function RegisterAccount() {
                 account.full_name !== ""
               ) {
                 console.log("hej");
-                registerAccount(account);
+                const randomeImg = imgPicker();
+                const addImgToAccount = { ...account, img: randomeImg };
+                registerAccount(addImgToAccount);
               } else {
                 if (account.password !== checkPassword) {
                   setCorrectCheckedPassword(false);

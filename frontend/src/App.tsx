@@ -15,6 +15,7 @@ function App() {
     id: "",
     full_name: "",
     email: "",
+    img: "",
   });
   useEffect(() => {
     const storedLoggedInUser = localStorage.getItem("loggedInUser");
@@ -26,6 +27,7 @@ function App() {
   useEffect(() => {
     console.log("loggedIn", loggedIn);
   }, [loggedIn]);
+  // localStorage.clear();
   const router = createHashRouter([
     {
       children: [
