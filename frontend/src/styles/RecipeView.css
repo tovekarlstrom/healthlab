@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 20px;
+  background-color: #f9fbf9;
 }
 
 .recipeH1 {
@@ -15,22 +15,35 @@
 }
 
 .recipeImg {
-  height: 230px;
+  max-height: 230px;
   width: 100%;
-  object-fit: cover;
+  margin-bottom: 20px;
 }
 
 .infoIcons {
   display: flex;
-  justify-content: space-between;
-  width: 309px;
-  margin: 15px 40.5px 20px 40.5px;
+  justify-content: center;
+  gap: 51px;
+  max-width: 309px;
+  margin: 15px auto 20px;
+}
+
+.instContainer {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.instTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .iconBox {
   display: flex;
   align-items: center;
 }
+
 .icon {
   margin-right: 5px;
 }
@@ -48,14 +61,18 @@
 .iconBag {
   width: 32px;
   height: 36px;
+  color: #174e2e;
 }
 .IconClock {
   width: 32px;
   height: 32px;
+  color: #174e2e;
 }
+
 .IconChat {
   width: 37px;
   height: 32px;
+  color: #174e2e;
 }
 
 .recipeDetails {
@@ -81,10 +98,12 @@
 }
 
 .recipeReviews {
-  padding: 16px;
+  padding: 10px 16px 21px;
   box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
-  margin-top: 47px;
-  padding-top: 10px;
+  margin-top: 32px;
+  width: 100%;
+  background-color: #fff;
+  color: #383838;
 }
 
 .IconHeading {
@@ -114,6 +133,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
 }
 .comment {
   display: flex;
@@ -143,33 +163,128 @@
   height: 50px;
 }
 
+.recipeReviews span:first-of-type {
+  background-color: transparent;
+  margin: 0;
+}
+
+.microContainer {
+  margin: 20px 0 27px;
+}
+
+.recipeInfo {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.recipeHero {
+  width: 100%;
+}
+
+.microContainer {
+  max-width: 358px;
+  height: 237px;
+  margin: 0 auto 27px;
+}
+
 /* Media Queries */
 
 @media (min-width: 750px) {
-  .innerContainer {
-    flex-direction: row;
-    align-items: flex-start;
-    margin-top: 40px;
+  /* Hero */
+  .recipeHero {
+    justify-content: space-between;
+    display: flex;
+    padding: 35px;
+    width: 100%;
   }
 
   .recipeImg {
-    height: 330px;
-    width: 330px;
-    margin-right: 40px;
+    max-width: 675px;
+    max-height: 561px;
+    border-radius: 30px;
+  }
+
+  .recipeInfo {
+    height: 100%;
+    margin: 0 0 0 auto;
+  }
+
+  .recipeH1 {
+    font-size: 40px;
+    margin-top: 20px;
   }
 
   .infoIcons {
-    width: 100%;
-    margin: 0;
-    margin-top: 40px;
+    font-size: 20px;
+    margin: 20px auto 55px;
+  }
+
+  .ratingContainer {
+    font-size: 31px;
+    display: flex;
+    gap: 3px;
+    justify-content: center;
+  }
+
+  .microContainer {
+    max-width: 557px;
+    height: 355px;
+  }
+
+  /* Ingredients & instruction */
+  .instTitle {
+    flex-direction: row;
+    gap: 20px;
   }
 
   .recipeDetails {
-    width: auto;
+    padding-left: 95px;
+  }
+
+  .ingredients {
+    padding-left: 80px;
+  }
+
+  .recipeDetailsContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 35px;
+  }
+
+  /* Reviews */
+  .IconHeading {
+    flex-direction: row;
+    gap: 20px;
+    margin-bottom: 15px;
+  }
+
+  .recipeH2 {
+    font-size: 28px;
+    font-weight: 700;
   }
 
   .recipeReviews {
-    margin-top: 0;
-    margin-left: 40px;
+    width: 100%;
+    padding: 20px 35px 30px;
+  }
+
+  .recipeReviews .Review-divider {
+    margin: 30px 0;
+  }
+
+  .recipeReviews .Review-body {
+    width: 100%;
+    max-width: 100%;
+    gap: 24px;
+  }
+
+  .recipeReviews .Review-content {
+    gap: 10px;
+  }
+
+  .recipeReviews .Review-image {
+    max-width: 65px;
+    height: 65px;
   }
 }

@@ -6,7 +6,6 @@
 }
 
 .Review-image {
-  width: 46px;
   height: 46px;
   max-width: 46px;
   border-radius: 50%;
@@ -32,16 +31,15 @@
   background-color: rgba(33, 37, 41, 0.25);
   display: block;
   height: 1px;
-  width: 300px;
-  margin: 0 auto 38px;
+  margin: 15px 29px;
+}
+
+.ReviewName {
+  text-transform: capitalize;
 }
 
 @media (min-width: 800px) {
   .Review-body {
     width: 358px;
-  }
-
-  .Review-divider {
-    display: none;
   }
 }

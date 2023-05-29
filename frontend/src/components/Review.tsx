@@ -24,7 +24,7 @@ function Review(props: reviewProps) {
           <div className="Review-stars">
             <StarRating rating={props.rating} />
           </div>
-          <p className="pBig"> {props.name} </p>
+          <p className="pBig ReviewName"> {props.name} </p>
           <p style={{ fontSize: "16px" }}> {props.comment} </p>
         </div>
       </div>

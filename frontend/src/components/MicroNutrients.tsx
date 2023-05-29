@@ -12,13 +12,11 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
   nutrientAmount,
   totalSum,
 }) => {
-  const percentage = Math.round((nutrientAmount / totalSum) * 100)
-  const circumference = 2 * Math.PI * 32.5
-  const dashOffset = (circumference * (100 - percentage)) / 100
-
   return (
     <div style={{ textAlign: "center", width: "100px" }}>
-      <h1 style={{ fontSize: "16px", marginBottom: "24px" }}>{nutrientName}</h1>
+      <p className="h5" style={{ marginBottom: "24px" }}>
+        {nutrientName}
+      </p>
       <p style={{ fontSize: "14px", marginBottom: "24px", fontWeight: "500" }}>
         {nutrientAmount} g
       </p>
@@ -45,18 +43,20 @@ const MicroNutrient: React.FC<MicroNutrientProps> = ({
   return (
     <div
       style={{
-        width: "290px",
-        height: "237px",
+        // maxWidth: "358px",
+        // height: "237px",
+        height: "100%",
+        width: "100%",
         boxShadow: "0px 1px 10px rgba(0, 0, 0, 0.25)",
         borderRadius: "16px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        alignItems: "center",
-        margin: "0 auto",
+        // alignItems: "center",
+        // margin: "0 auto",
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <div style={{ display: "flex", justifyContent: "space-around" }}>
         <MicronutrientCircle
           nutrientName="Protein"
           nutrientAmount={protein}

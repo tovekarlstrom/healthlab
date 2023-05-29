@@ -1,18 +1,17 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Recipe } from "./HomeView";
-import ArrowButton from "../components/ArrowButton";
-import ClickStarRating from "../components/ClickStarRating";
-import StarRating from "../components/StarRating";
-import "../styles/RecipeView.css";
-import { StarFill, StarHalf, Star } from "react-bootstrap-icons";
-import img1 from "../images/1.png";
-import img2 from "../images/2.png";
-import img3 from "../images/3.png";
-import img4 from "../images/4.png";
-import img5 from "../images/5.png";
-import img6 from "../images/6.png";
-import img7 from "../images/7.png";
+import { useEffect, useState, useContext } from "react"
+import { useParams, Link } from "react-router-dom"
+import { Recipe } from "./HomeView"
+import ArrowButton from "../components/ArrowButton"
+import ClickStarRating from "../components/ClickStarRating"
+import StarRating from "../components/StarRating"
+import "../styles/RecipeView.css"
+import img1 from "../images/1.png"
+import img2 from "../images/2.png"
+import img3 from "../images/3.png"
+import img4 from "../images/4.png"
+import img5 from "../images/5.png"
+import img6 from "../images/6.png"
+import img7 from "../images/7.png"
 
 import {
   Clock,
@@ -21,55 +20,55 @@ import {
   ChatText,
   Bag,
   SendFill,
-} from "react-bootstrap-icons";
-import Review from "../components/Review";
-import MicroNutrients from "../components/MicroNutrients";
-import { LoggedInContext } from "../LoggedInContext";
+} from "react-bootstrap-icons"
+import Review from "../components/Review"
+import MicroNutrients from "../components/MicroNutrients"
+import { LoggedInContext } from "../LoggedInContext"
 
 interface likeInteface {
-  id: number;
-  recipe_id: number;
-  user_id: number;
+  id: number
+  recipe_id: number
+  user_id: number
 }
 interface commentInteface {
-  id: number;
-  recipe_id: number;
-  user_id: number;
-  comment: string;
-  rating: number;
-  full_name: string;
+  id: number
+  recipe_id: number
+  user_id: number
+  comment: string
+  rating: number
+  full_name: string
 }
 
 function RecipeView() {
-  const { recipeName } = useParams();
-  const [like, setLike] = useState(false);
-  const [likeCount, setLikeCount] = useState<number>(0);
-  const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [likeArray, setLikeArray] = useState<likeInteface[]>([]);
+  const { recipeName } = useParams()
+  const [like, setLike] = useState(false)
+  const [likeCount, setLikeCount] = useState<number>(0)
+  const [recipe, setRecipe] = useState<Recipe | null>(null)
+  const [likeArray, setLikeArray] = useState<likeInteface[]>([])
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  };
-  const [allComments, setAllComments] = useState<commentInteface[]>([]);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  }
+  const [allComments, setAllComments] = useState<commentInteface[]>([])
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState("")
   useEffect(() => {
     fetch(`http://localhost:8085/recipes/${recipeName}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was not ok")
         }
-        return response.json();
+        return response.json()
       })
       .then((result) => {
-        console.log(result);
-        setRecipe(result[0]);
-        setLikeCount(result[0].likes);
+        console.log(result)
+        setRecipe(result[0])
+        setLikeCount(result[0].likes)
       })
       .catch((error) => {
-        console.log("Error:", error.message);
-      });
-  }, []);
+        console.log("Error:", error.message)
+      })
+  }, [])
 
   //get likes if logged in
   useEffect(() => {
@@ -81,20 +80,20 @@ function RecipeView() {
       })
         .then((response) => response.json())
         .then((result) => {
-          setLikeArray(result);
-        });
+          setLikeArray(result)
+        })
     }
-  }, []);
+  }, [])
 
   // check if already liked
   useEffect(() => {
     if (recipe && likeArray.length > 0) {
       const alreadyLiked = likeArray.some(
         (item) => item.recipe_id === recipe.id
-      );
-      setLike(alreadyLiked);
+      )
+      setLike(alreadyLiked)
     }
-  }, [likeArray]);
+  }, [likeArray])
 
   async function handleLike() {
     if (recipe && loggedIn) {
@@ -108,14 +107,14 @@ function RecipeView() {
             user_id: loggedIn.id,
           }),
         }
-      );
-      const result = await response.json();
+      )
+      const result = await response.json()
       if (result) {
-        setLikeCount(likeCount + 1);
+        setLikeCount(likeCount + 1)
       } else if (result === false) {
-        setLikeCount(likeCount - 1);
+        setLikeCount(likeCount - 1)
       }
-      setLike(result);
+      setLike(result)
     }
   }
   async function uploadReview() {
@@ -129,7 +128,7 @@ function RecipeView() {
           comment: comment,
           rating: rating,
         }),
-      });
+      })
       if (response.ok) {
         const newComment = {
           id: -1,
@@ -138,11 +137,11 @@ function RecipeView() {
           comment: comment,
           rating: rating,
           full_name: loggedIn.full_name,
-        };
-        setAllComments((prevComments) => [...prevComments, newComment]);
-        console.log("Comment added successfully");
+        }
+        setAllComments((prevComments) => [...prevComments, newComment])
+        console.log("Comment added successfully")
       } else {
-        console.log("Failed to add comment");
+        console.log("Failed to add comment")
       }
     }
   }
@@ -152,17 +151,17 @@ function RecipeView() {
       fetch(`http://localhost:8085/comments/${recipe.id}`)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
-          setAllComments(result.reverse());
-        });
+          console.log(result)
+          setAllComments(result.reverse())
+        })
     }
-  }, [recipe]);
+  }, [recipe])
 
   function imgPicker() {
-    const images = [img1, img2, img3, img4, img5, img6, img7];
-    const randomeIndex = Math.floor(Math.random() * images.length);
-    const randomeImage = images[randomeIndex];
-    return randomeImage;
+    const images = [img1, img2, img3, img4, img5, img6, img7]
+    const randomeIndex = Math.floor(Math.random() * images.length)
+    const randomeImage = images[randomeIndex]
+    return randomeImage
   }
 
   return (
@@ -196,54 +195,68 @@ function RecipeView() {
               />
             )}
           </div>
-          <img className="recipeImg" src={recipe.image} alt="recipe" />
           <div className="innerContainer">
-            <div>
-              <StarRating rating={recipe.rating} />
-            </div>
-            <h1 className="recipeH1">{recipe.name}</h1>
-            <div className="infoIcons">
-              <span className="iconBox">
-                <Clock className="icon" />
-                <p>{recipe.time}</p>
-              </span>
-              <span className="iconBox">
-                <Heart className="icon" />
-                <p>{likeCount}</p>
-              </span>
-              <span className="iconBox">
-                <ChatText className="icon" />
-                <p>{recipe.comments}</p>
-              </span>
+            <div className="recipeHero">
+              <img className="recipeImg" src={recipe.image} alt="recipe" />
+              <div className="recipeInfo">
+                <div className="ratingContainer">
+                  <StarRating rating={recipe.rating} />
+                </div>
+                <h1 className="recipeH1">{recipe.name}</h1>
+                <div className="infoIcons">
+                  <span className="iconBox">
+                    <Clock className="icon" />
+                    <p>{recipe.time}</p>
+                  </span>
+                  <span className="iconBox">
+                    <Heart className="icon" />
+                    <p>{likeCount}</p>
+                  </span>
+                  <span className="iconBox">
+                    <ChatText className="icon" />
+                    <p>{recipe.comments}</p>
+                  </span>
+                </div>
+                <div className="microContainer">
+                  <MicroNutrients
+                    carbs={recipe.carbs}
+                    fat={recipe.fat}
+                    protein={recipe.protein}
+                    kcal={recipe.kcal}
+                  />
+                </div>
+              </div>
             </div>
 
-            <span style={{ margin: "20px 0px 20px 0px" }}>
-              <MicroNutrients
-                carbs={recipe.carbs}
-                fat={recipe.fat}
-                protein={recipe.protein}
-                kcal={recipe.kcal}
-              />
-            </span>
+            <div className="recipeDetailsContainer">
+              <div className="instContainer">
+                <div className="instTitle">
+                  <div className="greenIconBox">
+                    <Bag className="iconBag" />
+                  </div>
+                  <h2 className="recipeH2">Ingredienser</h2>
+                </div>
+                <ul className="recipeDetails ingredients">
+                  {recipe.ingredients.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="instContainer">
+                <div className="instTitle">
+                  <div className="greenIconBox">
+                    <Clock className="IconClock" />
+                  </div>
+                  <h2 className="recipeH2">Instruktioner</h2>
+                </div>
+                <ul className="recipeDetails">
+                  {recipe.instructions.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-            <div className="greenIconBox">
-              <Bag className="iconBag" />
-            </div>
-            <h2 className="recipeH2">Ingredienser</h2>
-            <ul className="recipeDetails ingredients">
-              {recipe.ingredients.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-            <div className="greenIconBox">
-              <Clock className="IconClock" />
-            </div>
-            <h2 className="recipeH2">Instruktioner</h2>
-            <ul className="recipeDetails">
-              {recipe.instructions.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
             <div className="recipeReviews">
               <div className="IconHeading">
                 <div className="greenIconBox">
@@ -251,24 +264,7 @@ function RecipeView() {
                 </div>
                 <h2 className="recipeH2">Recensioner</h2>
               </div>
-              <Review
-                name="Jane Doe"
-                rating={3.5}
-                comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image={imgPicker()}
-              />
-              <Review
-                name="Jane Doe"
-                rating={3.5}
-                comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image={imgPicker()}
-              />
-              <Review
-                name="Jane Doe"
-                rating={3.5}
-                comment="Den här appen har gjort det mycket enklare att gå ner i vikt!"
-                image={imgPicker()}
-              />
+
               {allComments &&
                 allComments.map((item) => (
                   <Review
@@ -292,13 +288,13 @@ function RecipeView() {
                     type="text"
                     placeholder="Skriv en recension här..."
                     onChange={(event) => {
-                      setComment(event.target.value);
+                      setComment(event.target.value)
                     }}
                   />
                 </div>
                 <SendFill
                   onClick={() => {
-                    uploadReview();
+                    uploadReview()
                   }}
                 />
               </div>
@@ -321,7 +317,7 @@ function RecipeView() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default RecipeView;
+export default RecipeView
