@@ -1,27 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
+import { Link } from "react-router-dom";
 import NavbarDesktop from "./NavbarDesktop";
 import HamburgerButton from "./HamburgerButton";
+import "../styles/Navbar.css";
 import { XLg } from "react-bootstrap-icons";
+import { LoggedInContext } from "../LoggedInContext";
+
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 850);
+  const { loggedIn} = useContext(LoggedInContext) ?? {
+    loggedIn: null
+  }
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 849);
-    };
+      setIsMobileView(window.innerWidth <= 849)
+    }
 
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    }
+  }, [])
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
-  };
+  }
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/"
+  }
 
   if (isMobileView) {
     return (
@@ -75,6 +87,7 @@ const Navbar: React.FC = () => {
             Close Menu
           </XLg>
           <div
+            className="link-container"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -83,19 +96,47 @@ const Navbar: React.FC = () => {
               flex: 1,
             }}
           >
-            <h1 style={{ fontSize: "20px", marginBottom: "38px" }}>Registrera dig</h1>
-            <h1 style={{ fontSize: "20px", marginBottom: "38px" }}>Logga in</h1>
-            <h1 style={{ fontSize: "20px", marginBottom: "38px" }}>Kontakta oss</h1>
+            {loggedIn && loggedIn.id !== "" ? (
+              <>
+                <Link to="/recipes" className="nav-mobile">
+                  Recept
+                </Link>
+                <Link to="/loggedInHomePage" className="nav-mobile">
+                  Mitt konto
+                </Link>
+                <Link to="/#" className="nav-mobile" onClick={handleLogout}>
+                  Logga ut
+                 </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/register" className="nav-mobile">
+                  Registrera dig
+                </Link>
+                <Link to="/login" className="nav-mobile">
+                  Logga in
+                </Link>
+                <Link to="/contact" className="nav-mobile">
+                  Kontakta oss
+                </Link>
+              </>
+            )}
           </div>
           <div style={{ marginTop: "auto", marginBottom: "20px" }}>
-            <img src="/Logo Mobile.svg" alt="Logo" style={{ width: "136px", height: "29px" }} />
+            <Link to="/#">
+              <img
+                src="/Logo Mobile.svg"
+                alt="Logo"
+                style={{ width: "136px", height: "29px" }}
+              />
+            </Link>
           </div>
         </div>
       </div>
     );
   }
 
-  return <NavbarDesktop/>;
+  return <NavbarDesktop />;
 };
 
 export default Navbar;

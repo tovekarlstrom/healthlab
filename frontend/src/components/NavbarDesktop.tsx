@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 import "../styles/NavbarDesktop.css";
 import { LoggedInContext } from "../LoggedInContext";
 
+
 const NavbarDesktop: React.FC = () => {
-  const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
+  const { loggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
-    setLoggedIn: null,
-  };
+  }
 
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/"
-  };
+  }
 
   return (
     <div className="navbar">
@@ -49,7 +49,7 @@ const NavbarDesktop: React.FC = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default NavbarDesktop;
