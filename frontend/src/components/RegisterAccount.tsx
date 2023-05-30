@@ -1,5 +1,5 @@
-import { useState, ChangeEvent } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Loggin.css";
 import registerImg from "../images/register.png";
 import googleLogo from "../images/Googlelogo.svg";
@@ -7,6 +7,8 @@ import facebookLogo from "../images/Fcebooklogo.svg";
 import twitterLogo from "../images/Twitterlogo.svg";
 import { ExclamationCircleFill } from "react-bootstrap-icons";
 import ArrowButton from "./ArrowButton";
+import { useContext } from "react";
+import { LoggedInContext } from "../LoggedInContext";
 
 import img1 from "../images/1.png";
 import img2 from "../images/2.png";
@@ -26,17 +28,22 @@ export interface AccountInterface {
 function RegisterAccount() {
   const [logedInUser, setLogedInUser] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
-  const [correctCheckedPassword, setCorrectCheckedPassword] = useState(true);
-  const [correctPassword, setCorrectPassword] = useState(true);
-  const [correctFullName, setCorrectFullName] = useState(true);
-  const [correctEmail, setCorrectEmail] = useState(true);
+  const [incorrectPasswordCheck, setIncorrectPasswordCheck] = useState(false);
+  const [incorrectPassword, setIncorrectPassword] = useState(false);
+  const [incorrectFullName, setIncorrectFullName] = useState(false);
+  const [incorrectEmail, setIncorrectEmail] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
+    loggedIn: null,
+    setLoggedIn: null,
+  };
   const [account, setAccount] = useState<AccountInterface>({
     full_name: "",
     email: "",
     password: "",
     img: "",
   });
-
+  const navigate = useNavigate();
   const registerAccount = (account: AccountInterface) => {
     fetch("http://localhost:8085/register", {
       method: "POST",
@@ -45,10 +52,19 @@ function RegisterAccount() {
       },
       body: JSON.stringify(account),
     })
-      .then((response) => response.text())
+      .then((response) => {
+        if (response.status === 409) {
+          setShowError(true);
+        }
+        return response.text();
+      })
       .then((result) => {
         console.log(result);
-        setLogedInUser(result);
+        const parsedResult = JSON.parse(result);
+        if (setLoggedIn) {
+          setLoggedIn(parsedResult);
+          localStorage.setItem("loggedInUser", JSON.stringify(parsedResult));
+        }
       });
   };
 
@@ -59,6 +75,12 @@ function RegisterAccount() {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    if (loggedIn && loggedIn.id !== "") {
+      navigate("/homepage");
+    }
+  }, [loggedIn, navigate]);
 
   function imgPicker() {
     const images = [img1, img2, img3, img4, img5, img6, img7];
@@ -86,7 +108,7 @@ function RegisterAccount() {
               onChange={handleInputChange}
               required
             />
-            {!correctFullName && (
+            {incorrectFullName && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{ color: "rgba(220, 53, 69, 1)" }}
@@ -109,7 +131,7 @@ function RegisterAccount() {
               onChange={handleInputChange}
               required
             />
-            {!correctEmail && (
+            {incorrectEmail && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{
@@ -125,7 +147,8 @@ function RegisterAccount() {
                 </p>
               </div>
             )}
-            {logedInUser === "Conflict account already exists" && (
+            {/* hfkfahsljfdlas */}
+            {showError && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{
@@ -150,7 +173,7 @@ function RegisterAccount() {
               onChange={handleInputChange}
               required
             />
-            {!correctPassword && (
+            {incorrectPassword && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{
@@ -169,13 +192,13 @@ function RegisterAccount() {
             <input
               className="Input InputRegister"
               type="password"
-              name="password"
+              name="confirmPassword"
               placeholder="Bekräfta lösenord"
               value={checkPassword}
               onChange={(event) => setCheckPassword(event.target.value)}
               required
             />
-            {!correctCheckedPassword && (
+            {incorrectPasswordCheck && (
               <div className="unauthorizedMessage">
                 <ExclamationCircleFill
                   style={{ color: "rgba(220, 53, 69, 1)" }}
@@ -199,22 +222,25 @@ function RegisterAccount() {
                 account.email !== "" &&
                 account.full_name !== ""
               ) {
-                console.log("hej");
-                const randomeImg = imgPicker();
-                const addImgToAccount = { ...account, img: randomeImg };
-                registerAccount(addImgToAccount);
+                if (account.password.length < 8) {
+                  setIncorrectPassword(true);
+                } else {
+                  const randomeImg = imgPicker();
+                  const addImgToAccount = { ...account, img: randomeImg };
+                  registerAccount(addImgToAccount);
+                }
               } else {
                 if (account.password !== checkPassword) {
-                  setCorrectCheckedPassword(false);
+                  setIncorrectPasswordCheck(true);
                 }
                 if (account.full_name === "") {
-                  setCorrectFullName(false);
+                  setIncorrectFullName(true);
                 }
                 if (account.email === "") {
-                  setCorrectEmail(false);
+                  setIncorrectEmail(true);
                 }
                 if (account.password === "" || account.password.length < 8) {
-                  setCorrectPassword(false);
+                  setIncorrectPassword(true);
                 }
               }
             }}

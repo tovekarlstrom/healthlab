@@ -1,37 +1,16 @@
-import React from "react"
+import React from "react";
+import "../styles/Footer.css";
 
 const Footer: React.FC = () => {
-  const footerStyle: React.CSSProperties = {
-    background: "linear-gradient(96.22deg, #7ACB94 0%, #EEDF76 100%)",
-    height: "100px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "#ffffff",
-    fontFamily: "Montserrat, sans-serif",
-    bottom: 0,
-    width: "100%",
-  }
-
-  const divStyle: React.CSSProperties = {
-    display: "flex",
-    flexDirection: "row",
-    fontSize: "16px",
-    fontWeight: "600",
-    color: "#174E2E",
-    gap: "33px",
-    fontFamily: "Montserrat, sans-serif",
-  }
-
   return (
-    <footer style={footerStyle}>
-      <div style={divStyle}>
+    <footer className="footer">
+      <div className="footer-content">
         <p>FAQ</p>
         <p>Om oss</p>
         <p>Kontakt</p>
       </div>
     </footer>
-  )
+  );
 }
 
 export default Footer;
