@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
     );
   }
 
-  return <NavbarDesktop />;
+  return <NavbarDesktop/>;
 };
 
 export default Navbar;
