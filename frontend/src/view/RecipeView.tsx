@@ -93,7 +93,9 @@ function RecipeView() {
   }, [recipe, likeArray])
 
   async function handleLike() {
-    if (recipe && loggedIn) {
+    if (loggedIn && loggedIn.id === "") {
+      alert("Logga in för att spara recept!")
+    } else if (recipe && loggedIn) {
       const response = await fetch(
         `http://localhost:8085/recipes/${recipeName}`,
         {
@@ -160,7 +162,7 @@ function RecipeView() {
       {recipe !== null && (
         <div>
           <ArrowButton />
-          <div
+          {/* <div
             onClick={handleLike}
             className="heart"
             style={{
@@ -185,10 +187,43 @@ function RecipeView() {
                 style={{ width: "34px", height: "32px", color: "#174E2E" }}
               />
             )}
-          </div>
+          </div> */}
           <div className="innerContainer">
             <div className="recipeHero">
-              <img className="recipeImg" src={recipe.image} alt="recipe" />
+              <div className="imageWrapper">
+                <img className="recipeImg" src={recipe.image} alt="recipe" />
+                <div
+                  onClick={handleLike}
+                  className="heart"
+                  style={{
+                    backgroundColor: "rgba(249, 251, 249, 0.8)",
+                    position: "absolute",
+                    width: "50px",
+                    height: "50px",
+                    zIndex: "10",
+                    right: "20px",
+                    top: "20px",
+                    borderRadius: "25px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    paddingTop: "3px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {!like ? (
+                    <Heart style={{ width: "34px", height: "32px" }} />
+                  ) : (
+                    <HeartFill
+                      style={{
+                        width: "34px",
+                        height: "32px",
+                        color: "#174E2E",
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
               <div className="recipeInfo">
                 <div className="ratingContainer">
                   <StarRating rating={recipe.rating} />

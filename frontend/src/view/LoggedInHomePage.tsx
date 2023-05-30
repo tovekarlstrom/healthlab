@@ -1,22 +1,22 @@
-import "../styles/LoggedInHomePage.css";
-import { PlusCircle } from "react-bootstrap-icons";
-import meal1 from "../images/meal1.png";
-import meal2 from "../images/meal2.png";
-import meal3 from "../images/meal3.png";
-import training from "../images/training.png";
-import Circle from "../components/Circle";
-import drinks from "../images/drinks.png";
-import weightBar from "../images/weightbar.png";
-import { LoggedInContext } from "../LoggedInContext";
-import { useContext } from "react";
-import MicroCircle from "../components/MicroCircle";
-import SavedRecipes from "../components/SavedRecipes";
+import "../styles/LoggedInHomePage.css"
+import { PlusCircle } from "react-bootstrap-icons"
+import meal1 from "../images/meal1.png"
+import meal2 from "../images/meal2.png"
+import meal3 from "../images/meal3.png"
+import training from "../images/training.png"
+import Circle from "../components/Circle"
+import drinks from "../images/drinks.png"
+import weightBar from "../images/weightbar.png"
+import { LoggedInContext } from "../LoggedInContext"
+import { useContext } from "react"
+import MicroCircle from "../components/MicroCircle"
+import SavedRecipes from "../components/SavedRecipes"
 function LoggedInHomePage() {
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  };
-  const name = loggedIn?.full_name;
+  }
+  const name = loggedIn?.full_name
 
   return (
     <div className="LoggedInHomePage">
@@ -39,7 +39,7 @@ function LoggedInHomePage() {
             <MicroCircle nutrientAmount={60} totalSum={170} />
             <p> 60/170 g</p>
           </div>
-          <div className="container">
+          <div>
             <p className="Nutrient"> Fett</p>
             <MicroCircle nutrientAmount={14} totalSum={57} />
             <p> 14/57 g</p>
@@ -82,6 +82,6 @@ function LoggedInHomePage() {
         <SavedRecipes />
       </div>
     </div>
-  );
+  )
 }
-export default LoggedInHomePage;
+export default LoggedInHomePage

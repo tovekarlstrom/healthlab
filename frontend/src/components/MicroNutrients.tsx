@@ -1,5 +1,6 @@
 import React from "react"
 import MicroCircle from "./MicroCircle"
+import "../styles/MicroNutrients.css"
 
 interface MicronutrientCircleProps {
   nutrientName: string
@@ -13,13 +14,9 @@ const MicronutrientCircle: React.FC<MicronutrientCircleProps> = ({
   totalSum,
 }) => {
   return (
-    <div style={{ textAlign: "center", width: "100px" }}>
-      <p className="h5" style={{ marginBottom: "24px" }}>
-        {nutrientName}
-      </p>
-      <p style={{ fontSize: "14px", marginBottom: "24px", fontWeight: "500" }}>
-        {nutrientAmount} g
-      </p>
+    <div className="MicroNutrientsPart">
+      <p className="h5">{nutrientName}</p>
+      <p className="pMed">{nutrientAmount} g</p>
       <MicroCircle nutrientAmount={nutrientAmount} totalSum={totalSum} />
     </div>
   )
@@ -41,21 +38,7 @@ const MicroNutrient: React.FC<MicroNutrientProps> = ({
   const totalSum = protein + carbs + fat
 
   return (
-    <div
-      style={{
-        // maxWidth: "358px",
-        // height: "237px",
-        height: "100%",
-        width: "100%",
-        boxShadow: "0px 1px 10px rgba(0, 0, 0, 0.25)",
-        borderRadius: "16px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        // alignItems: "center",
-        // margin: "0 auto",
-      }}
-    >
+    <div className="MicroNutrients">
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <MicronutrientCircle
           nutrientName="Protein"
@@ -73,7 +56,7 @@ const MicroNutrient: React.FC<MicroNutrientProps> = ({
           totalSum={totalSum}
         />
       </div>
-      <p style={{ fontSize: "16px", marginTop: "24px", fontWeight: "500" }}>
+      <p className="pMed totalCal">
         <span style={{ fontWeight: "600" }}>Totalt:</span> {kcal} kcal
       </p>
     </div>
