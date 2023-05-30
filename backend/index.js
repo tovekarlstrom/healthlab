@@ -67,7 +67,9 @@ app.post("/register", (request, response) => __awaiter(void 0, void 0, void 0, f
         const loggedInUser = rows.find((item) => item.email === email);
         console.log("loggedInUser", loggedInUser);
         if (loggedInUser) {
-            response.status(409).send("Conflict account already exists");
+            response
+                .status(409)
+                .send({ id: "", full_name: "", email: "", password: "" });
         }
         else {
             const insertQuery = {
@@ -75,8 +77,17 @@ app.post("/register", (request, response) => __awaiter(void 0, void 0, void 0, f
                 values: [full_name, email, password, img],
             };
             const registerAccount = yield client.query(insertQuery);
-            console.log("registerAccount", registerAccount);
-            response.status(200).send("succes");
+            if (registerAccount) {
+                const { rows } = yield client.query("SELECT * FROM users WHERE email = $1", [email]);
+                const registeredUser = rows[0];
+                console.log("registeredUser", registeredUser);
+                response.status(200).send(registeredUser);
+            }
+            else {
+                response
+                    .status(400)
+                    .send('"full_name, email or password has not been added"');
+            }
         }
     }
     else {
