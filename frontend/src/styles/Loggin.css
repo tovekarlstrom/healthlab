@@ -128,13 +128,13 @@
   margin-right: 50px;
 }
 .logoFacebook {
-  width: 33.2px;
+  width: 34px;
   height: 33px;
   margin-right: 51px;
 }
 .logoTwitter {
-  width: 58.33px;
-  height: 50px;
+  width: 37px;
+  height: 32px;
 }
 .unauthorizedMessage {
   height: 19px;
@@ -154,6 +154,11 @@
   border-radius: 30px;
   border-style: none;
   margin-top: 36px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 120%;
+  letter-spacing: 0.03em;
   color: #174e2e;
 }
 
@@ -203,27 +208,28 @@
   }
 
   .Form {
-    padding-top: 350px;
-    width: 100%;
+    /* padding-top: 350px; */
     border-radius: 0;
-    height: 100%;
-    margin-top: 0;
-    position: relative;
+    position: absolute;
+    right: 10%;
     overflow: hidden;
+    top: 153px;
   }
   .content {
-    border-top-left-radius: 70%;
-    border-bottom-left-radius: 70%;
-    width: 200%;
+    /* border-top-left-radius: 0;
+    border-bottom-left-radius: 0; */
+    /* width: 200%; */
     position: relative;
     overflow: hidden;
-    height: 150%;
-
+    /* height: 150%; */
     z-index: 10;
     background-color: white;
-    right: -70px;
+    /* right: -70px; */
+    height: 100%;
     margin-top: 0;
-    /* clip-path: circle(70% at 90% 50%); */
+    border-radius: 0;
+    position: relative;
+    clip-path: circle(65% at 90% 50%);
   }
   .logginSubmitButton {
     border-style: none;
