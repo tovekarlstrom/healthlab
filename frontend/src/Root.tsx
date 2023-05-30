@@ -4,26 +4,29 @@ import Footer from "./components/Footer";
 
 function Root() {
   const location = useLocation();
-  const excludeNavbar = [
-    "/login",
-    "/register",
+  const excludeNavbarRecipeView = [
     (pathname: string) => pathname.startsWith("/recipe/"),
   ];
 
-  const excludeFooter = ["/login", "/register"];
-
-  const renderNavbar = !excludeNavbar.some((exclude) =>
+  const renderNavbar = !excludeNavbarRecipeView.some((exclude) =>
     typeof exclude === "function"
       ? exclude(location.pathname)
       : exclude === location.pathname
   );
 
-  const renderFooter = !excludeFooter.includes(location.pathname);
+  const excludeNavbar = ["/login", "/register"];
+  const excludeFooter = ["/login", "/register"];
+
+  const navbar = !excludeNavbar.includes(location.pathname);
+  const footer = !excludeFooter.includes(location.pathname);
+
+  const isDesktopView = window.matchMedia("(min-width: 700px)").matches;
+
   return (
     <div>
-      {renderNavbar && <NavBar />}
+      {(isDesktopView || renderNavbar) && navbar && <NavBar />}
       <Outlet />
-      {renderFooter && <Footer />}
+      {isDesktopView && footer && <Footer />}
     </div>
   );
 }
