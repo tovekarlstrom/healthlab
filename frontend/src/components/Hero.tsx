@@ -21,7 +21,7 @@ export default function Hero() {
           <Link to={`/login`}>
             <button className="Hero-loginButton">Logga in</button>
           </Link>
-          <Link to={`/homepage`}>
+          <Link to={`/register`}>
             <button className="Hero-registerButton">Bli en av oss!</button>
           </Link>
         </div>
