@@ -8,9 +8,10 @@ import Circle from "../components/Circle"
 import drinks from "../images/drinks.png"
 import weightBar from "../images/weightbar.png"
 import { LoggedInContext } from "../LoggedInContext"
-import { useContext } from "react"
+import { useContext, useState, useEffect } from "react"
 import MicroCircle from "../components/MicroCircle"
 import SavedRecipes from "../components/SavedRecipes"
+import RecipeCarousel from "../components/RecipeCarousel"
 
 function LoggedInHomePage() {
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
@@ -97,6 +98,9 @@ function LoggedInHomePage() {
           </div>
         </div>
         <SavedRecipes />
+        <div className="loggedInRecipe">
+          <RecipeCarousel />
+        </div>
       </div>
     </div>
   )
