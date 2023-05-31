@@ -1,63 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import ButtonRegister from '../components/ButtonRegister';
-import HomePageDesktop from './HomePageDesktop';
+import React, { useEffect, useState } from "react";
+import ButtonRegister from "../components/ButtonRegister";
+import HomePageDesktop from "./HomePageDesktop";
 
 const HomePage: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024)
+      setIsDesktop(window.innerWidth >= 600);
     };
 
-    handleResize()
-    window.addEventListener('resize', handleResize)
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const containerStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   };
 
   const imageStyle: React.CSSProperties = {
-    width: 390,
+    width: "100%",
     height: 300,
-    objectFit: 'cover',
+    objectFit: "cover",
   };
 
   const contentStyle: React.CSSProperties = {
-    position: 'relative',
-    top: '-20px',
-    width: '100%',
-    backgroundColor: 'white',
-    borderRadius: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: "relative",
+    top: "-20px",
+    width: "100%",
+    backgroundColor: "white",
+    borderRadius: "20px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     flexShrink: 0,
-    boxShadow: '0px -5px 5px rgba(0, 0, 0, 0.15)',
+    boxShadow: "0px -5px 5px rgba(0, 0, 0, 0.15)",
   };
 
   const buttonContainerStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: '20px',
-    gap: '20px',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "20px",
+    gap: "20px",
   };
 
   const paragraphStyle: React.CSSProperties = {
-    textAlign: 'center',
-    fontSize: '16px',
-    marginBottom: '20px',
-    fontWeight: '400',
-    padding: '0px 18px 0px 18px'
+    textAlign: "center",
+    fontSize: "16px",
+    marginBottom: "20px",
+    fontWeight: "400",
+    padding: "0px 18px 0px 18px",
   };
 
   if (isDesktop) {
@@ -67,14 +67,16 @@ const HomePage: React.FC = () => {
   return (
     <div style={containerStyle}>
       <img
-        src={process.env.PUBLIC_URL + '/Homepage-picture.jpg'}
+        src={process.env.PUBLIC_URL + "/Homepage-picture.jpg"}
         alt=""
         style={imageStyle}
       />
       <div style={contentStyle}>
-        <h1 style={{ textAlign: 'center', margin: '30px 20px' }}>Välkommen</h1>
+        <h1 style={{ textAlign: "center", margin: "30px 20px" }}>Välkommen</h1>
         <p style={paragraphStyle}>
-          Din resa mot en bättre hälsa börjar här. Vi vill hjälpa dig på bästa sätt och behöver därför veta mer om dig. Välj det alternativ som bäst stämmer in på dig.
+          Din resa mot en bättre hälsa börjar här. Vi vill hjälpa dig på bästa
+          sätt och behöver därför veta mer om dig. Välj det alternativ som bäst
+          stämmer in på dig.
         </p>
         <div style={buttonContainerStyle}>
           <ButtonRegister buttonText="Ner i vikt" />
@@ -84,7 +86,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

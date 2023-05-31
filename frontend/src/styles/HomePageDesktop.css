@@ -1,28 +1,47 @@
 .homepage-desktop {
   background-image: url("../images/NewDesktopHomepage.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
-  }
-  
-  .homepage-desktop h1 {
-    color: #212529;
-    font-size: 48px;
-    margin-bottom:30px;
-    font-weight: 700;
-  }
-  
-  .homepage-desktop p {
-    color: #212529;
-    font-size: 20px;
-    line-height:24px;
-    font-weight: 500;
-    width: 590px;
-  }
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+}
 
-  .styleContainer {
-    
-    padding:200px 0px 0px 70px;
+.homepage-desktop h1 {
+  color: #212529;
+  font-size: 48px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  padding: 0 68px;
+}
+.P {
+  padding: 0 68px;
+}
+
+.homepage-desktop p {
+  color: #212529;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 500;
+  width: 590px;
+}
+
+.styleContainer {
+  padding: 200px 0px 0px 0px;
+}
+
+.box1,
+.box2 {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+}
+.bigBox {
+  flex-direction: column;
+  padding-bottom: 102px;
+}
+
+@media (min-width: 1200px) {
+  .bigBox {
+    flex-direction: row;
   }
+}

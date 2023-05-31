@@ -1,43 +1,46 @@
-import { useState, useEffect } from "react"
-import RecipeCard from "../components/RecipeCard"
-import Info from "../components/Info"
-import Hero from "../components/Hero"
-import { Link } from "react-router-dom"
-import "../styles/HomeView.css"
-import Review from "../components/Review"
+import { useState, useEffect } from "react";
+import RecipeCard from "../components/RecipeCard";
+import Info from "../components/Info";
+import Hero from "../components/Hero";
+import { Link } from "react-router-dom";
+import "../styles/HomeView.css";
+import Review from "../components/Review";
+import img1 from "../images/1.png";
+import img2 from "../images/2.png";
+import img3 from "../images/3.png";
 export interface Recipe {
-  id: number
-  image: string
-  name: string
-  rating: number
-  time: number
-  likes: number
-  comments: number
-  protein: number
-  carbs: number
-  fat: number
-  kcal: number
-  ingredients: [string]
-  instructions: [string]
+  id: number;
+  image: string;
+  name: string;
+  rating: number;
+  time: number;
+  likes: number;
+  comments: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  kcal: number;
+  ingredients: [string];
+  instructions: [string];
 }
 function Home() {
-  const [recipes, setRecipes] = useState<Recipe[] | null>(null)
+  const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   useEffect(() => {
     fetch("http://localhost:8085/recipes")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok")
+          throw new Error("Network response was not ok");
         }
-        return response.json()
+        return response.json();
       })
       .then((result) => {
-        console.log(result)
-        setRecipes(result)
+        console.log(result);
+        setRecipes(result);
       })
       .catch((error) => {
-        console.log("Error:", error.message)
-      })
-  }, [])
+        console.log("Error:", error.message);
+      });
+  }, []);
   return (
     <div>
       <Hero />
@@ -45,22 +48,22 @@ function Home() {
         <h2 className="h3"> Detta säger våra kunder</h2>
         <div className="Home-reviews">
           <Review
-            name="Jane Doe"
-            rating={3.5}
+            name="Ella Carlsson"
+            rating={5}
             comment="Min nya favoritapp utan tvekan!"
-            image="YasminFrost.png"
+            image={img1}
           />
           <Review
-            name="Jane Doe"
-            rating={3.5}
+            name="Stefan Ingvarsson"
+            rating={5}
             comment="Healthlab har verkligen hjälpt mig att förbättra min kosthållning!"
-            image="YasminFrost.png"
+            image={img2}
           />
           <Review
-            name="Jane Doe"
-            rating={3.5}
+            name="Alva Eriksson"
+            rating={5}
             comment="Rekommenderar verkligen denna app till den som vill få bättre kostvanor."
-            image="YasminFrost.png"
+            image={img3}
           />
         </div>
       </div>
@@ -79,7 +82,7 @@ function Home() {
 
       <Info />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
