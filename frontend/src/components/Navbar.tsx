@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import NavbarDesktop from "./NavbarDesktop";
 import HamburgerButton from "./HamburgerButton";
@@ -6,34 +6,33 @@ import "../styles/Navbar.css";
 import { XLg } from "react-bootstrap-icons";
 import { LoggedInContext } from "../LoggedInContext";
 
-
 const Navbar: React.FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 850);
-  const { loggedIn} = useContext(LoggedInContext) ?? {
-    loggedIn: null
-  }
+  const { loggedIn } = useContext(LoggedInContext) ?? {
+    loggedIn: null,
+  };
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 849)
-    }
+      setIsMobileView(window.innerWidth <= 849);
+    };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-    }
-  }, [])
+    };
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
-  }
+  };
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "/"
-  }
+    window.location.href = "/";
+  };
 
   if (isMobileView) {
     return (
@@ -98,15 +97,19 @@ const Navbar: React.FC = () => {
           >
             {loggedIn && loggedIn.id !== "" ? (
               <>
-                <Link to="/recipes" className="nav-mobile">
+                <Link to="/#" className="nav-mobile" onClick={toggleMenu}>
                   Recept
                 </Link>
-                <Link to="/loggedInHomePage" className="nav-mobile">
+                <Link
+                  to="/loggedInHomePage"
+                  onClick={toggleMenu}
+                  className="nav-mobile"
+                >
                   Mitt konto
                 </Link>
                 <Link to="/#" className="nav-mobile" onClick={handleLogout}>
                   Logga ut
-                 </Link>
+                </Link>
               </>
             ) : (
               <>
