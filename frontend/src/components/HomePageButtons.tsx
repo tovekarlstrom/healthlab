@@ -3,11 +3,13 @@ import React from "react";
 interface HomePageButtonProps {
   header: string;
   paragraph: string;
+  onClick: () => void;
 }
 
 const HomePageButton: React.FC<HomePageButtonProps> = ({
   header,
   paragraph,
+  onClick,
 }) => {
   return (
     <div
@@ -57,6 +59,7 @@ const HomePageButton: React.FC<HomePageButtonProps> = ({
           fontWeight: "600",
           cursor: "pointer",
         }}
+        onClick={onClick}
       >
         Välj
       </button>

@@ -1,8 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import HomePageButton from "../components/HomePageButtons";
 import "../styles/HomePageDesktop.css";
 
 const HomePageDesktop: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleButtonClicked = () => {
+    navigate("/loggedInHomePage");
+  };
+
   return (
     <div className="homepage-desktop">
       <div className="styleContainer">
@@ -18,7 +25,6 @@ const HomePageDesktop: React.FC = () => {
           style={{
             marginTop: "60px",
             display: "flex",
-            // gap: "170px",
             justifyContent: "space-between",
             alignItems: "center",
             overflowX: "scroll",
@@ -30,21 +36,25 @@ const HomePageDesktop: React.FC = () => {
             <HomePageButton
               header="Ner i vikt"
               paragraph="Kalorisnåla och proteinrika recept."
-            ></HomePageButton>
+              onClick={handleButtonClicked}
+            />
             <HomePageButton
               header="Behåll vikt"
               paragraph="Fiberrikt, sunda fetter, proteinrikt."
-            ></HomePageButton>
+              onClick={handleButtonClicked}
+            />
           </div>
           <div className="box2">
             <HomePageButton
               header="Upp i vikt"
               paragraph="Näringsrika och kaloririka recept"
-            ></HomePageButton>
+              onClick={handleButtonClicked}
+            />
             <HomePageButton
               header="Ingen plan"
               paragraph="Näringsrika och goda recept"
-            ></HomePageButton>
+              onClick={handleButtonClicked}
+            />
           </div>
         </div>
       </div>

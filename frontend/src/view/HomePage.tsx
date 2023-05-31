@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ButtonRegister from "../components/ButtonRegister";
 import HomePageDesktop from "./HomePageDesktop";
 
 const HomePage: React.FC = () => {
   const [isDesktop, setIsDesktop] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,6 +19,10 @@ const HomePage: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleButtonClicked = () => {
+    navigate("/loggedInHomePage");
+  };
 
   const containerStyle: React.CSSProperties = {
     display: "flex",
@@ -79,10 +85,22 @@ const HomePage: React.FC = () => {
           stämmer in på dig.
         </p>
         <div style={buttonContainerStyle}>
-          <ButtonRegister buttonText="Ner i vikt" />
-          <ButtonRegister buttonText="Behåll vikt" />
-          <ButtonRegister buttonText="Upp i vikt" />
-          <ButtonRegister buttonText="Ingen plan" />
+          <ButtonRegister
+            buttonText="Ner i vikt"
+            onClick={handleButtonClicked}
+          />
+          <ButtonRegister
+            buttonText="Behåll vikt"
+            onClick={handleButtonClicked}
+          />
+          <ButtonRegister
+            buttonText="Upp i vikt"
+            onClick={handleButtonClicked}
+          />
+          <ButtonRegister
+            buttonText="Ingen plan"
+            onClick={handleButtonClicked}
+          />
         </div>
       </div>
     </div>

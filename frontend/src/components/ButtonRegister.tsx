@@ -2,9 +2,10 @@ import React from 'react';
 
 interface ButtonRegisterProps {
   buttonText: string;
+  onClick: () => void;
 }
 
-const ButtonRegister: React.FC<ButtonRegisterProps> = ({ buttonText }) => {
+const ButtonRegister: React.FC<ButtonRegisterProps> = ({ buttonText, onClick }) => {
   return (
     <button
       style={{
@@ -18,6 +19,7 @@ const ButtonRegister: React.FC<ButtonRegisterProps> = ({ buttonText }) => {
         fontSize: '14px',
         fontWeight: 'bold',
       }}
+      onClick={onClick}
     >
       {buttonText}
     </button>
