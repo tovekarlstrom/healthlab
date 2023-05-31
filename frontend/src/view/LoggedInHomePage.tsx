@@ -11,6 +11,7 @@ import { LoggedInContext } from "../LoggedInContext"
 import { useContext } from "react"
 import MicroCircle from "../components/MicroCircle"
 import SavedRecipes from "../components/SavedRecipes"
+
 function LoggedInHomePage() {
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
@@ -20,62 +21,78 @@ function LoggedInHomePage() {
 
   return (
     <div className="LoggedInHomePage">
-      <div className="LoggedInHero">
-        <img src={drinks} alt="drinks" />
-        <div className="circleContainer">
-          <Circle />
+      <div className="LoggedInCard">
+        <div className="LoggedInHero">
+          <img src={drinks} alt="drinks" />
+          <div className="circleContainer">
+            <Circle />
+          </div>
+        </div>
+        <div className="LoggedInContent">
+          <h1 className="h1 nameMobile"> Tjenixen, {name}!</h1>
+          <div className="LoggedInMacros">
+            <div>
+              <p className="Nutrient pMed"> Protein </p>
+              <MicroCircle nutrientAmount={50} totalSum={128} />
+              <p className="pMed"> 50/128 g</p>
+            </div>
+            <div>
+              <p className="Nutrient pMed"> Kolhydrater </p>
+              <MicroCircle nutrientAmount={60} totalSum={170} />
+              <p className="pMed"> 60/170 g</p>
+            </div>
+            <div>
+              <p className="Nutrient pMed"> Fett</p>
+              <MicroCircle nutrientAmount={14} totalSum={57} />
+              <p className="pMed"> 14/57 g</p>
+            </div>
+          </div>
+          <div className="weightContainer">
+            <p className="pBig"> Nuvarande vikt: 65 kg </p>
+            <img src={weightBar} alt="weight bar" />
+            <div className="weightWrapper">
+              <p> 70 kg</p>
+              <p> 60 kg</p>
+            </div>
+            <div className="weightButton">
+              <p>Uppdatera vikt</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="LoggedInContent">
-        <h1 className="h1"> Tjenixen, {name}!</h1>
-        <div className="LoggedInMacros">
-          <div>
-            <p className="Nutrient"> Protein </p>
-            <MicroCircle nutrientAmount={50} totalSum={128} />
-            <p> 50/128 g</p>
-          </div>
-          <div>
-            <p className="Nutrient"> Kolhydrater </p>
-            <MicroCircle nutrientAmount={60} totalSum={170} />
-            <p> 60/170 g</p>
-          </div>
-          <div>
-            <p className="Nutrient"> Fett</p>
-            <MicroCircle nutrientAmount={14} totalSum={57} />
-            <p> 14/57 g</p>
-          </div>
-        </div>
-        <div className="weightContainer">
-          <p className="pBig"> Nuvarande vikt: 65 kg </p>
-          <img src={weightBar} alt="weight bar" />
-          <div className="weightWrapper">
-            <p> 70 kg</p>
-            <p> 60 kg</p>
-          </div>
-          <div className="weightButton">
-            <p>Uppdatera vikt</p>
-          </div>
-        </div>
-
+      <div className="loggedInMeals">
+        <h1 className="h1 nameDesktop"> Tjenixen, {name}!</h1>
         <div className="mealCards">
           <div className="mealCard">
-            <img className="mealImg" src={meal1} alt="Breakfast smoothie" />
-            <p className="mealP">Frukost - 566/566 kcal</p>
+            <div className="meal">
+              <img className="mealImg" src={meal1} alt="Breakfast smoothie" />
+              <p className="mealP">Frukost - 566/566 kcal</p>
+            </div>
             <PlusCircle className="plusCircle" />
           </div>
           <div className="mealCard">
-            <img className="mealImg" src={meal2} alt="Lunch sallad" />
-            <p className="mealP">Lunch - 0/566 kcal</p>
+            <div className="meal">
+              <img className="mealImg" src={meal2} alt="Lunch sallad" />
+              <p className="mealP">Lunch - 0/566 kcal</p>
+            </div>
             <PlusCircle className="plusCircle" />
           </div>
           <div className="mealCard">
-            <img className="mealImg" src={meal3} alt="Dinner steak" />
-            <p className="mealP">Middag - 0/566 kcal</p>
+            <div className="meal">
+              <img className="mealImg" src={meal3} alt="Dinner steak" />
+              <p className="mealP">Middag - 0/566 kcal</p>
+            </div>
             <PlusCircle className="plusCircle" />
           </div>
           <div className="mealCard">
-            <img className="mealImgTraining" src={training} alt="running man" />
-            <p className="mealP">Träning - 0/30 min</p>
+            <div className="meal">
+              <img
+                className="mealImgTraining"
+                src={training}
+                alt="running man"
+              />
+              <p className="mealP">Träning - 0/30 min</p>
+            </div>
             <PlusCircle className="plusCircle" />
           </div>
         </div>
