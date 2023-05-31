@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: center;
 }
-@media (min-width: 800px) {
+@media (min-width: 849px) {
   .ArrowContainer {
     display: none;
   }
