@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import { Link } from "react-router-dom";
 import { Recipe } from "../view/HomeView";
+import "../styles/SavedRecipes.css";
 
 function SavedRecipes() {
   const { loggedIn } = useContext(LoggedInContext) ?? {
