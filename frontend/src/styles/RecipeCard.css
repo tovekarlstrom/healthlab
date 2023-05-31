@@ -14,6 +14,7 @@
 .RecipeCard-rating {
   display: flex;
   gap: 1.3px;
+  margin: 5px 0;
 }
 
 .RecipeCard-rating svg {

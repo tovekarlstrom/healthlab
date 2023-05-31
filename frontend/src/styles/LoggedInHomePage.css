@@ -137,11 +137,25 @@
   display: none;
 }
 
+.loggedInMeals {
+  padding: 0 16px;
+}
+
+.recipeHeader {
+  margin-bottom: 15px;
+  color: #383838;
+}
+
+@media (min-width: 470px) and (max-width: 700px) {
+  .recipeCarousel .RecipeCard {
+    max-width: 100%;
+  }
+}
+
 @media (min-width: 750px) {
   .LoggedInHomePage {
-    display: flex;
+    /* display: flex; */
     gap: 100px;
-    justify-content: center;
     margin-top: 112px;
     padding: 19px 35px 22px;
   }
@@ -197,6 +211,7 @@
   .loggedInMeals {
     width: 100%;
   }
+
   .nameMobile {
     display: none;
   }
@@ -209,5 +224,12 @@
   /* meals */
   .mealCard {
     width: 100%;
+  }
+}
+
+@media (min-width: 1235px) {
+  .LoggedInHomePage {
+    display: flex;
+    gap: 50px;
   }
 }

@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import "../styles/NavbarDesktop.css";
-import { LoggedInContext } from "../LoggedInContext";
-
+import React, { useContext } from "react"
+import { Link } from "react-router-dom"
+import "../styles/NavbarDesktop.css"
+import { LoggedInContext } from "../LoggedInContext"
 
 const NavbarDesktop: React.FC = () => {
   const { loggedIn } = useContext(LoggedInContext) ?? {
@@ -10,7 +9,7 @@ const NavbarDesktop: React.FC = () => {
   }
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.clear()
     window.location.href = "/"
   }
 
@@ -52,4 +51,4 @@ const NavbarDesktop: React.FC = () => {
   )
 }
 
-export default NavbarDesktop;
+export default NavbarDesktop
