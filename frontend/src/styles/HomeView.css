@@ -68,5 +68,6 @@
     flex-direction: row;
     gap: 20px;
     align-items: baseline;
+    justify-content: center;
   }
 }
