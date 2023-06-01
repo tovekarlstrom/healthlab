@@ -96,8 +96,7 @@
 
 @media (min-width: 850px) {
   .Hero {
-    margin-top: 130px;
-    padding: 34px 35px 56px;
+    padding: 164px 35px 56px;
     display: grid;
     gap: 35px;
     grid-template-columns: 1fr 1fr;

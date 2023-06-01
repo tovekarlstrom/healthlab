@@ -320,7 +320,7 @@
 
 @media (min-width: 849px) {
   .innerContainer {
-    margin-top: 112px;
+    padding-top: 112px;
   }
 }
 
