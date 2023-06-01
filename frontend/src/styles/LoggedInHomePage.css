@@ -156,8 +156,8 @@
   .LoggedInHomePage {
     /* display: flex; */
     gap: 100px;
-    margin-top: 112px;
-    padding: 19px 35px 22px;
+    /* margin-top: 112px; */
+    padding: 131px 35px 22px;
   }
 
   /* Logged in card */
