@@ -1,38 +1,38 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
-import NavbarDesktop from "./NavbarDesktop";
-import HamburgerButton from "./HamburgerButton";
-import "../styles/Navbar.css";
-import { XLg } from "react-bootstrap-icons";
-import { LoggedInContext } from "../LoggedInContext";
+import React, { useState, useEffect, useContext } from "react"
+import { Link } from "react-router-dom"
+import NavbarDesktop from "./NavbarDesktop"
+import HamburgerButton from "./HamburgerButton"
+import "../styles/Navbar.css"
+import { XLg } from "react-bootstrap-icons"
+import { LoggedInContext } from "../LoggedInContext"
 
 const Navbar: React.FC = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 850);
+  const [isMenuOpen, setMenuOpen] = useState(false)
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 850)
   const { loggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
-  };
+  }
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 849);
-    };
+      setIsMobileView(window.innerWidth <= 849)
+    }
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize)
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+    setMenuOpen(!isMenuOpen)
+  }
 
   const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = "/";
-  };
+    localStorage.clear()
+    window.location.href = "/"
+  }
 
   if (isMobileView) {
     return (
@@ -53,9 +53,9 @@ const Navbar: React.FC = () => {
             padding: "20px",
           }}
         >
-          <div>
+          <Link to="/">
             <img src="/Logo Mobile.svg" alt="Logo" style={{ width: "140px" }} />
-          </div>
+          </Link>
           <div>
             <HamburgerButton onClick={toggleMenu} />
           </div>
@@ -136,10 +136,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
-    );
+    )
   }
 
-  return <NavbarDesktop />;
-};
+  return <NavbarDesktop />
+}
 
-export default Navbar;
+export default Navbar
