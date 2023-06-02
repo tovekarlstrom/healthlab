@@ -1,31 +1,31 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
-import "../styles/Loggin.css";
-import loginImg from "../images/login.png";
-import googleLogo from "../images/Googlelogo.svg";
-import facebookLogo from "../images/Fcebooklogo.svg";
-import twitterLogo from "../images/Twitterlogo.svg";
-import { ExclamationCircleFill } from "react-bootstrap-icons";
-import ArrowButton from "./ArrowButton";
-import { useContext } from "react";
-import { LoggedInContext } from "../LoggedInContext";
+import "../styles/Loggin.css"
+import loginImg from "../images/login.png"
+import googleLogo from "../images/Googlelogo.svg"
+import facebookLogo from "../images/Fcebooklogo.svg"
+import twitterLogo from "../images/Twitterlogo.svg"
+import { ExclamationCircleFill } from "react-bootstrap-icons"
+import ArrowButton from "./ArrowButton"
+import { useContext } from "react"
+import { LoggedInContext } from "../LoggedInContext"
 function Login() {
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  };
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [incorrectEmail, setIncorrectEmail] = useState(false);
-  const [incorrectPassword, setIncorrectPassword] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const navigate = useNavigate();
+  }
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [incorrectEmail, setIncorrectEmail] = useState(false)
+  const [incorrectPassword, setIncorrectPassword] = useState(false)
+  const [showErrorMessage, setShowErrorMessage] = useState(false)
+  const navigate = useNavigate()
   const loginUser = () => {
     const data = {
       email: email,
       password: password,
-    };
+    }
 
     fetch("http://localhost:8085/login", {
       method: "POST",
@@ -36,25 +36,24 @@ function Login() {
     })
       .then((response) => {
         if (response.status === 401) {
-          setShowErrorMessage(true);
-          setIncorrectPassword(false);
+          setShowErrorMessage(true)
+          setIncorrectPassword(false)
         }
-        return response.text();
+        return response.text()
       })
       .then((result) => {
-        console.log(result);
-        const parsedResult = JSON.parse(result);
+        const parsedResult = JSON.parse(result)
         if (setLoggedIn) {
-          setLoggedIn(parsedResult);
-          localStorage.setItem("loggedInUser", JSON.stringify(parsedResult));
+          setLoggedIn(parsedResult)
+          localStorage.setItem("loggedInUser", JSON.stringify(parsedResult))
         }
-      });
-  };
+      })
+  }
   useEffect(() => {
     if (loggedIn && loggedIn.id !== "") {
-      navigate("/loggedInHomePage");
+      navigate("/loggedInHomePage")
     }
-  }, [loggedIn, navigate]);
+  }, [loggedIn, navigate])
 
   return (
     <div className="container">
@@ -136,20 +135,17 @@ function Login() {
             className="logginSubmitButton"
             onClick={() => {
               if (password !== "" && email !== "") {
-                loginUser();
+                loginUser()
               } else {
                 if (password === "") {
-                  console.log("hr");
-
-                  setShowErrorMessage(false);
-                  setIncorrectPassword(true);
+                  setShowErrorMessage(false)
+                  setIncorrectPassword(true)
                   if (email !== "") {
-                    setIncorrectEmail(false);
+                    setIncorrectEmail(false)
                   }
                 }
                 if (email === "") {
-                  console.log(email);
-                  setIncorrectEmail(true);
+                  setIncorrectEmail(true)
                 }
               }
             }}
@@ -182,7 +178,7 @@ function Login() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login
