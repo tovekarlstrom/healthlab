@@ -55,7 +55,6 @@ function RecipeView() {
         return response.json();
       })
       .then((result) => {
-        console.log(result);
         setRecipe(result[0]);
         setLikeCount(result[0].likes);
       })

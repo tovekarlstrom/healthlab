@@ -163,6 +163,12 @@
   color: #174e2e;
 }
 
+.RegisterSubmitButton:hover,
+.logginSubmitButton:hover {
+  cursor: pointer;
+  background: linear-gradient(96.22deg, #32c160 0%, #f4da1f 100%);
+}
+
 .already-account {
   margin-top: 22px;
   display: flex;

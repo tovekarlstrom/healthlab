@@ -1,7 +1,7 @@
 import { Recipe } from "../view/HomeView"
 import RecipeCard from "./RecipeCard"
 import { Link } from "react-router-dom"
-import { useEffect, useState, useLayoutEffect } from "react"
+import { useEffect, useState } from "react"
 import "../styles/RecipeCarousel.css"
 import {
   CarouselProvider,
@@ -45,7 +45,6 @@ export default function RecipeCarousel() {
         return response.json()
       })
       .then((result) => {
-        console.log(result)
         setRecipes(result)
       })
       .catch((error) => {
