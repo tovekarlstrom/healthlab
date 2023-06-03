@@ -113,6 +113,7 @@ function RecipeView() {
       setLike(result);
     }
   }
+
   async function uploadReview() {
     if (recipe && loggedIn) {
       const response = await fetch(`http://localhost:8085/comments`, {
@@ -136,6 +137,13 @@ function RecipeView() {
           img: loggedIn.img,
         };
         setAllComments((prevComments) => [...prevComments, newComment]);
+        console.log("conn1", comment);
+        if (comment !== "") {
+          setComment("");
+          console.log("conn2", comment);
+          setRating(0);
+        }
+
         console.log("Comment added successfully");
       } else {
         console.log("Failed to add comment");
@@ -149,7 +157,7 @@ function RecipeView() {
         .then((response) => response.json())
         .then((result) => {
           console.log(result);
-          setAllComments(result);
+          setAllComments(result.reverse());
         });
     }
   }, [recipe]);

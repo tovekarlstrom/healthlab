@@ -185,7 +185,7 @@ function RegisterAccount() {
                     margin: "0 7px",
                   }}
                 >
-                  Måset vara minst 8 tecken
+                  Måste vara minst 8 tecken
                 </p>
               </div>
             )}

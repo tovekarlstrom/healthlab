@@ -97,7 +97,7 @@ function LoggedInHomePage() {
             <PlusCircle className="plusCircle" />
           </div>
         </div>
-        {/* <SavedRecipes /> */}
+
         <div className="loggedInRecipe">
           <h2 className="h2 recipeHeader"> Förslag på recept </h2>
           <RecipeCarousel />

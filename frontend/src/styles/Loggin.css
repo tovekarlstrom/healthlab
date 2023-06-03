@@ -145,6 +145,7 @@
   letter-spacing: 0.03em;
   color: #dc3545;
   display: flex;
+  position: absolute;
 }
 .RegisterSubmitButton {
   padding: 6px 12px;

@@ -12,7 +12,7 @@ function ClickStarRating(props: IRating) {
   const emptyStar = halfStar ? 5 - filledStars - 1 : 5 - filledStars;
 
   let stars = [];
-  const starStyle = { color: "#faca15" };
+  const starStyle = { color: "#faca15", cursor: "pointer" };
 
   function clickRating(clickedStar: number) {
     const newRating = clickedStar + 1;
