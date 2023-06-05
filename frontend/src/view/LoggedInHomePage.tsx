@@ -1,24 +1,24 @@
-import React, { useState, useContext } from 'react';
-import "../styles/LoggedInHomePage.css";
-import { PlusCircle } from "react-bootstrap-icons";
-import meal1 from "../images/meal1.png";
-import meal2 from "../images/meal2.png";
-import meal3 from "../images/meal3.png";
-import training from "../images/training.png";
-import Circle from "../components/Circle";
-import drinks from "../images/drinks.png";
-import weightBar from "../images/weightbar.png";
-import { LoggedInContext } from "../LoggedInContext";
-import MicroCircle from "../components/MicroCircle";
-import SavedRecipes from "../components/SavedRecipes";
-import RecipeCarousel from "../components/RecipeCarousel";
+import "../styles/LoggedInHomePage.css"
+import { PlusCircle } from "react-bootstrap-icons"
+import meal1 from "../images/meal1.png"
+import meal2 from "../images/meal2.png"
+import meal3 from "../images/meal3.png"
+import training from "../images/training.png"
+import Circle from "../components/Circle"
+import drinks from "../images/drinks.png"
+import weightBar from "../images/weightbar.png"
+import { LoggedInContext } from "../LoggedInContext"
+import { useContext, useState } from "react"
+import MicroCircle from "../components/MicroCircle"
+// import SavedRecipes from "../components/SavedRecipes";
+import RecipeCarousel from "../components/RecipeCarousel"
 
 function LoggedInHomePage() {
   const { loggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  };
-  const name = loggedIn?.full_name;
+  }
+  const name = loggedIn?.full_name
 
   const [weight, setWeight] = useState("");
   const [recommendedKcal, setRecommendedKcal] = useState(null);
@@ -144,14 +144,14 @@ function LoggedInHomePage() {
             <PlusCircle className="plusCircle" />
           </div>
         </div>
-        {/* <SavedRecipes /> */}
+
         <div className="loggedInRecipe">
           <h2 className="h2 recipeHeader">Förslag på recept</h2>
           <RecipeCarousel />
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default LoggedInHomePage;

@@ -16,11 +16,14 @@ const client = new Client({
 });
 client.connect();
 
-const app = express();
+const app = express(),
+  path = require("path");
 app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(express.static(path.join(path.resolve(), "public")));
 
 app.get("/recipes", async (request, response) => {
   const { rows } = await client.query("SELECT * FROM recipes");

@@ -26,7 +26,7 @@ export interface Recipe {
 function Home() {
   const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   useEffect(() => {
-    fetch("http://localhost:8085/recipes")
+    fetch("/recipes")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -34,7 +34,6 @@ function Home() {
         return response.json();
       })
       .then((result) => {
-        console.log(result);
         setRecipes(result);
       })
       .catch((error) => {

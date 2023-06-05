@@ -15,7 +15,7 @@ function SavedRecipes() {
   useEffect(() => {
     if (loggedIn?.id) {
       console.log(loggedIn.id);
-      fetch(`http://localhost:8085/likedRecipes/${loggedIn.id}`)
+      fetch(`/likedRecipes/${loggedIn.id}`)
         .then((response) => response.json())
         .then((result) => {
           console.log(result);

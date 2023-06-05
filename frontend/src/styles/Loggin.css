@@ -145,6 +145,7 @@
   letter-spacing: 0.03em;
   color: #dc3545;
   display: flex;
+  position: absolute;
 }
 .RegisterSubmitButton {
   padding: 6px 12px;
@@ -160,6 +161,12 @@
   line-height: 120%;
   letter-spacing: 0.03em;
   color: #174e2e;
+}
+
+.RegisterSubmitButton:hover,
+.logginSubmitButton:hover {
+  cursor: pointer;
+  background: linear-gradient(96.22deg, #32c160 0%, #f4da1f 100%);
 }
 
 .already-account {

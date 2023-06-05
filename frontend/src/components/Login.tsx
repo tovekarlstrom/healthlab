@@ -27,7 +27,7 @@ function Login() {
       password: password,
     };
 
-    fetch("http://localhost:8085/login", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,6 @@ function Login() {
         return response.text();
       })
       .then((result) => {
-        console.log(result);
         const parsedResult = JSON.parse(result);
         if (setLoggedIn) {
           setLoggedIn(parsedResult);
@@ -139,8 +138,6 @@ function Login() {
                 loginUser();
               } else {
                 if (password === "") {
-                  console.log("hr");
-
                   setShowErrorMessage(false);
                   setIncorrectPassword(true);
                   if (email !== "") {
@@ -148,7 +145,6 @@ function Login() {
                   }
                 }
                 if (email === "") {
-                  console.log(email);
                   setIncorrectEmail(true);
                 }
               }

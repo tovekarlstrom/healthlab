@@ -45,7 +45,7 @@ function RegisterAccount() {
   });
   const navigate = useNavigate();
   const registerAccount = (account: AccountInterface) => {
-    fetch("http://localhost:8085/register", {
+    fetch("/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,7 +118,7 @@ function RegisterAccount() {
                     margin: "0 7px",
                   }}
                 >
-                  Namn är oblegatoriskt
+                  Namn är obligatoriskt
                 </p>
               </div>
             )}
@@ -185,7 +185,7 @@ function RegisterAccount() {
                     margin: "0 7px",
                   }}
                 >
-                  Måset vara minst 8 tecken
+                  Måste vara minst 8 tecken
                 </p>
               </div>
             )}

@@ -27,7 +27,7 @@ function App() {
   useEffect(() => {
     console.log("loggedIn", loggedIn);
   }, [loggedIn]);
-  localStorage.clear();
+
   const router = createHashRouter([
     {
       children: [

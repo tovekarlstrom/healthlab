@@ -172,6 +172,7 @@
   transform: rotate(45deg);
   width: 28px;
   height: 28px;
+  cursor: pointer;
 }
 
 .recipeReviews span:first-of-type {

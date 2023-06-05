@@ -26,10 +26,11 @@ const client = new pg_1.Client({
     ssl: true,
 });
 client.connect();
-const app = (0, express_1.default)();
+const app = (0, express_1.default)(), path = require("path");
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
+app.use(express_1.default.static(path.join(path.resolve(), "public")));
 app.get("/recipes", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { rows } = yield client.query("SELECT * FROM recipes");
     response.status(200).send(rows);
