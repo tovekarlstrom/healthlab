@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a76a9248.css",
-    "main.js": "/static/js/main.c058b98f.js",
+    "main.css": "/static/css/main.2ea8aaba.css",
+    "main.js": "/static/js/main.3f440b03.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/register.png": "/static/media/register.6a261cbc067159097be4.png",
     "static/media/NewDesktopHomepage.png": "/static/media/NewDesktopHomepage.1a860a343acff8cdf065.png",
@@ -22,12 +22,12 @@
     "index.html": "/index.html",
     "static/media/Twitterlogo.svg": "/static/media/Twitterlogo.8b924189c2c6337a6dc4ff9f64bec10e.svg",
     "static/media/Fcebooklogo.svg": "/static/media/Fcebooklogo.92c644089ec217bcc0f3df5336b34a5a.svg",
-    "main.a76a9248.css.map": "/static/css/main.a76a9248.css.map",
-    "main.c058b98f.js.map": "/static/js/main.c058b98f.js.map",
+    "main.2ea8aaba.css.map": "/static/css/main.2ea8aaba.css.map",
+    "main.3f440b03.js.map": "/static/js/main.3f440b03.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a76a9248.css",
-    "static/js/main.c058b98f.js"
+    "static/css/main.2ea8aaba.css",
+    "static/js/main.3f440b03.js"
   ]
 }
