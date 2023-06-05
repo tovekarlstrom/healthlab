@@ -133,12 +133,8 @@ function RecipeView() {
           img: loggedIn.img,
         };
         setAllComments((prevComments) => [...prevComments, newComment]);
-        console.log("conn1", comment);
-        if (comment !== "") {
-          setComment("");
-          console.log("conn2", comment);
-          setRating(0);
-        }
+        setComment("");
+        setRating(0);
 
         console.log("Comment added successfully");
       } else {
@@ -153,7 +149,9 @@ function RecipeView() {
         .then((response) => response.json())
         .then((result) => {
           console.log(result);
-          setAllComments(result.reverse());
+          setAllComments(
+            result.sort((a: commentInteface, b: commentInteface) => a.id - b.id)
+          );
         });
     }
   }, [recipe]);
@@ -288,6 +286,7 @@ function RecipeView() {
                     className="commentField"
                     type="text"
                     placeholder="Skriv en recension här..."
+                    value={comment}
                     onChange={(event) => {
                       setComment(event.target.value);
                     }}
