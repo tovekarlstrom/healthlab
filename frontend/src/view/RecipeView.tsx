@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, Link } from "react-router-dom";
-import { Recipe } from "./HomeView";
-import ArrowButton from "../components/ArrowButton";
-import ClickStarRating from "../components/ClickStarRating";
-import StarRating from "../components/StarRating";
-import "../styles/RecipeView.css";
+import { useEffect, useState, useContext } from "react"
+import { useParams, Link } from "react-router-dom"
+import { Recipe } from "./HomeView"
+import ArrowButton from "../components/ArrowButton"
+import ClickStarRating from "../components/ClickStarRating"
+import StarRating from "../components/StarRating"
+import "../styles/RecipeView.css"
 
 import {
   Clock,
@@ -13,55 +13,55 @@ import {
   ChatText,
   Bag,
   SendFill,
-} from "react-bootstrap-icons";
-import Review from "../components/Review";
-import MicroNutrients from "../components/MicroNutrients";
-import { LoggedInContext } from "../LoggedInContext";
+} from "react-bootstrap-icons"
+import Review from "../components/Review"
+import MicroNutrients from "../components/MicroNutrients"
+import { LoggedInContext } from "../LoggedInContext"
 
 interface likeInteface {
-  id: number;
-  recipe_id: number;
-  user_id: number;
+  id: number
+  recipe_id: number
+  user_id: number
 }
 interface commentInteface {
-  id: number;
-  recipe_id: number;
-  user_id: number;
-  comment: string;
-  rating: number;
-  full_name: string;
-  img: string;
+  id: number
+  recipe_id: number
+  user_id: number
+  comment: string
+  rating: number
+  full_name: string
+  img: string
 }
 
 function RecipeView() {
-  const { recipeName } = useParams();
-  const [like, setLike] = useState(false);
-  const [likeCount, setLikeCount] = useState<number>(0);
-  const [recipe, setRecipe] = useState<Recipe | null>(null);
-  const [likeArray, setLikeArray] = useState<likeInteface[]>([]);
+  const { recipeName } = useParams()
+  const [like, setLike] = useState(false)
+  const [likeCount, setLikeCount] = useState<number>(0)
+  const [recipe, setRecipe] = useState<Recipe | null>(null)
+  const [likeArray, setLikeArray] = useState<likeInteface[]>([])
   const { loggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  };
-  const [allComments, setAllComments] = useState<commentInteface[]>([]);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  }
+  const [allComments, setAllComments] = useState<commentInteface[]>([])
+  const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState("")
   useEffect(() => {
     fetch(`/recipes/${recipeName}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was not ok")
         }
-        return response.json();
+        return response.json()
       })
       .then((result) => {
-        setRecipe(result[0]);
-        setLikeCount(result[0].likes);
+        setRecipe(result[0])
+        setLikeCount(result[0].likes)
       })
       .catch((error) => {
-        console.log("Error:", error.message);
-      });
-  }, [recipeName]);
+        console.log("Error:", error.message)
+      })
+  }, [recipeName])
 
   //get likes if logged in
   useEffect(() => {
@@ -73,24 +73,24 @@ function RecipeView() {
       })
         .then((response) => response.json())
         .then((result) => {
-          setLikeArray(result);
-        });
+          setLikeArray(result)
+        })
     }
-  }, [loggedIn]);
+  }, [loggedIn])
 
   // check if already liked
   useEffect(() => {
     if (recipe && likeArray.length > 0) {
       const alreadyLiked = likeArray.some(
         (item) => item.recipe_id === recipe.id
-      );
-      setLike(alreadyLiked);
+      )
+      setLike(alreadyLiked)
     }
-  }, [recipe, likeArray]);
+  }, [recipe, likeArray])
 
   async function handleLike() {
     if (loggedIn && loggedIn.id === "") {
-      alert("Logga in för att spara recept!");
+      alert("Logga in för att spara recept!")
     } else if (recipe && loggedIn) {
       const response = await fetch(`/recipes/${recipeName}`, {
         method: "POST",
@@ -99,14 +99,14 @@ function RecipeView() {
           recipe_id: recipe.id,
           user_id: loggedIn.id,
         }),
-      });
-      const result = await response.json();
+      })
+      const result = await response.json()
       if (result) {
-        setLikeCount(likeCount + 1);
+        setLikeCount(likeCount + 1)
       } else if (result === false) {
-        setLikeCount(likeCount - 1);
+        setLikeCount(likeCount - 1)
       }
-      setLike(result);
+      setLike(result)
     }
   }
 
@@ -121,7 +121,7 @@ function RecipeView() {
           comment: comment,
           rating: rating,
         }),
-      });
+      })
       if (response.ok) {
         const newComment = {
           id: -1,
@@ -131,14 +131,14 @@ function RecipeView() {
           rating: rating,
           full_name: loggedIn.full_name,
           img: loggedIn.img,
-        };
-        setAllComments((prevComments) => [...prevComments, newComment]);
-        setComment("");
-        setRating(0);
+        }
+        setAllComments((prevComments) => [...prevComments, newComment])
+        setComment("")
+        setRating(0)
 
-        console.log("Comment added successfully");
+        console.log("Comment added successfully")
       } else {
-        console.log("Failed to add comment");
+        console.log("Failed to add comment")
       }
     }
   }
@@ -148,13 +148,12 @@ function RecipeView() {
       fetch(`/comments/${recipe.id}`)
         .then((response) => response.json())
         .then((result) => {
-          console.log(result);
           setAllComments(
             result.sort((a: commentInteface, b: commentInteface) => a.id - b.id)
-          );
-        });
+          )
+        })
     }
-  }, [recipe]);
+  }, [recipe])
 
   return (
     <div className="mobileContainer">
@@ -288,14 +287,14 @@ function RecipeView() {
                     placeholder="Skriv en recension här..."
                     value={comment}
                     onChange={(event) => {
-                      setComment(event.target.value);
+                      setComment(event.target.value)
                     }}
                   />
                 </div>
                 <SendFill
                   className="sendButton"
                   onClick={() => {
-                    uploadReview();
+                    uploadReview()
                   }}
                 />
               </div>
@@ -318,7 +317,7 @@ function RecipeView() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default RecipeView;
+export default RecipeView
