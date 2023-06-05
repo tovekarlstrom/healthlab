@@ -47,7 +47,7 @@ function RecipeView() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   useEffect(() => {
-    fetch(`http://localhost:8085/recipes/${recipeName}`)
+    fetch(`/recipes/${recipeName}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -66,7 +66,7 @@ function RecipeView() {
   //get likes if logged in
   useEffect(() => {
     if (loggedIn && typeof loggedIn.id === "number") {
-      fetch("http://localhost:8085/likes", {
+      fetch("/likes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id: loggedIn.id }),
@@ -92,17 +92,14 @@ function RecipeView() {
     if (loggedIn && loggedIn.id === "") {
       alert("Logga in för att spara recept!");
     } else if (recipe && loggedIn) {
-      const response = await fetch(
-        `http://localhost:8085/recipes/${recipeName}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            recipe_id: recipe.id,
-            user_id: loggedIn.id,
-          }),
-        }
-      );
+      const response = await fetch(`/recipes/${recipeName}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          recipe_id: recipe.id,
+          user_id: loggedIn.id,
+        }),
+      });
       const result = await response.json();
       if (result) {
         setLikeCount(likeCount + 1);
@@ -115,7 +112,7 @@ function RecipeView() {
 
   async function uploadReview() {
     if (recipe && loggedIn) {
-      const response = await fetch(`http://localhost:8085/comments`, {
+      const response = await fetch(`/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -152,7 +149,7 @@ function RecipeView() {
 
   useEffect(() => {
     if (recipe) {
-      fetch(`http://localhost:8085/comments/${recipe.id}`)
+      fetch(`/comments/${recipe.id}`)
         .then((response) => response.json())
         .then((result) => {
           console.log(result);

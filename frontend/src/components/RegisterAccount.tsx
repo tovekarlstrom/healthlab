@@ -1,51 +1,51 @@
-import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import "../styles/Loggin.css"
-import registerImg from "../images/register.png"
-import googleLogo from "../images/Googlelogo.svg"
-import facebookLogo from "../images/Fcebooklogo.svg"
-import twitterLogo from "../images/Twitterlogo.svg"
-import { ExclamationCircleFill } from "react-bootstrap-icons"
-import ArrowButton from "./ArrowButton"
-import { useContext } from "react"
-import { LoggedInContext } from "../LoggedInContext"
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../styles/Loggin.css";
+import registerImg from "../images/register.png";
+import googleLogo from "../images/Googlelogo.svg";
+import facebookLogo from "../images/Fcebooklogo.svg";
+import twitterLogo from "../images/Twitterlogo.svg";
+import { ExclamationCircleFill } from "react-bootstrap-icons";
+import ArrowButton from "./ArrowButton";
+import { useContext } from "react";
+import { LoggedInContext } from "../LoggedInContext";
 
-import img1 from "../images/1.png"
-import img2 from "../images/2.png"
-import img3 from "../images/3.png"
-import img4 from "../images/4.png"
-import img5 from "../images/5.png"
-import img6 from "../images/6.png"
-import img7 from "../images/7.png"
+import img1 from "../images/1.png";
+import img2 from "../images/2.png";
+import img3 from "../images/3.png";
+import img4 from "../images/4.png";
+import img5 from "../images/5.png";
+import img6 from "../images/6.png";
+import img7 from "../images/7.png";
 
 export interface AccountInterface {
-  full_name: string
-  email: string
-  password: string
-  img: string
+  full_name: string;
+  email: string;
+  password: string;
+  img: string;
 }
 
 function RegisterAccount() {
-  const [logedInUser, setLogedInUser] = useState("")
-  const [checkPassword, setCheckPassword] = useState("")
-  const [incorrectPasswordCheck, setIncorrectPasswordCheck] = useState(false)
-  const [incorrectPassword, setIncorrectPassword] = useState(false)
-  const [incorrectFullName, setIncorrectFullName] = useState(false)
-  const [incorrectEmail, setIncorrectEmail] = useState(false)
-  const [showError, setShowError] = useState(false)
+  const [logedInUser, setLogedInUser] = useState("");
+  const [checkPassword, setCheckPassword] = useState("");
+  const [incorrectPasswordCheck, setIncorrectPasswordCheck] = useState(false);
+  const [incorrectPassword, setIncorrectPassword] = useState(false);
+  const [incorrectFullName, setIncorrectFullName] = useState(false);
+  const [incorrectEmail, setIncorrectEmail] = useState(false);
+  const [showError, setShowError] = useState(false);
   const { loggedIn, setLoggedIn } = useContext(LoggedInContext) ?? {
     loggedIn: null,
     setLoggedIn: null,
-  }
+  };
   const [account, setAccount] = useState<AccountInterface>({
     full_name: "",
     email: "",
     password: "",
     img: "",
-  })
-  const navigate = useNavigate()
+  });
+  const navigate = useNavigate();
   const registerAccount = (account: AccountInterface) => {
-    fetch("http://localhost:8085/register", {
+    fetch("/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -54,39 +54,39 @@ function RegisterAccount() {
     })
       .then((response) => {
         if (response.status === 409) {
-          setShowError(true)
+          setShowError(true);
         }
-        return response.text()
+        return response.text();
       })
       .then((result) => {
-        console.log(result)
-        const parsedResult = JSON.parse(result)
+        console.log(result);
+        const parsedResult = JSON.parse(result);
         if (setLoggedIn) {
-          setLoggedIn(parsedResult)
-          localStorage.setItem("loggedInUser", JSON.stringify(parsedResult))
+          setLoggedIn(parsedResult);
+          localStorage.setItem("loggedInUser", JSON.stringify(parsedResult));
         }
-      })
-  }
+      });
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
+    const { name, value } = event.target;
     setAccount((prevAccount) => ({
       ...prevAccount,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   useEffect(() => {
     if (loggedIn && loggedIn.id !== "") {
-      navigate("/homepage")
+      navigate("/homepage");
     }
-  }, [loggedIn, navigate])
+  }, [loggedIn, navigate]);
 
   function imgPicker() {
-    const images = [img1, img2, img3, img4, img5, img6, img7]
-    const randomeIndex = Math.floor(Math.random() * images.length)
-    const randomeImage = images[randomeIndex]
-    return randomeImage
+    const images = [img1, img2, img3, img4, img5, img6, img7];
+    const randomeIndex = Math.floor(Math.random() * images.length);
+    const randomeImage = images[randomeIndex];
+    return randomeImage;
   }
 
   return (
@@ -223,24 +223,24 @@ function RegisterAccount() {
                 account.full_name !== ""
               ) {
                 if (account.password.length < 8) {
-                  setIncorrectPassword(true)
+                  setIncorrectPassword(true);
                 } else {
-                  const randomeImg = imgPicker()
-                  const addImgToAccount = { ...account, img: randomeImg }
-                  registerAccount(addImgToAccount)
+                  const randomeImg = imgPicker();
+                  const addImgToAccount = { ...account, img: randomeImg };
+                  registerAccount(addImgToAccount);
                 }
               } else {
                 if (account.password !== checkPassword) {
-                  setIncorrectPasswordCheck(true)
+                  setIncorrectPasswordCheck(true);
                 }
                 if (account.full_name === "") {
-                  setIncorrectFullName(true)
+                  setIncorrectFullName(true);
                 }
                 if (account.email === "") {
-                  setIncorrectEmail(true)
+                  setIncorrectEmail(true);
                 }
                 if (account.password === "" || account.password.length < 8) {
-                  setIncorrectPassword(true)
+                  setIncorrectPassword(true);
                 }
               }
             }}
@@ -273,6 +273,6 @@ function RegisterAccount() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-export default RegisterAccount
+export default RegisterAccount;

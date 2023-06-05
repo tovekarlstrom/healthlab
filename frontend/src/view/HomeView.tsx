@@ -1,45 +1,45 @@
-import { useState, useEffect } from "react"
-import RecipeCard from "../components/RecipeCard"
-import Info from "../components/Info"
-import Hero from "../components/Hero"
-import { Link } from "react-router-dom"
-import "../styles/HomeView.css"
-import Review from "../components/Review"
-import img1 from "../images/1.png"
-import img2 from "../images/2.png"
-import img3 from "../images/3.png"
+import { useState, useEffect } from "react";
+import RecipeCard from "../components/RecipeCard";
+import Info from "../components/Info";
+import Hero from "../components/Hero";
+import { Link } from "react-router-dom";
+import "../styles/HomeView.css";
+import Review from "../components/Review";
+import img1 from "../images/1.png";
+import img2 from "../images/2.png";
+import img3 from "../images/3.png";
 export interface Recipe {
-  id: number
-  image: string
-  name: string
-  rating: number
-  time: number
-  likes: number
-  comments: number
-  protein: number
-  carbs: number
-  fat: number
-  kcal: number
-  ingredients: [string]
-  instructions: [string]
+  id: number;
+  image: string;
+  name: string;
+  rating: number;
+  time: number;
+  likes: number;
+  comments: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  kcal: number;
+  ingredients: [string];
+  instructions: [string];
 }
 function Home() {
-  const [recipes, setRecipes] = useState<Recipe[] | null>(null)
+  const [recipes, setRecipes] = useState<Recipe[] | null>(null);
   useEffect(() => {
-    fetch("http://localhost:8085/recipes")
+    fetch("/recipes")
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok")
+          throw new Error("Network response was not ok");
         }
-        return response.json()
+        return response.json();
       })
       .then((result) => {
-        setRecipes(result)
+        setRecipes(result);
       })
       .catch((error) => {
-        console.log("Error:", error.message)
-      })
-  }, [])
+        console.log("Error:", error.message);
+      });
+  }, []);
   return (
     <div>
       <Hero />
@@ -81,7 +81,7 @@ function Home() {
 
       <Info />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
