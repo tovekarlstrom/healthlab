@@ -185,6 +185,20 @@ app.post("/recipes/:recipeName", (request, response) => __awaiter(void 0, void 0
         response.status(400).send({ error: "missing id" });
     }
 }));
+app.get("/update-weight", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { weight } = request.query;
+    if (!weight || isNaN(Number(weight))) {
+        response.status(400).send("Invalid weight provided");
+        return;
+    }
+    const recommendedKcal = Number(weight) * 30;
+    response.status(200).send({ recommendedKcal });
+}));
+app.post("/update-weight", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
+    const { weight } = request.body;
+    const recommendedKcal = weight * 30;
+    response.status(200).send({ recommendedKcal });
+}));
 const port = process.env.PORT || 8085;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

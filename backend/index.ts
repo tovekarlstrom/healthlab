@@ -212,6 +212,28 @@ app.post("/recipes/:recipeName", async (request, response) => {
   }
 });
 
+app.get("/update-weight", async (request, response) => {
+  const { weight } = request.query;
+
+  if (!weight || isNaN(Number(weight))) {
+    response.status(400).send("Invalid weight provided");
+    return;
+  }
+
+  const recommendedKcal = Number(weight) * 30;
+  response.status(200).send({ recommendedKcal });
+});
+
+app.post("/update-weight", async (request, response) => {
+  const { weight } = request.body;
+
+  const recommendedKcal = weight * 30;
+  response.status(200).send({ recommendedKcal });
+});
+
+
+
+
 const port = process.env.PORT || 8085;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

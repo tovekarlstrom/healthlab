@@ -8,7 +8,7 @@ import Circle from "../components/Circle"
 import drinks from "../images/drinks.png"
 import weightBar from "../images/weightbar.png"
 import { LoggedInContext } from "../LoggedInContext"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import MicroCircle from "../components/MicroCircle"
 // import SavedRecipes from "../components/SavedRecipes";
 import RecipeCarousel from "../components/RecipeCarousel"
@@ -20,49 +20,96 @@ function LoggedInHomePage() {
   }
   const name = loggedIn?.full_name
 
+  const [weight, setWeight] = useState("");
+  const [recommendedKcal, setRecommendedKcal] = useState(null);
+  const [isUpdatingWeight, setIsUpdatingWeight] = useState(false);
+
+  const handleWeightUpdate = async () => {
+    console.log("Button clicked");
+    setIsUpdatingWeight(true);
+
+    try {
+      const response = await fetch("http://localhost:8085/update-weight", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ weight }),
+      });
+
+      console.log("Fetch request made");
+
+      if (response.ok) {
+        const { recommendedKcal } = await response.json();
+        setRecommendedKcal(recommendedKcal);
+      } else {
+        console.log("Failed to update weight");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+
+    setIsUpdatingWeight(false);
+  };
+
   return (
     <div className="LoggedInHomePage">
       <div className="LoggedInCard">
         <div className="LoggedInHero">
           <img src={drinks} alt="drinks" />
           <div className="circleContainer">
-            <Circle />
+            <Circle weight={weight} recommendedKcal={recommendedKcal} />
           </div>
         </div>
         <div className="LoggedInContent">
-          <h1 className="h1 nameMobile"> Tjenixen, {name}!</h1>
+          <h1 className="h1 nameMobile">Tjenixen, {name}!</h1>
           <div className="LoggedInMacros">
             <div>
-              <p className="Nutrient pMed"> Protein </p>
+              <p className="Nutrient pMed">Protein</p>
               <MicroCircle nutrientAmount={50} totalSum={128} />
-              <p className="pMed"> 50/128 g</p>
+              <p className="pMed">50/128 g</p>
             </div>
             <div>
-              <p className="Nutrient pMed"> Kolhydrater </p>
+              <p className="Nutrient pMed">Kolhydrater</p>
               <MicroCircle nutrientAmount={60} totalSum={170} />
-              <p className="pMed"> 60/170 g</p>
+              <p className="pMed">60/170 g</p>
             </div>
             <div>
-              <p className="Nutrient pMed"> Fett</p>
+              <p className="Nutrient pMed">Fett</p>
               <MicroCircle nutrientAmount={14} totalSum={57} />
-              <p className="pMed"> 14/57 g</p>
+              <p className="pMed">14/57 g</p>
             </div>
           </div>
           <div className="weightContainer">
-            <p className="pBig"> Nuvarande vikt: 65 kg </p>
+            <p className="pBig">Nuvarande vikt:</p>
+            <input
+              type="text"
+              className="weightInput"
+              pattern="[0-9]{3}"
+              inputMode="numeric"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              maxLength={3}
+              autoComplete="off"
+                />
             <img src={weightBar} alt="weight bar" />
             <div className="weightWrapper">
-              <p> 70 kg</p>
-              <p> 60 kg</p>
+              <p>70 kg</p>
+              <p>60 kg</p>
             </div>
-            <div className="weightButton">
-              <p>Uppdatera vikt</p>
-            </div>
+            <button
+              className="weightButton-over"
+              type="button"
+              onClick={handleWeightUpdate} // Call the weight update function when the button is clicked
+              disabled={isUpdatingWeight}
+            >
+              Uppdatera vikt
+            </button>
           </div>
         </div>
       </div>
       <div className="loggedInMeals">
-        <h1 className="h1 nameDesktop"> Tjenixen, {name}!</h1>
+        <h1 className="h1 nameDesktop">Tjenixen, {name}!</h1>
         <div className="mealCards">
           <div className="mealCard">
             <div className="meal">
@@ -99,11 +146,12 @@ function LoggedInHomePage() {
         </div>
 
         <div className="loggedInRecipe">
-          <h2 className="h2 recipeHeader"> Förslag på recept </h2>
+          <h2 className="h2 recipeHeader">Förslag på recept</h2>
           <RecipeCarousel />
         </div>
       </div>
     </div>
   )
 }
-export default LoggedInHomePage
+
+export default LoggedInHomePage;

@@ -1,13 +1,49 @@
-import "../styles/Circle.css"
+import React, { useEffect, useState } from "react";
+import "../styles/Circle.css";
 
-export default function Circle() {
-  const nutrientAmount = 20
-  const totalSum = 100
-  const calories = 1134
+interface CircleProps {
+  weight: string;
+  recommendedKcal?: number | null;
+  onUpdateWeight?: () => void; // prop för weight update som gör en callback som inte funkar
+}
 
-  const percentage = Math.round((nutrientAmount / totalSum) * 100)
-  const circumference = 2 * Math.PI * 32.5
-  const dashOffset = (circumference * (100 - percentage)) / 100
+export default function Circle({ weight, recommendedKcal, onUpdateWeight }: CircleProps) {
+  const [caloriesLeft, setCaloriesLeft] = useState(recommendedKcal || 0);
+
+  useEffect(() => {
+    fetchData();
+  }, [weight]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:8085/update-weight", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ weight }),
+      });
+      if (response.ok) {
+        const { recommendedKcal } = await response.json();
+        setCaloriesLeft(recommendedKcal);
+        
+        if (onUpdateWeight) {
+          onUpdateWeight();
+        }
+      } else {
+        console.error("Error fetching data");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const nutrientAmount = 20;
+  const totalSum = 100;
+
+  const percentage = Math.round((nutrientAmount / totalSum) * 100);
+  const circumference = 2 * Math.PI * 32.5;
+  const dashOffset = (circumference * (100 - percentage)) / 100;
 
   const circleStyle = {
     strokeDasharray: `${circumference}`,
@@ -15,7 +51,7 @@ export default function Circle() {
     transform: "rotate(-90deg)",
     transformOrigin: "center",
     transition: "stroke-dashoffset 0.3s ease-in-out",
-  }
+  };
 
   return (
     <div className="Circle">
@@ -44,10 +80,10 @@ export default function Circle() {
           />
         </svg>
         <div className="CircleText">
-          <p className="h1"> {calories} </p>
+          <p className="h1">{caloriesLeft}</p>
           <p>kcal kvar</p>
         </div>
       </div>
     </div>
-  )
+  );
 }
