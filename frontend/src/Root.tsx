@@ -7,12 +7,10 @@ import { useState, useEffect } from "react";
 function Root() {
   const location = useLocation();
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 850);
-  const excludeNavbar = ["/login", "/register"];
-  const excludeFooter = ["/login", "/register"];
+  const excludeNavbarAndFooter = ["/login", "/register"];
   const recipeView = location.pathname.startsWith("/recipe");
 
-  const navbar = !excludeNavbar.includes(location.pathname);
-  const footer = !excludeFooter.includes(location.pathname);
+  const navbarAndFooter = !excludeNavbarAndFooter.includes(location.pathname);
 
   useEffect(() => {
     const handleResize = () => {
@@ -29,10 +27,10 @@ function Root() {
   return (
     <div>
       {!isMobileView && recipeView && <NavbarDesktop />}
-      {!recipeView && navbar && <NavBar />}
+      {!recipeView && navbarAndFooter && <NavBar />}
 
       <Outlet />
-      {footer && <Footer />}
+      {navbarAndFooter && <Footer />}
     </div>
   );
 }

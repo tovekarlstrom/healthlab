@@ -26,7 +26,6 @@ export interface AccountInterface {
 }
 
 function RegisterAccount() {
-  const [logedInUser, setLogedInUser] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [incorrectPasswordCheck, setIncorrectPasswordCheck] = useState(false);
   const [incorrectPassword, setIncorrectPassword] = useState(false);

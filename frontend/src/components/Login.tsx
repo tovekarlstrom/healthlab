@@ -61,8 +61,6 @@ function Login() {
         <ArrowButton />
         <img className="login-img" src={loginImg} alt="" />
       </div>
-      {loggedIn && <p>{loggedIn.id}</p>}
-
       <div className="content">
         <p>{loggedIn?.email}</p>
         <div className="Form">
