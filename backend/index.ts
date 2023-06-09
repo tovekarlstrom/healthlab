@@ -144,16 +144,6 @@ app.get("/comments/:recipe_id", async (request, response) => {
 });
 app.post("/comments", async (request, response) => {
   const { recipe_id, user_id, comment, rating } = request.body;
-  console.log(recipe_id);
-  console.log(user_id);
-  console.log(comment);
-  console.log(rating);
-  const { rows } = await client.query("SELECT * FROM comments");
-  if (rows) {
-    console.log("fe", rows);
-  } else {
-    console.log("hej");
-  }
   if (recipe_id && user_id && comment) {
     const insertComment = {
       text: "INSERT INTO comments (recipe_id, user_id, comment, rating) VALUES ($1, $2, $3, $4)",
@@ -230,9 +220,6 @@ app.post("/update-weight", async (request, response) => {
   const recommendedKcal = weight * 30;
   response.status(200).send({ recommendedKcal });
 });
-
-
-
 
 const port = process.env.PORT || 8085;
 app.listen(port, () => {

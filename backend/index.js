@@ -131,17 +131,6 @@ app.get("/comments/:recipe_id", (request, response) => __awaiter(void 0, void 0,
 }));
 app.post("/comments", (request, response) => __awaiter(void 0, void 0, void 0, function* () {
     const { recipe_id, user_id, comment, rating } = request.body;
-    console.log(recipe_id);
-    console.log(user_id);
-    console.log(comment);
-    console.log(rating);
-    const { rows } = yield client.query("SELECT * FROM comments");
-    if (rows) {
-        console.log("fe", rows);
-    }
-    else {
-        console.log("hej");
-    }
     if (recipe_id && user_id && comment) {
         const insertComment = {
             text: "INSERT INTO comments (recipe_id, user_id, comment, rating) VALUES ($1, $2, $3, $4)",
