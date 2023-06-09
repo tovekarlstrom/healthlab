@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.ec70a0d4.css",
-    "main.js": "/static/js/main.280b5332.js",
+    "main.js": "/static/js/main.77256d2c.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/register.png": "/static/media/register.6a261cbc067159097be4.png",
     "static/media/NewDesktopHomepage.png": "/static/media/NewDesktopHomepage.1a860a343acff8cdf065.png",
@@ -10,7 +10,7 @@
     "static/media/drinks.png": "/static/media/drinks.e3f022f02f5555633687.png",
     "static/media/meal3.png": "/static/media/meal3.7efe718b15ef286bce91.png",
     "static/media/5.png": "/static/media/5.15a9092a3e8ac70d8133.png",
-    "static/media/Googlelogo.svg": "/static/media/Googlelogo.2e928f462dc34e74a75df8e8a8ad5b10.svg",
+    "static/media/Googlelogo.svg": "/static/media/Googlelogo.0f9f0984df382894f938a8daac0ac348.svg",
     "static/media/6.png": "/static/media/6.c702ea1cc4fa8cfa73c6.png",
     "static/media/1.png": "/static/media/1.9ed63081691318cd57e9.png",
     "static/media/3.png": "/static/media/3.f518b4e4e01c9e68a299.png",
@@ -20,14 +20,14 @@
     "static/media/meal1.png": "/static/media/meal1.a7b5bd5913c3ed99051a.png",
     "static/media/training.png": "/static/media/training.e5b85624d2286999bcec.png",
     "index.html": "/index.html",
-    "static/media/Twitterlogo.svg": "/static/media/Twitterlogo.238b9fc30ad5825247c0f66feeaf3cad.svg",
-    "static/media/Fcebooklogo.svg": "/static/media/Fcebooklogo.ef6f8951d94603bac257171c47d783a9.svg",
+    "static/media/Twitterlogo.svg": "/static/media/Twitterlogo.8b924189c2c6337a6dc4ff9f64bec10e.svg",
+    "static/media/Fcebooklogo.svg": "/static/media/Fcebooklogo.92c644089ec217bcc0f3df5336b34a5a.svg",
     "main.ec70a0d4.css.map": "/static/css/main.ec70a0d4.css.map",
-    "main.280b5332.js.map": "/static/js/main.280b5332.js.map",
+    "main.77256d2c.js.map": "/static/js/main.77256d2c.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ec70a0d4.css",
-    "static/js/main.280b5332.js"
+    "static/js/main.77256d2c.js"
   ]
 }
